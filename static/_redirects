@@ -1,0 +1,17 @@
+# Redirect root to learning dashboard
+/  /learning_dashboard.html  302
+
+# Handle URLs without .html extension
+/learning_dashboard  /learning_dashboard.html  301
+/cursor_mastery_guide  /cursor_mastery_guide.html  301
+/flutter_learning_roadmap  /flutter_learning_roadmap.html  301
+/n8n_learning_roadmap  /n8n_learning_roadmap.html  301
+/aws_developer_associate_roadmap  /aws_developer_associate_roadmap.html  301
+
+# Handle trailing slashes
+/learning_dashboard/  /learning_dashboard.html  301
+/cursor_mastery_guide/  /cursor_mastery_guide.html  301
+/flutter_learning_roadmap/  /flutter_learning_roadmap.html  301
+/n8n_learning_roadmap/  /n8n_learning_roadmap.html  301
+/aws_developer_associate_roadmap/  /aws_developer_associate_roadmap.html  301
+

@@ -7,6 +7,8 @@ frontend:
     build:
       commands:
         - npm run build
+        # Copy learning_dashboard.html as index.html for root access
+        - cp build/learning_dashboard.html build/index.html
   artifacts:
     baseDirectory: build
     files:
