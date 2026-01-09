@@ -1,0 +1,2531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AWS Developer Associate DVA-C02 | Exam Roadmap</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a0e17;
+            --bg-secondary: #111827;
+            --bg-card: #1a2332;
+            --bg-elevated: #232f3e;
+            --accent-orange: #ff9900;
+            --accent-blue: #00a8e1;
+            --accent-purple: #8b5cf6;
+            --accent-green: #10b981;
+            --accent-pink: #ec4899;
+            --accent-cyan: #06b6d4;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --border-color: #2d3a4f;
+            --glow-orange: rgba(255, 153, 0, 0.3);
+            --glow-blue: rgba(0, 168, 225, 0.3);
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'IBM Plex Sans', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+        
+        .noise-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            opacity: 0.03;
+            pointer-events: none;
+            z-index: 1000;
+        }
+        
+        .hero {
+            position: relative;
+            padding: 80px 40px;
+            background: linear-gradient(135deg, var(--bg-primary) 0%, #0f1729 50%, var(--bg-secondary) 100%);
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(ellipse 80% 50% at 20% 40%, rgba(255, 153, 0, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse 60% 40% at 80% 60%, rgba(0, 168, 225, 0.08) 0%, transparent 50%);
+            pointer-events: none;
+        }
+        
+        .hero-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .dashboard-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 153, 0, 0.15);
+            border: 1px solid var(--accent-orange);
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            color: var(--accent-orange);
+            margin-bottom: 20px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .dashboard-link:hover {
+            background: var(--accent-orange);
+            color: #000;
+        }
+        
+        .badge-row {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+        
+        .badge {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            font-weight: 500;
+            padding: 6px 14px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .badge-orange { background: rgba(255, 153, 0, 0.15); color: var(--accent-orange); border: 1px solid rgba(255, 153, 0, 0.3); }
+        .badge-blue { background: rgba(0, 168, 225, 0.15); color: var(--accent-blue); border: 1px solid rgba(0, 168, 225, 0.3); }
+        .badge-green { background: rgba(16, 185, 129, 0.15); color: var(--accent-green); border: 1px solid rgba(16, 185, 129, 0.3); }
+        .badge-purple { background: rgba(139, 92, 246, 0.15); color: var(--accent-purple); border: 1px solid rgba(139, 92, 246, 0.3); }
+        
+        .hero h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-orange) 50%, var(--accent-blue) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin-bottom: 40px;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
+            max-width: 900px;
+        }
+        
+        .stat-card {
+            background: rgba(26, 35, 50, 0.6);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 24px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .stat-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent-orange);
+        }
+        
+        .stat-label {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 60px 40px;
+        }
+        
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 40px;
+        }
+        
+        .section-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+        
+        .section-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.75rem;
+            font-weight: 600;
+        }
+        
+        .section-subtitle {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+        
+        /* Exam Domains */
+        .domains-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
+        }
+        
+        .domain-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 28px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .domain-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent-orange);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .domain-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 16px;
+        }
+        
+        .domain-number {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            background: var(--bg-elevated);
+            padding: 4px 10px;
+            border-radius: 4px;
+        }
+        
+        .domain-weight {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent-orange);
+        }
+        
+        .domain-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+        
+        .domain-topics {
+            list-style: none;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+        
+        .domain-topics li {
+            padding: 6px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .domain-topics li::before {
+            content: '›';
+            position: absolute;
+            left: 0;
+            color: var(--accent-blue);
+            font-weight: bold;
+        }
+        
+        .progress-bar {
+            height: 4px;
+            background: var(--bg-elevated);
+            border-radius: 2px;
+            margin-top: 20px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-orange), var(--accent-blue));
+            border-radius: 2px;
+        }
+        
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 40px;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, var(--accent-orange), var(--accent-blue), var(--accent-purple), var(--accent-green));
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 40px;
+        }
+        
+        .timeline-marker {
+            position: absolute;
+            left: -33px;
+            top: 8px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            border: 3px solid var(--accent-orange);
+            background: var(--bg-primary);
+        }
+        
+        .timeline-month {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--accent-orange);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+        
+        .timeline-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+        
+        .timeline-content {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 24px;
+        }
+        
+        .week-grid {
+            display: grid;
+            gap: 16px;
+        }
+        
+        .week-item {
+            background: var(--bg-elevated);
+            border-radius: 8px;
+            padding: 16px;
+            border-left: 3px solid var(--accent-blue);
+        }
+        
+        .week-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--accent-blue);
+            margin-bottom: 8px;
+        }
+        
+        .week-focus {
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .week-tasks {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+        
+        /* Cheat Sheets */
+        .cheat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 24px;
+        }
+        
+        .cheat-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        
+        .cheat-header {
+            background: var(--bg-elevated);
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .cheat-icon {
+            font-size: 1.5rem;
+        }
+        
+        .cheat-title {
+            font-weight: 600;
+        }
+        
+        .cheat-content {
+            padding: 20px;
+        }
+        
+        .cheat-item {
+            margin-bottom: 16px;
+        }
+        
+        .cheat-item:last-child { margin-bottom: 0; }
+        
+        .cheat-key {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--accent-cyan);
+            margin-bottom: 4px;
+        }
+        
+        .cheat-value {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+        
+        .code-block {
+            background: #0d1117;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 16px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            overflow-x: auto;
+            margin: 12px 0;
+        }
+        
+        .code-comment { color: #6e7681; }
+        .code-keyword { color: #ff7b72; }
+        .code-string { color: #a5d6ff; }
+        .code-function { color: #d2a8ff; }
+        .code-number { color: #79c0ff; }
+        
+        /* Resources */
+        .resource-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .resource-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 24px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        
+        .resource-card:hover {
+            border-color: var(--accent-orange);
+            transform: translateY(-2px);
+        }
+        
+        .resource-type {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--accent-purple);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+        
+        .resource-title {
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .resource-desc {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+        
+        .resource-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 12px;
+            font-size: 0.85rem;
+            color: var(--accent-blue);
+        }
+        
+        /* Tips Section */
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 24px;
+        }
+        
+        .tip-card {
+            background: linear-gradient(135deg, rgba(255, 153, 0, 0.05), rgba(0, 168, 225, 0.05));
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 24px;
+        }
+        
+        .tip-number {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent-orange);
+            opacity: 0.5;
+            margin-bottom: 12px;
+        }
+        
+        .tip-title {
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .tip-content {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+        
+        /* Services Table */
+        .services-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--bg-card);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        
+        .services-table th,
+        .services-table td {
+            padding: 16px 20px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .services-table th {
+            background: var(--bg-elevated);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+        }
+        
+        .services-table tr:last-child td { border-bottom: none; }
+        
+        .services-table tr:hover { background: rgba(255, 153, 0, 0.03); }
+        
+        .service-name {
+            font-weight: 600;
+            color: var(--accent-orange);
+        }
+        
+        .priority-high { color: var(--accent-pink); }
+        .priority-medium { color: var(--accent-orange); }
+        .priority-low { color: var(--accent-green); }
+        
+        /* Tabs */
+        .tabs-container {
+            margin-bottom: 24px;
+        }
+        
+        .tabs {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 24px;
+        }
+        
+        .tab {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            padding: 10px 20px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .tab:hover, .tab.active {
+            background: var(--accent-orange);
+            color: var(--bg-primary);
+            border-color: var(--accent-orange);
+        }
+        
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        
+        /* Footer */
+        footer {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
+            padding: 40px;
+            text-align: center;
+        }
+        
+        footer p {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+        }
+        
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-secondary); }
+        ::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+        
+        /* Service Sections */
+        .service-section {
+            animation: fadeInUp 0.5s ease forwards;
+        }
+        
+        .service-header h3 {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        /* Links styling */
+        a.resource-card {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        a.resource-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent-orange), var(--accent-blue));
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+        
+        a.resource-card:hover::after {
+            transform: translateX(0);
+        }
+        
+        /* Highlight key topics */
+        .resource-type {
+            display: inline-block;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero { padding: 40px 20px; }
+            .container { padding: 40px 20px; }
+            .cheat-grid { grid-template-columns: 1fr; }
+            .timeline { padding-left: 30px; }
+            .service-header { padding: 15px !important; }
+        }
+    </style>
+</head>
+<body>
+    <div class="noise-overlay"></div>
+    
+    <header class="hero">
+        <div class="hero-content">
+            <a href="learning_dashboard.html" class="dashboard-link">🏠 Back to Dashboard</a>
+            <div class="badge-row">
+                <span class="badge badge-orange">DVA-C02</span>
+                <span class="badge badge-blue">Associate Level</span>
+                <span class="badge badge-green">✓ CCP Certified</span>
+                <span class="badge badge-purple">7+ Years Experience</span>
+            </div>
+            <h1>AWS Certified Developer<br>Associate Exam Roadmap</h1>
+            <p class="hero-subtitle">
+                A comprehensive 14-week accelerated study plan designed for experienced AWS practitioners. 
+                Master serverless, containers, CI/CD, and application development on AWS.
+            </p>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value">65</div>
+                    <div class="stat-label">Questions</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">130</div>
+                    <div class="stat-label">Minutes</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">720</div>
+                    <div class="stat-label">Passing Score (out of 1000)</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">$150</div>
+                    <div class="stat-label">Exam Cost USD</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Exam Domains -->
+        <section class="container">
+            <div class="section-header">
+                <div class="section-icon" style="background: linear-gradient(135deg, rgba(255, 153, 0, 0.2), rgba(255, 153, 0, 0.05));">📊</div>
+                <div>
+                    <h2 class="section-title">Exam Domains & Weightage</h2>
+                    <p class="section-subtitle">DVA-C02 exam structure - Focus your study time accordingly</p>
+                </div>
+            </div>
+            
+            <div class="domains-grid">
+                <div class="domain-card">
+                    <div class="domain-header">
+                        <span class="domain-number">Domain 1</span>
+                        <span class="domain-weight">32%</span>
+                    </div>
+                    <h3 class="domain-title">Development with AWS Services</h3>
+                    <ul class="domain-topics">
+                        <li>Develop code for applications hosted on AWS</li>
+                        <li>Develop code for AWS Lambda</li>
+                        <li>Use data stores in application development</li>
+                    </ul>
+                    <div class="progress-bar"><div class="progress-fill" style="width: 32%;"></div></div>
+                </div>
+                
+                <div class="domain-card">
+                    <div class="domain-header">
+                        <span class="domain-number">Domain 2</span>
+                        <span class="domain-weight">26%</span>
+                    </div>
+                    <h3 class="domain-title">Security</h3>
+                    <ul class="domain-topics">
+                        <li>Implement authentication and authorization</li>
+                        <li>Implement encryption using AWS services</li>
+                        <li>Manage sensitive data in application code</li>
+                    </ul>
+                    <div class="progress-bar"><div class="progress-fill" style="width: 26%;"></div></div>
+                </div>
+                
+                <div class="domain-card">
+                    <div class="domain-header">
+                        <span class="domain-number">Domain 3</span>
+                        <span class="domain-weight">24%</span>
+                    </div>
+                    <h3 class="domain-title">Deployment</h3>
+                    <ul class="domain-topics">
+                        <li>Prepare application artifacts for deployment</li>
+                        <li>Test applications in development environments</li>
+                        <li>Automate deployment testing</li>
+                    </ul>
+                    <div class="progress-bar"><div class="progress-fill" style="width: 24%;"></div></div>
+                </div>
+                
+                <div class="domain-card">
+                    <div class="domain-header">
+                        <span class="domain-number">Domain 4</span>
+                        <span class="domain-weight">18%</span>
+                    </div>
+                    <h3 class="domain-title">Troubleshooting & Optimization</h3>
+                    <ul class="domain-topics">
+                        <li>Assist in root cause analysis</li>
+                        <li>Instrument code for observability</li>
+                        <li>Optimize applications using AWS services</li>
+                    </ul>
+                    <div class="progress-bar"><div class="progress-fill" style="width: 18%;"></div></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 14-Week Timeline -->
+        <section class="container" style="background: linear-gradient(180deg, transparent, rgba(255, 153, 0, 0.02), transparent);">
+            <div class="section-header">
+                <div class="section-icon" style="background: linear-gradient(135deg, rgba(0, 168, 225, 0.2), rgba(0, 168, 225, 0.05));">📅</div>
+                <div>
+                    <h2 class="section-title">14-Week Study Plan</h2>
+                    <p class="section-subtitle">Accelerated path for experienced AWS practitioners (8-10 hrs/week)</p>
+                </div>
+            </div>
+            
+            <div class="timeline">
+                <!-- Month 1 -->
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <span class="timeline-month">Month 1 • Weeks 1-4</span>
+                    <h3 class="timeline-title">Core Services Deep Dive</h3>
+                    <div class="timeline-content">
+                        <div class="week-grid">
+                            <div class="week-item">
+                                <div class="week-label">Week 1-2: Lambda Mastery</div>
+                                <div class="week-focus">AWS Lambda Deep Dive</div>
+                                <div class="week-tasks">
+                                    Execution context, cold starts, provisioned concurrency, Lambda layers, destinations, 
+                                    event source mappings (SQS, Kinesis, DynamoDB Streams), X-Ray tracing, Lambda@Edge vs CloudFront Functions
+                                </div>
+                            </div>
+                            <div class="week-item">
+                                <div class="week-label">Week 3: API Gateway</div>
+                                <div class="week-focus">REST API & HTTP API</div>
+                                <div class="week-tasks">
+                                    Stage variables, canary deployments, Lambda authorizers, Cognito authorizers, 
+                                    request/response transformations, caching, throttling, WebSocket APIs, usage plans
+                                </div>
+                            </div>
+                            <div class="week-item">
+                                <div class="week-label">Week 4: DynamoDB</div>
+                                <div class="week-focus">NoSQL Design & Optimization</div>
+                                <div class="week-tasks">
+                                    Partition keys, sort keys, GSI/LSI, single-table design, DynamoDB Streams, 
+                                    DAX caching, TTL, transactions, batch operations, conditional writes, optimistic locking
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Month 2 -->
+                <div class="timeline-item">
+                    <div class="timeline-marker" style="border-color: var(--accent-blue);"></div>
+                    <span class="timeline-month" style="color: var(--accent-blue);">Month 2 • Weeks 5-8</span>
+                    <h3 class="timeline-title">Security & CI/CD Pipeline</h3>
+                    <div class="timeline-content">
+                        <div class="week-grid">
+                            <div class="week-item" style="border-left-color: var(--accent-purple);">
+                                <div class="week-label" style="color: var(--accent-purple);">Week 5: IAM & Security</div>
+                                <div class="week-focus">Identity & Access Management</div>
+                                <div class="week-tasks">
+                                    IAM policies (identity-based vs resource-based), STS AssumeRole, cross-account access, 
+                                    Cognito User Pools vs Identity Pools, federation, policy evaluation logic
+                                </div>
+                            </div>
+                            <div class="week-item" style="border-left-color: var(--accent-purple);">
+                                <div class="week-label" style="color: var(--accent-purple);">Week 6: Secrets & Encryption</div>
+                                <div class="week-focus">KMS, Secrets Manager, SSM</div>
+                                <div class="week-tasks">
+                                    KMS key types (symmetric/asymmetric), envelope encryption, SSM Parameter Store (standard vs advanced),
+                                    Secrets Manager rotation, ACM certificates, encryption in transit vs at rest
+                                </div>
+                            </div>
+                            <div class="week-item" style="border-left-color: var(--accent-cyan);">
+                                <div class="week-label" style="color: var(--accent-cyan);">Week 7: CodePipeline & CodeBuild</div>
+                                <div class="week-focus">CI/CD Implementation</div>
+                                <div class="week-tasks">
+                                    buildspec.yml, appspec.yml, artifacts, CodePipeline stages and actions, 
+                                    CodeBuild environment variables, caching, VPC integration, cross-account deployments
+                                </div>
+                            </div>
+                            <div class="week-item" style="border-left-color: var(--accent-cyan);">
+                                <div class="week-label" style="color: var(--accent-cyan);">Week 8: CodeDeploy & SAM</div>
+                                <div class="week-focus">Deployment Strategies</div>
+                                <div class="week-tasks">
+                                    In-place vs Blue/Green deployments, deployment configurations (AllAtOnce, HalfAtATime, OneAtATime),
+                                    Lambda deployment preferences, SAM templates, SAM CLI, CloudFormation intrinsic functions
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Month 3 -->
+                <div class="timeline-item">
+                    <div class="timeline-marker" style="border-color: var(--accent-purple);"></div>
+                    <span class="timeline-month" style="color: var(--accent-purple);">Month 3 • Weeks 9-12</span>
+                    <h3 class="timeline-title">Containers, Messaging & Observability</h3>
+                    <div class="timeline-content">
+                        <div class="week-grid">
+                            <div class="week-item" style="border-left-color: var(--accent-pink);">
+                                <div class="week-label" style="color: var(--accent-pink);">Week 9: Containers</div>
+                                <div class="week-focus">ECS, ECR, Fargate</div>
+                                <div class="week-tasks">
+                                    Task definitions, service definitions, task roles vs execution roles, ECR lifecycle policies,
+                                    ECS service auto scaling, capacity providers, App Runner basics
+                                </div>
+                            </div>
+                            <div class="week-item" style="border-left-color: var(--accent-pink);">
+                                <div class="week-label" style="color: var(--accent-pink);">Week 10: Messaging</div>
+                                <div class="week-focus">SQS, SNS, EventBridge, Kinesis</div>
+                                <div class="week-tasks">
+                                    SQS (standard vs FIFO, visibility timeout, DLQ, long polling), SNS (message filtering, fan-out),
+                                    EventBridge rules and patterns, Kinesis Data Streams (shards, KCL, enhanced fan-out)
+                                </div>
+                            </div>
+                            <div class="week-item" style="border-left-color: var(--accent-green);">
+                                <div class="week-label" style="color: var(--accent-green);">Week 11: S3 & Caching</div>
+                                <div class="week-focus">Storage & Performance</div>
+                                <div class="week-tasks">
+                                    S3 event notifications, S3 Select, presigned URLs, cross-region replication,
+                                    ElastiCache (Redis vs Memcached), caching strategies (lazy loading, write-through), CloudFront
+                                </div>
+                            </div>
+                            <div class="week-item" style="border-left-color: var(--accent-green);">
+                                <div class="week-label" style="color: var(--accent-green);">Week 12: Observability</div>
+                                <div class="week-focus">CloudWatch, X-Ray</div>
+                                <div class="week-tasks">
+                                    CloudWatch Logs Insights, custom metrics, metric filters, alarms, 
+                                    X-Ray segments/subsegments, annotations, sampling rules, service maps
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Month 4 -->
+                <div class="timeline-item">
+                    <div class="timeline-marker" style="border-color: var(--accent-green);"></div>
+                    <span class="timeline-month" style="color: var(--accent-green);">Month 4 • Weeks 13-14</span>
+                    <h3 class="timeline-title">Review & Practice Exams</h3>
+                    <div class="timeline-content">
+                        <div class="week-grid">
+                            <div class="week-item" style="border-left-color: var(--accent-orange);">
+                                <div class="week-label" style="color: var(--accent-orange);">Week 13: Intensive Review</div>
+                                <div class="week-focus">Gap Analysis & Weak Areas</div>
+                                <div class="week-tasks">
+                                    Take first full practice exam, identify weak areas, review all cheat sheets,
+                                    focus on exam-specific scenarios, Elastic Beanstalk deployment policies
+                                </div>
+                            </div>
+                            <div class="week-item" style="border-left-color: var(--accent-orange);">
+                                <div class="week-label" style="color: var(--accent-orange);">Week 14: Final Prep</div>
+                                <div class="week-focus">Practice Exams & Exam Day</div>
+                                <div class="week-tasks">
+                                    Take 2-3 more practice exams (aim for 80%+), review incorrect answers,
+                                    light review day before exam, schedule exam with confidence!
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Core Services Priority -->
+        <section class="container">
+            <div class="section-header">
+                <div class="section-icon" style="background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(139, 92, 246, 0.05));">⚡</div>
+                <div>
+                    <h2 class="section-title">Core Services Priority Matrix</h2>
+                    <p class="section-subtitle">Services ranked by exam importance and question frequency</p>
+                </div>
+            </div>
+            
+            <div style="overflow-x: auto; border-radius: 12px; border: 1px solid var(--border-color);">
+                <table class="services-table">
+                    <thead>
+                        <tr>
+                            <th>Service</th>
+                            <th>Priority</th>
+                            <th>Key Focus Areas</th>
+                            <th>Est. Questions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="service-name">AWS Lambda</td>
+                            <td class="priority-high">CRITICAL</td>
+                            <td>Event sources, concurrency, layers, destinations, versioning/aliases, cold starts</td>
+                            <td>10-15</td>
+                        </tr>
+                        <tr>
+                            <td class="service-name">DynamoDB</td>
+                            <td class="priority-high">CRITICAL</td>
+                            <td>Keys design, GSI/LSI, Streams, DAX, capacity modes, transactions</td>
+                            <td>8-12</td>
+                        </tr>
+                        <tr>
+                            <td class="service-name">API Gateway</td>
+                            <td class="priority-high">CRITICAL</td>
+                            <td>REST vs HTTP API, authorizers, stages, caching, throttling</td>
+                            <td>6-10</td>
+                        </tr>
+                        <tr>
+                            <td class="service-name">IAM & Cognito</td>
+                            <td class="priority-high">CRITICAL</td>
+                            <td>Policies, STS, User Pools vs Identity Pools, federation</td>
+                            <td>8-12</td>
+                        </tr>
+                        <tr>
+                            <td class="service-name">CodePipeline/Build/Deploy</td>
+                            <td class="priority-high">HIGH</td>
+                            <td>buildspec.yml, appspec.yml, deployment strategies</td>
+                            <td>6-10</td>
+                        </tr>
+                        <tr>
+                            <td class="service-name">SQS / SNS</td>
+                            <td class="priority-medium">HIGH</td>
+                            <td>Standard vs FIFO, DLQ, visibility timeout, fan-out patterns</td>
+                            <td>5-8</td>
+                        </tr>
+                        <tr>
+                            <td class="service-name">CloudWatch & X-Ray</td>
+                            <td class="priority-medium">HIGH</td>
+                            <td>Custom metrics, Logs Insights, tracing, annotations</td>
+                            <td>5-8</td>
+                        </tr>
+                        <tr>
+                            <td class="service-name">KMS / Secrets Manager</td>
+                            <td class="priority-medium">HIGH</td>
+                            <td>Envelope encryption, key policies, rotation</td>
+                            <td>4-6</td>
+                        </tr>
+                        <tr>
+                            <td class="service-name">S3</td>
+                            <td class="priority-medium">MEDIUM</td>
+                            <td>Presigned URLs, events, versioning, encryption</td>
+                            <td>3-5</td>
+                        </tr>
+                        <tr>
+                            <td class="service-name">ECS / Fargate / ECR</td>
+                            <td class="priority-medium">MEDIUM</td>
+                            <td>Task definitions, roles, ECR lifecycle</td>
+                            <td>3-5</td>
+                        </tr>
+                        <tr>
+                            <td class="service-name">Elastic Beanstalk</td>
+                            <td class="priority-low">MEDIUM</td>
+                            <td>Deployment policies, .ebextensions, environment tiers</td>
+                            <td>2-4</td>
+                        </tr>
+                        <tr>
+                            <td class="service-name">Kinesis</td>
+                            <td class="priority-low">MEDIUM</td>
+                            <td>Shards, KCL checkpointing, enhanced fan-out</td>
+                            <td>2-4</td>
+                        </tr>
+                        <tr>
+                            <td class="service-name">Step Functions</td>
+                            <td class="priority-low">LOW-MEDIUM</td>
+                            <td>Standard vs Express, ASL basics, error handling</td>
+                            <td>2-3</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Cheat Sheets -->
+        <section class="container" style="background: linear-gradient(180deg, transparent, rgba(139, 92, 246, 0.02), transparent);">
+            <div class="section-header">
+                <div class="section-icon" style="background: linear-gradient(135deg, rgba(236, 72, 153, 0.2), rgba(236, 72, 153, 0.05));">📋</div>
+                <div>
+                    <h2 class="section-title">Quick Reference Cheat Sheets</h2>
+                    <p class="section-subtitle">Memorize these key values and limits before exam day</p>
+                </div>
+            </div>
+            
+            <div class="tabs">
+                <button class="tab active" onclick="showTab('lambda-cheat')">Lambda</button>
+                <button class="tab" onclick="showTab('dynamodb-cheat')">DynamoDB</button>
+                <button class="tab" onclick="showTab('api-cheat')">API Gateway</button>
+                <button class="tab" onclick="showTab('sqs-cheat')">SQS/SNS</button>
+                <button class="tab" onclick="showTab('security-cheat')">Security</button>
+                <button class="tab" onclick="showTab('cicd-cheat')">CI/CD</button>
+            </div>
+            
+            <div id="lambda-cheat" class="tab-content active">
+                <div class="cheat-grid">
+                    <div class="cheat-card">
+                        <div class="cheat-header">
+                            <span class="cheat-icon">⚡</span>
+                            <span class="cheat-title">Lambda Limits & Defaults</span>
+                        </div>
+                        <div class="cheat-content">
+                            <div class="cheat-item">
+                                <div class="cheat-key">Memory</div>
+                                <div class="cheat-value">128 MB - 10,240 MB (10 GB) in 1 MB increments</div>
+                            </div>
+                            <div class="cheat-item">
+                                <div class="cheat-key">Timeout</div>
+                                <div class="cheat-value">Default: 3 sec | Max: 900 sec (15 min)</div>
+                            </div>
+                            <div class="cheat-item">
+                                <div class="cheat-key">Deployment Package</div>
+                                <div class="cheat-value">Zipped: 50 MB | Unzipped: 250 MB | With layers: 250 MB total</div>
+                            </div>
+                            <div class="cheat-item">
+                                <div class="cheat-key">Concurrent Executions</div>
+                                <div class="cheat-value">Default: 1,000/region (soft limit) | Reserved: subtract from account</div>
+                            </div>
+                            <div class="cheat-item">
+                                <div class="cheat-key">/tmp Storage</div>
+                                <div class="cheat-value">512 MB - 10,240 MB (10 GB)</div>
+                            </div>
+                            <div class="cheat-item">
+                                <div class="cheat-key">Environment Variables</div>
+                                <div class="cheat-value">Max 4 KB total for all variables</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cheat-card">
+                        <div class="cheat-header">
+                            <span class="cheat-icon">🔄</span>
+                            <span class="cheat-title">Lambda Invocation Types</span>
+                        </div>
+                        <div class="cheat-content">
+                            <div class="cheat-item">
+                                <div class="cheat-key">Synchronous</div>
+                                <div class="cheat-value">API Gateway, ALB, Cognito, Lex, Alexa, CloudFront (Lambda@Edge)</div>
+                            </div>
+                            <div class="cheat-item">
+                                <div class="cheat-key">Asynchronous</div>
+                                <div class="cheat-value">S3, SNS, EventBridge, CodeCommit, CodePipeline, CloudWatch Events</div>
+                            </div>
+                            <div class="cheat-item">
+                                <div class="cheat-key">Event Source Mapping</div>
+                                <div class="cheat-value">SQS, Kinesis, DynamoDB Streams, Amazon MQ, MSK</div>
+                            </div>
+                            <div class="code-block">
+<span class="code-comment"># Async invocation config</span>
+<span class="code-keyword">aws</span> lambda put-function-event-invoke-config \
+  --function-name MyFunction \
+  --maximum-retry-attempts <span class="code-number">2</span> \
+  --maximum-event-age-in-seconds <span class="code-number">3600</span> \
+  --destination-config '{
+    "<span class="code-string">OnSuccess</span>": {"Destination": "arn:aws:sqs:..."},
+    "<span class="code-string">OnFailure</span>": {"Destination": "arn:aws:sqs:..."}
+  }'
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="dynamodb-cheat" class="tab-content">
+                <div class="cheat-grid">
+                    <div class="cheat-card">
+                        <div class="cheat-header">
+                            <span class="cheat-icon">🗄️</span>
+                            <span class="cheat-title">DynamoDB Capacity & Limits</span>
+                        </div>
+                        <div class="cheat-content">
+                            <div class="cheat-item">
+                                <div class="cheat-key">Item Size</div>
+                                <div class="cheat-value">Max 400 KB per item</div>
+                            </div>
+                            <div class="cheat-item">
+                                <div class="cheat-key">Partition Key</div>
+                                <div class="cheat-value">Max 2048 bytes</div>
+                            </div>
+                            <div class="cheat-item">
+                                <div class="cheat-key">Sort Key</div>
+                                <div class="cheat-value">Max 1024 bytes</div>
+                            </div>
+                            <div class="cheat-item">
+                                <div class="cheat-key">GSI per Table</div>
+                                <div class="cheat-value">20 (default soft limit)</div>
+                            </div>
+                            <div class="cheat-item">
+                                <div class="cheat-key">LSI per Table</div>
+                                <div class="cheat-value">5 (must be created with table)</div>
+                            </div>
+                            <div class="cheat-item">
+                                <div class="cheat-key">WCU Formula</div>
+                                <div class="cheat-value">1 WCU = 1 write/sec for item ≤1 KB</div>
+                            </div>
+                            <div class="cheat-item">
+                                <div class="cheat-key">RCU Formula</div>
+                                <div class="cheat-value">1 RCU = 1 strongly consistent read/sec OR 2 eventually consistent reads/sec for item ≤4 KB</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cheat-card">
+                        <div class="cheat-header">
+                            <span class="cheat-icon">🔍</span>
+                            <span class="cheat-title">DynamoDB Operations</span>
+                        </div>
+                        <div class="cheat-content">
+                            <div class="cheat-item">
+                                <div class="cheat-key">Query</div>
+                                <div class="cheat-value">Uses partition key (required) + optional sort key. Most efficient.</div>
+                            </div>
+                            <div class="cheat-item">
+                                <div class="cheat-key">Scan</div>
+                                <div class="cheat-value">Reads entire table. Use ProjectionExpression & FilterExpression to limit.</div>
+                            </div>
+                            <div class="cheat-item">
+                                <div class="cheat-key">BatchWriteItem</div>
+                                <div class="cheat-value">Up to 25 PutItem/DeleteItem, max 16 MB total, max 400 KB/item</div>
+                            </div>
+                            <div class="cheat-item">
+                                <div class="cheat-key">BatchGetItem</div>
+                                <div class="cheat-value">Up to 100 items, max 16 MB returned</div>
+                            </div>
+                            <div class="cheat-item">
+                                <div class="cheat-key">TransactWriteItems</div>
+                                <div class="cheat-value">Up to 100 items, ACID transactions, 2x WCU cost</div>
+                            </div>
+                            <div class="code-block">
+<span class="code-comment"># Optimistic locking with version</span>
+UpdateExpression: <span class="code-string">"SET price = :p, version = version + 1"</span>
+ConditionExpression: <span class="code-string">"version = :v"</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="api-cheat" class="tab-content">
+                <div class="cheat-grid">
+                    <div class="cheat-card">
+                        <div class="cheat-header">
+                            <span class="cheat-icon">🌐</span>
+                            <span class="cheat-title">API Gateway Types</span>
+                        </div>
+                        <div class="cheat-content">
+                            <div class="cheat-item">
+                                <div class="cheat-key">REST API</div>
+                                <div class="cheat-value">Full features: caching, API keys, request validation, WAF, resource policies</div>
+                            </div>
+                            <div class="cheat-item">
+                                <div class="cheat-key">HTTP API</div>
+                                <div class="cheat-value">Faster, cheaper, simpler. JWT authorizers, OIDC. No caching/WAF.</div>
+                            </div>
+                            <div class="cheat-item">
+                                <div class="cheat-key">WebSocket API</div>
+                                <div class="cheat-value">Two-way communication. Routes: $connect, $disconnect, $default</div>
+                            </div>
+                            <div class="cheat-item">
+                                <div class="cheat-key">Timeout</div>
+                                <div class="cheat-value">Integration timeout: 50ms - 29 seconds (default 29s)</div>
+                            </div>
+                            <div class="cheat-item">
+                                <div class="cheat-key">Payload Size</div>
+                                <div class="cheat-value">Max 10 MB</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cheat-card">
+                        <div class="cheat-header">
+                            <span class="cheat-icon">🔐</span>
+                            <span class="cheat-title">API Gateway Authorization</span>
+                        </div>
+                        <div class="cheat-content">
+                            <div class="cheat-item">
+                                <div class="cheat-key">IAM Authorization</div>
+                                <div class="cheat-value">SigV4 signed requests. Good for internal services, cross-account.</div>
+                            </div>
+                            <div class="cheat-item">
+                                <div class="cheat-key">Lambda Authorizer</div>
+                                <div class="cheat-value">TOKEN-based (bearer) or REQUEST-based (headers, query strings). Cache TTL: 0-3600s</div>
+                            </div>
+                            <div class="cheat-item">
+                                <div class="cheat-key">Cognito Authorizer</div>
+                                <div class="cheat-value">Validates JWT tokens from Cognito User Pool. REST API only.</div>
+                            </div>
+                            <div class="cheat-item">
+                                <div class="cheat-key">Stage Variables</div>
+                                <div class="cheat-value">Use ${stageVariables.variableName} in Lambda ARN, HTTP endpoint</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="sqs-cheat" class="tab-content">
+                <div class="cheat-grid">
+                    <div class="cheat-card">
+                        <div class="cheat-header">
+                            <span class="cheat-icon">📨</span>
+                            <span class="cheat-title">SQS Limits & Settings</span>
+                        </div>
+                        <div class="cheat-content">
+                            <div class="cheat-item">
+                                <div class="cheat-key">Message Size</div>
+                                <div class="cheat-value">Max 256 KB (use Extended Client Library for larger)</div>
+                            </div>
+                            <div class="cheat-item">
+                                <div class="cheat-key">Visibility Timeout</div>
+                                <div class="cheat-value">Default: 30 sec | Range: 0 sec - 12 hours</div>
+                            </div>
+                            <div class="cheat-item">
+                                <div class="cheat-key">Message Retention</div>
+                                <div class="cheat-value">Default: 4 days | Range: 1 min - 14 days</div>
+                            </div>
+                            <div class="cheat-item">
+                                <div class="cheat-key">Long Polling</div>
+                                <div class="cheat-value">WaitTimeSeconds: 1-20 seconds (reduces empty receives)</div>
+                            </div>
+                            <div class="cheat-item">
+                                <div class="cheat-key">Delay Queue</div>
+                                <div class="cheat-value">DelaySeconds: 0-15 minutes</div>
+                            </div>
+                            <div class="cheat-item">
+                                <div class="cheat-key">FIFO Throughput</div>
+                                <div class="cheat-value">300 msg/sec (3000 with batching) | High throughput: 70,000 msg/sec</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cheat-card">
+                        <div class="cheat-header">
+                            <span class="cheat-icon">📢</span>
+                            <span class="cheat-title">SNS & EventBridge</span>
+                        </div>
+                        <div class="cheat-content">
+                            <div class="cheat-item">
+                                <div class="cheat-key">SNS Message Size</div>
+                                <div class="cheat-value">Max 256 KB</div>
+                            </div>
+                            <div class="cheat-item">
+                                <div class="cheat-key">SNS Filter Policy</div>
+                                <div class="cheat-value">Filter on message attributes (default) or message body</div>
+                            </div>
+                            <div class="cheat-item">
+                                <div class="cheat-key">Fan-Out Pattern</div>
+                                <div class="cheat-value">SNS → Multiple SQS queues for parallel processing</div>
+                            </div>
+                            <div class="cheat-item">
+                                <div class="cheat-key">EventBridge</div>
+                                <div class="cheat-value">Event-driven, schema registry, archive & replay, cross-account</div>
+                            </div>
+                            <div class="code-block">
+<span class="code-comment">// SNS Message Filter Policy</span>
+{
+  "<span class="code-string">store</span>": ["<span class="code-string">example_corp</span>"],
+  "<span class="code-string">price_usd</span>": [{"<span class="code-keyword">numeric</span>": ["<", <span class="code-number">100</span>]}]
+}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="security-cheat" class="tab-content">
+                <div class="cheat-grid">
+                    <div class="cheat-card">
+                        <div class="cheat-header">
+                            <span class="cheat-icon">🔑</span>
+                            <span class="cheat-title">KMS & Encryption</span>
+                        </div>
+                        <div class="cheat-content">
+                            <div class="cheat-item">
+                                <div class="cheat-key">CMK Types</div>
+                                <div class="cheat-value">AWS Managed | Customer Managed | AWS Owned</div>
+                            </div>
+                            <div class="cheat-item">
+                                <div class="cheat-key">Encrypt API Limit</div>
+                                <div class="cheat-value">Max 4 KB data. Use envelope encryption for larger.</div>
+                            </div>
+                            <div class="cheat-item">
+                                <div class="cheat-key">Envelope Encryption</div>
+                                <div class="cheat-value">GenerateDataKey → Encrypt data with DEK → Store encrypted DEK + data</div>
+                            </div>
+                            <div class="cheat-item">
+                                <div class="cheat-key">SSM Parameter Store</div>
+                                <div class="cheat-value">Standard: 10,000 params, 4 KB | Advanced: 100,000 params, 8 KB</div>
+                            </div>
+                            <div class="cheat-item">
+                                <div class="cheat-key">Secrets Manager</div>
+                                <div class="cheat-value">Auto rotation with Lambda. Cross-account access. Max 64 KB.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cheat-card">
+                        <div class="cheat-header">
+                            <span class="cheat-icon">👤</span>
+                            <span class="cheat-title">Cognito</span>
+                        </div>
+                        <div class="cheat-content">
+                            <div class="cheat-item">
+                                <div class="cheat-key">User Pools</div>
+                                <div class="cheat-value">Authentication: Sign-up/in, MFA, password recovery. Returns JWT tokens.</div>
+                            </div>
+                            <div class="cheat-item">
+                                <div class="cheat-key">Identity Pools</div>
+                                <div class="cheat-value">Authorization: Exchange tokens for AWS credentials (STS). Federated identities.</div>
+                            </div>
+                            <div class="cheat-item">
+                                <div class="cheat-key">Lambda Triggers</div>
+                                <div class="cheat-value">Pre/Post authentication, Pre sign-up, Custom message, Token generation</div>
+                            </div>
+                            <div class="cheat-item">
+                                <div class="cheat-key">Common Pattern</div>
+                                <div class="cheat-value">User Pool (auth) → Identity Pool (AWS creds) → Access AWS resources</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="cicd-cheat" class="tab-content">
+                <div class="cheat-grid">
+                    <div class="cheat-card">
+                        <div class="cheat-header">
+                            <span class="cheat-icon">🔧</span>
+                            <span class="cheat-title">CodeBuild & CodeDeploy</span>
+                        </div>
+                        <div class="cheat-content">
+                            <div class="cheat-item">
+                                <div class="cheat-key">buildspec.yml Phases</div>
+                                <div class="cheat-value">install → pre_build → build → post_build</div>
+                            </div>
+                            <div class="cheat-item">
+                                <div class="cheat-key">appspec.yml Hooks (EC2)</div>
+                                <div class="cheat-value">BeforeInstall → AfterInstall → ApplicationStart → ValidateService</div>
+                            </div>
+                            <div class="cheat-item">
+                                <div class="cheat-key">appspec.yml Hooks (Lambda)</div>
+                                <div class="cheat-value">BeforeAllowTraffic → AfterAllowTraffic</div>
+                            </div>
+                            <div class="cheat-item">
+                                <div class="cheat-key">Deployment Configs (EC2)</div>
+                                <div class="cheat-value">AllAtOnce | HalfAtATime | OneAtATime | Custom</div>
+                            </div>
+                            <div class="cheat-item">
+                                <div class="cheat-key">Lambda Deploy Types</div>
+                                <div class="cheat-value">Canary (ex: 10% → 90%) | Linear (ex: 10% every 10min) | AllAtOnce</div>
+                            </div>
+                            <div class="code-block">
+<span class="code-comment"># buildspec.yml structure</span>
+version: <span class="code-number">0.2</span>
+phases:
+  install:
+    runtime-versions:
+      nodejs: <span class="code-number">18</span>
+  build:
+    commands:
+      - npm run build
+artifacts:
+  files:
+    - '<span class="code-string">**/*</span>'
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cheat-card">
+                        <div class="cheat-header">
+                            <span class="cheat-icon">🌱</span>
+                            <span class="cheat-title">Elastic Beanstalk Deployments</span>
+                        </div>
+                        <div class="cheat-content">
+                            <div class="cheat-item">
+                                <div class="cheat-key">All at Once</div>
+                                <div class="cheat-value">Fastest. Brief downtime. Good for dev.</div>
+                            </div>
+                            <div class="cheat-item">
+                                <div class="cheat-key">Rolling</div>
+                                <div class="cheat-value">Updates in batches. Reduced capacity during deployment.</div>
+                            </div>
+                            <div class="cheat-item">
+                                <div class="cheat-key">Rolling with Additional Batch</div>
+                                <div class="cheat-value">Maintains full capacity. Spins up new instances first.</div>
+                            </div>
+                            <div class="cheat-item">
+                                <div class="cheat-key">Immutable</div>
+                                <div class="cheat-value">New ASG with new instances. Safe rollback. Higher cost.</div>
+                            </div>
+                            <div class="cheat-item">
+                                <div class="cheat-key">Blue/Green</div>
+                                <div class="cheat-value">Separate environment. Swap URLs. Zero downtime.</div>
+                            </div>
+                            <div class="cheat-item">
+                                <div class="cheat-key">.ebextensions</div>
+                                <div class="cheat-value">YAML/JSON config files in .ebextensions/ folder. Must end in .config</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Learning Resources -->
+        <section class="container">
+            <div class="section-header">
+                <div class="section-icon" style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(16, 185, 129, 0.05));">📚</div>
+                <div>
+                    <h2 class="section-title">Curated Learning Resources</h2>
+                    <p class="section-subtitle">Top-rated courses, documentation, and practice materials</p>
+                </div>
+            </div>
+            
+            <div class="resource-grid">
+                <a href="https://www.udemy.com/course/aws-certified-developer-associate-dva-c01/" target="_blank" class="resource-card">
+                    <div class="resource-type">Video Course</div>
+                    <div class="resource-title">Stephane Maarek - Ultimate AWS Developer Associate</div>
+                    <div class="resource-desc">Most comprehensive DVA-C02 course. 30+ hours of content with hands-on labs.</div>
+                    <span class="resource-link">Udemy →</span>
+                </a>
+                
+                <a href="https://tutorialsdojo.com/courses/aws-certified-developer-associate-practice-exams/" target="_blank" class="resource-card">
+                    <div class="resource-type">Practice Exams</div>
+                    <div class="resource-title">Tutorials Dojo Practice Exams</div>
+                    <div class="resource-desc">Gold standard practice tests. Closest to actual exam difficulty and format.</div>
+                    <span class="resource-link">Tutorials Dojo →</span>
+                </a>
+                
+                <a href="https://explore.skillbuilder.aws/learn/course/14724/aws-certified-developer-associate-official-practice-question-set-dva-c02-english" target="_blank" class="resource-card">
+                    <div class="resource-type">Official</div>
+                    <div class="resource-title">AWS Official Practice Questions</div>
+                    <div class="resource-desc">Free 20-question official practice set from AWS Skill Builder.</div>
+                    <span class="resource-link">AWS Skill Builder →</span>
+                </a>
+                
+                <a href="https://docs.aws.amazon.com/lambda/latest/dg/welcome.html" target="_blank" class="resource-card">
+                    <div class="resource-type">Documentation</div>
+                    <div class="resource-title">AWS Lambda Developer Guide</div>
+                    <div class="resource-desc">Official docs. Focus on: execution context, concurrency, event sources, X-Ray.</div>
+                    <span class="resource-link">AWS Docs →</span>
+                </a>
+                
+                <a href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Introduction.html" target="_blank" class="resource-card">
+                    <div class="resource-type">Documentation</div>
+                    <div class="resource-title">DynamoDB Developer Guide</div>
+                    <div class="resource-desc">Essential reading. Focus on: key design, GSI/LSI, Streams, DAX, transactions.</div>
+                    <span class="resource-link">AWS Docs →</span>
+                </a>
+                
+                <a href="https://aws.amazon.com/blogs/compute/" target="_blank" class="resource-card">
+                    <div class="resource-type">Blog</div>
+                    <div class="resource-title">AWS Compute Blog</div>
+                    <div class="resource-desc">Stay updated on Lambda, containers, and serverless best practices.</div>
+                    <span class="resource-link">AWS Blog →</span>
+                </a>
+                
+                <a href="https://github.com/aws-samples" target="_blank" class="resource-card">
+                    <div class="resource-type">Hands-On</div>
+                    <div class="resource-title">AWS Samples GitHub</div>
+                    <div class="resource-desc">Official code samples. Great for understanding SAM, CDK, and real implementations.</div>
+                    <span class="resource-link">GitHub →</span>
+                </a>
+                
+                <a href="https://serverlessland.com/" target="_blank" class="resource-card">
+                    <div class="resource-type">Patterns</div>
+                    <div class="resource-title">Serverless Land</div>
+                    <div class="resource-desc">Serverless patterns, snippets, and learning resources from AWS.</div>
+                    <span class="resource-link">Serverless Land →</span>
+                </a>
+                
+                <a href="https://d1.awsstatic.com/training-and-certification/docs-dev-associate/AWS-Certified-Developer-Associate_Exam-Guide.pdf" target="_blank" class="resource-card">
+                    <div class="resource-type">Official</div>
+                    <div class="resource-title">DVA-C02 Exam Guide (PDF)</div>
+                    <div class="resource-desc">Official exam guide. Review domains, task statements, and in-scope services.</div>
+                    <span class="resource-link">Download PDF →</span>
+                </a>
+            </div>
+        </section>
+
+        <!-- Detailed Service Learning Materials -->
+        <section class="container" style="background: linear-gradient(180deg, transparent, rgba(255, 153, 0, 0.03), transparent);">
+            <div class="section-header">
+                <div class="section-icon" style="background: linear-gradient(135deg, rgba(255, 153, 0, 0.2), rgba(255, 153, 0, 0.05));">🎯</div>
+                <div>
+                    <h2 class="section-title">Service-by-Service Learning Materials</h2>
+                    <p class="section-subtitle">Complete hyperlinks for documentation, tutorials, labs & practice for each exam service</p>
+                </div>
+            </div>
+
+            <!-- Lambda Section -->
+            <div class="service-section" style="margin-bottom: 40px;">
+                <div class="service-header" style="background: linear-gradient(90deg, rgba(255, 153, 0, 0.1), transparent); padding: 20px; border-radius: 12px; margin-bottom: 20px; border-left: 4px solid var(--accent-orange);">
+                    <h3 style="font-size: 1.3rem; margin-bottom: 8px;">⚡ AWS Lambda (CRITICAL - 10-15 Questions)</h3>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem;">Master serverless compute - the heart of DVA-C02 exam</p>
+                </div>
+                <div class="resource-grid">
+                    <a href="https://docs.aws.amazon.com/lambda/latest/dg/welcome.html" target="_blank" class="resource-card">
+                        <div class="resource-type">📖 Documentation</div>
+                        <div class="resource-title">Lambda Developer Guide</div>
+                        <div class="resource-desc">Complete official documentation. Focus on: execution model, concurrency, event sources.</div>
+                        <span class="resource-link">Read Docs →</span>
+                    </a>
+                    <a href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-concurrency.html" target="_blank" class="resource-card">
+                        <div class="resource-type">🔥 Key Topic</div>
+                        <div class="resource-title">Lambda Concurrency Deep Dive</div>
+                        <div class="resource-desc">Reserved vs provisioned concurrency, scaling behavior, throttling - heavily tested!</div>
+                        <span class="resource-link">Study Now →</span>
+                    </a>
+                    <a href="https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventsourcemapping.html" target="_blank" class="resource-card">
+                        <div class="resource-type">🔥 Key Topic</div>
+                        <div class="resource-title">Event Source Mappings</div>
+                        <div class="resource-desc">SQS, Kinesis, DynamoDB Streams integration - expect 3-5 questions on this!</div>
+                        <span class="resource-link">Study Now →</span>
+                    </a>
+                    <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html" target="_blank" class="resource-card">
+                        <div class="resource-type">📦 Feature</div>
+                        <div class="resource-title">Lambda Layers</div>
+                        <div class="resource-desc">Sharing code/dependencies, layer limits (250MB unzipped), versioning.</div>
+                        <span class="resource-link">Learn More →</span>
+                    </a>
+                    <a href="https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html" target="_blank" class="resource-card">
+                        <div class="resource-type">🔄 Invocation</div>
+                        <div class="resource-title">Async Invocation & Destinations</div>
+                        <div class="resource-desc">Retries, DLQ configuration, success/failure destinations.</div>
+                        <span class="resource-link">Learn More →</span>
+                    </a>
+                    <a href="https://docs.aws.amazon.com/lambda/latest/dg/services-xray.html" target="_blank" class="resource-card">
+                        <div class="resource-type">🔍 Tracing</div>
+                        <div class="resource-title">Lambda with X-Ray</div>
+                        <div class="resource-desc">Enable active tracing, X-Ray SDK integration, analyzing traces.</div>
+                        <span class="resource-link">Learn More →</span>
+                    </a>
+                    <a href="https://explore.skillbuilder.aws/learn/course/internal/view/elearning/37/introduction-to-serverless-development" target="_blank" class="resource-card">
+                        <div class="resource-type">🎓 Free Course</div>
+                        <div class="resource-title">AWS Skill Builder - Serverless Development</div>
+                        <div class="resource-desc">Free official AWS training on serverless development patterns.</div>
+                        <span class="resource-link">Start Course →</span>
+                    </a>
+                    <a href="https://workshops.aws/categories/Serverless" target="_blank" class="resource-card">
+                        <div class="resource-type">🛠️ Hands-On</div>
+                        <div class="resource-title">AWS Serverless Workshops</div>
+                        <div class="resource-desc">Free hands-on workshops: Wild Rydes, Serverless Image Handler, etc.</div>
+                        <span class="resource-link">Start Workshop →</span>
+                    </a>
+                    <a href="https://aws.amazon.com/lambda/faqs/" target="_blank" class="resource-card">
+                        <div class="resource-type">❓ FAQ</div>
+                        <div class="resource-title">Lambda FAQs</div>
+                        <div class="resource-desc">Official FAQ - great for memorizing limits and capabilities.</div>
+                        <span class="resource-link">Read FAQs →</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- DynamoDB Section -->
+            <div class="service-section" style="margin-bottom: 40px;">
+                <div class="service-header" style="background: linear-gradient(90deg, rgba(0, 168, 225, 0.1), transparent); padding: 20px; border-radius: 12px; margin-bottom: 20px; border-left: 4px solid var(--accent-blue);">
+                    <h3 style="font-size: 1.3rem; margin-bottom: 8px;">🗄️ Amazon DynamoDB (CRITICAL - 8-12 Questions)</h3>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem;">NoSQL database - key design, indexes, and capacity planning are heavily tested</p>
+                </div>
+                <div class="resource-grid">
+                    <a href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Introduction.html" target="_blank" class="resource-card">
+                        <div class="resource-type">📖 Documentation</div>
+                        <div class="resource-title">DynamoDB Developer Guide</div>
+                        <div class="resource-desc">Complete guide - start here for comprehensive understanding.</div>
+                        <span class="resource-link">Read Docs →</span>
+                    </a>
+                    <a href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/bp-partition-key-design.html" target="_blank" class="resource-card">
+                        <div class="resource-type">🔥 Key Topic</div>
+                        <div class="resource-title">Partition Key Design Best Practices</div>
+                        <div class="resource-desc">High-cardinality keys, avoiding hot partitions - MUST READ!</div>
+                        <span class="resource-link">Study Now →</span>
+                    </a>
+                    <a href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GSI.html" target="_blank" class="resource-card">
+                        <div class="resource-type">🔥 Key Topic</div>
+                        <div class="resource-title">Global Secondary Indexes (GSI)</div>
+                        <div class="resource-desc">GSI design, capacity considerations, projection types.</div>
+                        <span class="resource-link">Study Now →</span>
+                    </a>
+                    <a href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LSI.html" target="_blank" class="resource-card">
+                        <div class="resource-type">📊 Indexes</div>
+                        <div class="resource-title">Local Secondary Indexes (LSI)</div>
+                        <div class="resource-desc">LSI vs GSI differences, 10GB limit per partition, creation rules.</div>
+                        <span class="resource-link">Learn More →</span>
+                    </a>
+                    <a href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Streams.html" target="_blank" class="resource-card">
+                        <div class="resource-type">🌊 Streams</div>
+                        <div class="resource-title">DynamoDB Streams</div>
+                        <div class="resource-desc">Change data capture, Lambda triggers, stream view types.</div>
+                        <span class="resource-link">Learn More →</span>
+                    </a>
+                    <a href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DAX.html" target="_blank" class="resource-card">
+                        <div class="resource-type">⚡ Caching</div>
+                        <div class="resource-title">DynamoDB Accelerator (DAX)</div>
+                        <div class="resource-desc">In-memory caching, microsecond latency, when to use DAX vs ElastiCache.</div>
+                        <span class="resource-link">Learn More →</span>
+                    </a>
+                    <a href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/transaction-apis.html" target="_blank" class="resource-card">
+                        <div class="resource-type">💼 Transactions</div>
+                        <div class="resource-title">DynamoDB Transactions</div>
+                        <div class="resource-desc">ACID transactions, TransactWriteItems, TransactGetItems, 2x capacity cost.</div>
+                        <span class="resource-link">Learn More →</span>
+                    </a>
+                    <a href="https://amazon-dynamodb-labs.workshop.aws/" target="_blank" class="resource-card">
+                        <div class="resource-type">🛠️ Hands-On</div>
+                        <div class="resource-title">DynamoDB Workshop</div>
+                        <div class="resource-desc">Comprehensive hands-on lab covering all DynamoDB features.</div>
+                        <span class="resource-link">Start Workshop →</span>
+                    </a>
+                    <a href="https://aws.amazon.com/dynamodb/faqs/" target="_blank" class="resource-card">
+                        <div class="resource-type">❓ FAQ</div>
+                        <div class="resource-title">DynamoDB FAQs</div>
+                        <div class="resource-desc">Official FAQ with limits, pricing, and capability details.</div>
+                        <span class="resource-link">Read FAQs →</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- API Gateway Section -->
+            <div class="service-section" style="margin-bottom: 40px;">
+                <div class="service-header" style="background: linear-gradient(90deg, rgba(139, 92, 246, 0.1), transparent); padding: 20px; border-radius: 12px; margin-bottom: 20px; border-left: 4px solid var(--accent-purple);">
+                    <h3 style="font-size: 1.3rem; margin-bottom: 8px;">🌐 Amazon API Gateway (CRITICAL - 6-10 Questions)</h3>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem;">REST APIs, HTTP APIs, authorizers, and deployment strategies</p>
+                </div>
+                <div class="resource-grid">
+                    <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/welcome.html" target="_blank" class="resource-card">
+                        <div class="resource-type">📖 Documentation</div>
+                        <div class="resource-title">API Gateway Developer Guide</div>
+                        <div class="resource-desc">Complete official documentation for REST, HTTP, and WebSocket APIs.</div>
+                        <span class="resource-link">Read Docs →</span>
+                    </a>
+                    <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-vs-rest.html" target="_blank" class="resource-card">
+                        <div class="resource-type">🔥 Key Topic</div>
+                        <div class="resource-title">REST API vs HTTP API</div>
+                        <div class="resource-desc">Critical comparison - know when to use each type!</div>
+                        <span class="resource-link">Study Now →</span>
+                    </a>
+                    <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-use-lambda-authorizer.html" target="_blank" class="resource-card">
+                        <div class="resource-type">🔐 Security</div>
+                        <div class="resource-title">Lambda Authorizers</div>
+                        <div class="resource-desc">TOKEN vs REQUEST authorizers, caching, custom authorization logic.</div>
+                        <span class="resource-link">Study Now →</span>
+                    </a>
+                    <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/stages.html" target="_blank" class="resource-card">
+                        <div class="resource-type">🚀 Deployment</div>
+                        <div class="resource-title">Stages & Stage Variables</div>
+                        <div class="resource-desc">Stage configuration, canary deployments, stage variables usage.</div>
+                        <span class="resource-link">Learn More →</span>
+                    </a>
+                    <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-caching.html" target="_blank" class="resource-card">
+                        <div class="resource-type">⚡ Caching</div>
+                        <div class="resource-title">API Gateway Caching</div>
+                        <div class="resource-desc">Cache settings, TTL, cache invalidation, cache key parameters.</div>
+                        <span class="resource-link">Learn More →</span>
+                    </a>
+                    <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-request-throttling.html" target="_blank" class="resource-card">
+                        <div class="resource-type">🚦 Throttling</div>
+                        <div class="resource-title">Throttling & Usage Plans</div>
+                        <div class="resource-desc">Rate limiting, burst limits, usage plans with API keys.</div>
+                        <span class="resource-link">Learn More →</span>
+                    </a>
+                    <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api.html" target="_blank" class="resource-card">
+                        <div class="resource-type">🔌 WebSocket</div>
+                        <div class="resource-title">WebSocket APIs</div>
+                        <div class="resource-desc">Two-way communication, route selection, $connect/$disconnect routes.</div>
+                        <span class="resource-link">Learn More →</span>
+                    </a>
+                    <a href="https://aws.amazon.com/api-gateway/faqs/" target="_blank" class="resource-card">
+                        <div class="resource-type">❓ FAQ</div>
+                        <div class="resource-title">API Gateway FAQs</div>
+                        <div class="resource-desc">Limits (10MB payload, 29s timeout), pricing, capabilities.</div>
+                        <span class="resource-link">Read FAQs →</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- IAM & Cognito Section -->
+            <div class="service-section" style="margin-bottom: 40px;">
+                <div class="service-header" style="background: linear-gradient(90deg, rgba(236, 72, 153, 0.1), transparent); padding: 20px; border-radius: 12px; margin-bottom: 20px; border-left: 4px solid var(--accent-pink);">
+                    <h3 style="font-size: 1.3rem; margin-bottom: 8px;">🔐 IAM & Amazon Cognito (CRITICAL - 8-12 Questions)</h3>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem;">Security domain is 26% of exam - master IAM policies and Cognito</p>
+                </div>
+                <div class="resource-grid">
+                    <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html" target="_blank" class="resource-card">
+                        <div class="resource-type">📖 Documentation</div>
+                        <div class="resource-title">IAM User Guide</div>
+                        <div class="resource-desc">Complete IAM documentation - policies, roles, federation.</div>
+                        <span class="resource-link">Read Docs →</span>
+                    </a>
+                    <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html" target="_blank" class="resource-card">
+                        <div class="resource-type">🔥 Key Topic</div>
+                        <div class="resource-title">Policy Evaluation Logic</div>
+                        <div class="resource-desc">How AWS evaluates policies - explicit deny, implicit deny, allow.</div>
+                        <span class="resource-link">Study Now →</span>
+                    </a>
+                    <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2.html" target="_blank" class="resource-card">
+                        <div class="resource-type">🎭 Roles</div>
+                        <div class="resource-title">IAM Roles for EC2</div>
+                        <div class="resource-desc">Instance profiles, assuming roles, STS AssumeRole.</div>
+                        <span class="resource-link">Learn More →</span>
+                    </a>
+                    <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/what-is-amazon-cognito.html" target="_blank" class="resource-card">
+                        <div class="resource-type">📖 Cognito</div>
+                        <div class="resource-title">Cognito Developer Guide</div>
+                        <div class="resource-desc">User Pools, Identity Pools, federation - comprehensive guide.</div>
+                        <span class="resource-link">Read Docs →</span>
+                    </a>
+                    <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools.html" target="_blank" class="resource-card">
+                        <div class="resource-type">👤 User Pools</div>
+                        <div class="resource-title">Cognito User Pools</div>
+                        <div class="resource-desc">User directory, sign-up/sign-in, MFA, Lambda triggers, JWT tokens.</div>
+                        <span class="resource-link">Study Now →</span>
+                    </a>
+                    <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-identity.html" target="_blank" class="resource-card">
+                        <div class="resource-type">🆔 Identity Pools</div>
+                        <div class="resource-title">Cognito Identity Pools</div>
+                        <div class="resource-desc">Federated identities, AWS credentials, authenticated vs guest access.</div>
+                        <span class="resource-link">Study Now →</span>
+                    </a>
+                    <a href="https://docs.aws.amazon.com/STS/latest/APIReference/welcome.html" target="_blank" class="resource-card">
+                        <div class="resource-type">🔑 STS</div>
+                        <div class="resource-title">Security Token Service</div>
+                        <div class="resource-desc">AssumeRole, AssumeRoleWithWebIdentity, temporary credentials.</div>
+                        <span class="resource-link">Learn More →</span>
+                    </a>
+                    <a href="https://aws.amazon.com/cognito/faqs/" target="_blank" class="resource-card">
+                        <div class="resource-type">❓ FAQ</div>
+                        <div class="resource-title">Cognito FAQs</div>
+                        <div class="resource-desc">User Pool vs Identity Pool differences, limits, pricing.</div>
+                        <span class="resource-link">Read FAQs →</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- CI/CD Section -->
+            <div class="service-section" style="margin-bottom: 40px;">
+                <div class="service-header" style="background: linear-gradient(90deg, rgba(6, 182, 212, 0.1), transparent); padding: 20px; border-radius: 12px; margin-bottom: 20px; border-left: 4px solid var(--accent-cyan);">
+                    <h3 style="font-size: 1.3rem; margin-bottom: 8px;">🔧 AWS CI/CD Services (HIGH - 6-10 Questions)</h3>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem;">CodeCommit, CodeBuild, CodeDeploy, CodePipeline - know the spec files!</p>
+                </div>
+                <div class="resource-grid">
+                    <a href="https://docs.aws.amazon.com/codepipeline/latest/userguide/welcome.html" target="_blank" class="resource-card">
+                        <div class="resource-type">📖 Documentation</div>
+                        <div class="resource-title">CodePipeline User Guide</div>
+                        <div class="resource-desc">Pipeline stages, actions, artifacts, cross-account deployments.</div>
+                        <span class="resource-link">Read Docs →</span>
+                    </a>
+                    <a href="https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html" target="_blank" class="resource-card">
+                        <div class="resource-type">🔥 Key Topic</div>
+                        <div class="resource-title">buildspec.yml Reference</div>
+                        <div class="resource-desc">MUST KNOW: phases, artifacts, cache, environment variables.</div>
+                        <span class="resource-link">Study Now →</span>
+                    </a>
+                    <a href="https://docs.aws.amazon.com/codedeploy/latest/userguide/reference-appspec-file.html" target="_blank" class="resource-card">
+                        <div class="resource-type">🔥 Key Topic</div>
+                        <div class="resource-title">appspec.yml Reference</div>
+                        <div class="resource-desc">MUST KNOW: hooks for EC2/Lambda, lifecycle events, scripts.</div>
+                        <span class="resource-link">Study Now →</span>
+                    </a>
+                    <a href="https://docs.aws.amazon.com/codedeploy/latest/userguide/deployment-configurations.html" target="_blank" class="resource-card">
+                        <div class="resource-type">🚀 Deployments</div>
+                        <div class="resource-title">Deployment Configurations</div>
+                        <div class="resource-desc">AllAtOnce, HalfAtATime, OneAtATime, Canary, Linear for Lambda.</div>
+                        <span class="resource-link">Study Now →</span>
+                    </a>
+                    <a href="https://docs.aws.amazon.com/codebuild/latest/userguide/welcome.html" target="_blank" class="resource-card">
+                        <div class="resource-type">🏗️ Build</div>
+                        <div class="resource-title">CodeBuild User Guide</div>
+                        <div class="resource-desc">Build projects, compute types, VPC integration, caching.</div>
+                        <span class="resource-link">Read Docs →</span>
+                    </a>
+                    <a href="https://docs.aws.amazon.com/codedeploy/latest/userguide/welcome.html" target="_blank" class="resource-card">
+                        <div class="resource-type">📦 Deploy</div>
+                        <div class="resource-title">CodeDeploy User Guide</div>
+                        <div class="resource-desc">EC2, Lambda, ECS deployments, blue/green, rollback.</div>
+                        <span class="resource-link">Read Docs →</span>
+                    </a>
+                    <a href="https://cicd.serverlessworkshops.io/" target="_blank" class="resource-card">
+                        <div class="resource-type">🛠️ Hands-On</div>
+                        <div class="resource-title">CI/CD for Serverless Workshop</div>
+                        <div class="resource-desc">Build a complete serverless CI/CD pipeline hands-on.</div>
+                        <span class="resource-link">Start Workshop →</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- SQS/SNS/EventBridge Section -->
+            <div class="service-section" style="margin-bottom: 40px;">
+                <div class="service-header" style="background: linear-gradient(90deg, rgba(16, 185, 129, 0.1), transparent); padding: 20px; border-radius: 12px; margin-bottom: 20px; border-left: 4px solid var(--accent-green);">
+                    <h3 style="font-size: 1.3rem; margin-bottom: 8px;">📨 Messaging Services (HIGH - 5-8 Questions)</h3>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem;">SQS, SNS, EventBridge - decoupling patterns and configurations</p>
+                </div>
+                <div class="resource-grid">
+                    <a href="https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/welcome.html" target="_blank" class="resource-card">
+                        <div class="resource-type">📖 Documentation</div>
+                        <div class="resource-title">SQS Developer Guide</div>
+                        <div class="resource-desc">Standard vs FIFO, visibility timeout, DLQ, long polling.</div>
+                        <span class="resource-link">Read Docs →</span>
+                    </a>
+                    <a href="https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html" target="_blank" class="resource-card">
+                        <div class="resource-type">🔥 Key Topic</div>
+                        <div class="resource-title">SQS Visibility Timeout</div>
+                        <div class="resource-desc">Default 30s, max 12 hours - heavily tested concept!</div>
+                        <span class="resource-link">Study Now →</span>
+                    </a>
+                    <a href="https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html" target="_blank" class="resource-card">
+                        <div class="resource-type">📊 FIFO</div>
+                        <div class="resource-title">SQS FIFO Queues</div>
+                        <div class="resource-desc">Message groups, deduplication, exactly-once processing.</div>
+                        <span class="resource-link">Study Now →</span>
+                    </a>
+                    <a href="https://docs.aws.amazon.com/sns/latest/dg/welcome.html" target="_blank" class="resource-card">
+                        <div class="resource-type">📖 Documentation</div>
+                        <div class="resource-title">SNS Developer Guide</div>
+                        <div class="resource-desc">Topics, subscriptions, message filtering, fan-out pattern.</div>
+                        <span class="resource-link">Read Docs →</span>
+                    </a>
+                    <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-subscription-filter-policies.html" target="_blank" class="resource-card">
+                        <div class="resource-type">🔥 Key Topic</div>
+                        <div class="resource-title">SNS Message Filtering</div>
+                        <div class="resource-desc">Filter policies, attribute-based vs payload-based filtering.</div>
+                        <span class="resource-link">Study Now →</span>
+                    </a>
+                    <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/aws-events.html" target="_blank" class="resource-card">
+                        <div class="resource-type">📖 EventBridge</div>
+                        <div class="resource-title">EventBridge User Guide</div>
+                        <div class="resource-desc">Event buses, rules, patterns, schema registry, archive & replay.</div>
+                        <span class="resource-link">Read Docs →</span>
+                    </a>
+                    <a href="https://aws.amazon.com/sqs/faqs/" target="_blank" class="resource-card">
+                        <div class="resource-type">❓ FAQ</div>
+                        <div class="resource-title">SQS FAQs</div>
+                        <div class="resource-desc">Limits (256KB, 14 days retention), pricing, FIFO throughput.</div>
+                        <span class="resource-link">Read FAQs →</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- KMS/Secrets Manager Section -->
+            <div class="service-section" style="margin-bottom: 40px;">
+                <div class="service-header" style="background: linear-gradient(90deg, rgba(255, 153, 0, 0.1), transparent); padding: 20px; border-radius: 12px; margin-bottom: 20px; border-left: 4px solid var(--accent-orange);">
+                    <h3 style="font-size: 1.3rem; margin-bottom: 8px;">🔑 KMS & Secrets Management (HIGH - 4-6 Questions)</h3>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem;">Encryption, key management, and secrets handling</p>
+                </div>
+                <div class="resource-grid">
+                    <a href="https://docs.aws.amazon.com/kms/latest/developerguide/overview.html" target="_blank" class="resource-card">
+                        <div class="resource-type">📖 Documentation</div>
+                        <div class="resource-title">KMS Developer Guide</div>
+                        <div class="resource-desc">Key types, key policies, envelope encryption, grants.</div>
+                        <span class="resource-link">Read Docs →</span>
+                    </a>
+                    <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#enveloping" target="_blank" class="resource-card">
+                        <div class="resource-type">🔥 Key Topic</div>
+                        <div class="resource-title">Envelope Encryption</div>
+                        <div class="resource-desc">GenerateDataKey, encrypt data locally, store encrypted DEK.</div>
+                        <span class="resource-link">Study Now →</span>
+                    </a>
+                    <a href="https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html" target="_blank" class="resource-card">
+                        <div class="resource-type">🔐 Secrets</div>
+                        <div class="resource-title">Secrets Manager User Guide</div>
+                        <div class="resource-desc">Secret rotation, Lambda rotation functions, cross-account access.</div>
+                        <span class="resource-link">Read Docs →</span>
+                    </a>
+                    <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html" target="_blank" class="resource-card">
+                        <div class="resource-type">📋 Parameters</div>
+                        <div class="resource-title">SSM Parameter Store</div>
+                        <div class="resource-desc">Standard vs Advanced tiers, SecureString, hierarchies.</div>
+                        <span class="resource-link">Read Docs →</span>
+                    </a>
+                    <a href="https://aws.amazon.com/kms/faqs/" target="_blank" class="resource-card">
+                        <div class="resource-type">❓ FAQ</div>
+                        <div class="resource-title">KMS FAQs</div>
+                        <div class="resource-desc">4KB encrypt limit, key types, pricing, regional availability.</div>
+                        <span class="resource-link">Read FAQs →</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- CloudWatch/X-Ray Section -->
+            <div class="service-section" style="margin-bottom: 40px;">
+                <div class="service-header" style="background: linear-gradient(90deg, rgba(0, 168, 225, 0.1), transparent); padding: 20px; border-radius: 12px; margin-bottom: 20px; border-left: 4px solid var(--accent-blue);">
+                    <h3 style="font-size: 1.3rem; margin-bottom: 8px;">📊 Observability - CloudWatch & X-Ray (HIGH - 5-8 Questions)</h3>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem;">Monitoring, logging, tracing, and troubleshooting</p>
+                </div>
+                <div class="resource-grid">
+                    <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatch.html" target="_blank" class="resource-card">
+                        <div class="resource-type">📖 Documentation</div>
+                        <div class="resource-title">CloudWatch User Guide</div>
+                        <div class="resource-desc">Metrics, logs, alarms, dashboards, events.</div>
+                        <span class="resource-link">Read Docs →</span>
+                    </a>
+                    <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/AnalyzingLogData.html" target="_blank" class="resource-card">
+                        <div class="resource-type">🔥 Key Topic</div>
+                        <div class="resource-title">CloudWatch Logs Insights</div>
+                        <div class="resource-desc">Query language, analyzing logs, common query patterns.</div>
+                        <span class="resource-link">Study Now →</span>
+                    </a>
+                    <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/publishingMetrics.html" target="_blank" class="resource-card">
+                        <div class="resource-type">📈 Metrics</div>
+                        <div class="resource-title">Custom Metrics</div>
+                        <div class="resource-desc">PutMetricData API, dimensions, high-resolution metrics.</div>
+                        <span class="resource-link">Learn More →</span>
+                    </a>
+                    <a href="https://docs.aws.amazon.com/xray/latest/devguide/aws-xray.html" target="_blank" class="resource-card">
+                        <div class="resource-type">📖 X-Ray</div>
+                        <div class="resource-title">X-Ray Developer Guide</div>
+                        <div class="resource-desc">Distributed tracing, segments, subsegments, annotations.</div>
+                        <span class="resource-link">Read Docs →</span>
+                    </a>
+                    <a href="https://docs.aws.amazon.com/xray/latest/devguide/xray-concepts.html" target="_blank" class="resource-card">
+                        <div class="resource-type">🔥 Key Topic</div>
+                        <div class="resource-title">X-Ray Concepts</div>
+                        <div class="resource-desc">Traces, segments, subsegments, annotations vs metadata.</div>
+                        <span class="resource-link">Study Now →</span>
+                    </a>
+                    <a href="https://docs.aws.amazon.com/xray/latest/devguide/xray-sdk-nodejs.html" target="_blank" class="resource-card">
+                        <div class="resource-type">💻 SDK</div>
+                        <div class="resource-title">X-Ray SDK for Node.js</div>
+                        <div class="resource-desc">Instrumenting code, capturing segments, patching AWS SDK.</div>
+                        <span class="resource-link">Learn More →</span>
+                    </a>
+                    <a href="https://aws.amazon.com/cloudwatch/faqs/" target="_blank" class="resource-card">
+                        <div class="resource-type">❓ FAQ</div>
+                        <div class="resource-title">CloudWatch FAQs</div>
+                        <div class="resource-desc">Retention periods, limits, pricing, metric resolution.</div>
+                        <span class="resource-link">Read FAQs →</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- ECS/Containers Section -->
+            <div class="service-section" style="margin-bottom: 40px;">
+                <div class="service-header" style="background: linear-gradient(90deg, rgba(139, 92, 246, 0.1), transparent); padding: 20px; border-radius: 12px; margin-bottom: 20px; border-left: 4px solid var(--accent-purple);">
+                    <h3 style="font-size: 1.3rem; margin-bottom: 8px;">🐳 Containers - ECS, Fargate, ECR (MEDIUM - 3-5 Questions)</h3>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem;">Container orchestration and registry services</p>
+                </div>
+                <div class="resource-grid">
+                    <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/Welcome.html" target="_blank" class="resource-card">
+                        <div class="resource-type">📖 Documentation</div>
+                        <div class="resource-title">ECS Developer Guide</div>
+                        <div class="resource-desc">Task definitions, services, clusters, capacity providers.</div>
+                        <span class="resource-link">Read Docs →</span>
+                    </a>
+                    <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definitions.html" target="_blank" class="resource-card">
+                        <div class="resource-type">🔥 Key Topic</div>
+                        <div class="resource-title">Task Definitions</div>
+                        <div class="resource-desc">Container definitions, task role vs execution role - know the difference!</div>
+                        <span class="resource-link">Study Now →</span>
+                    </a>
+                    <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/AWS_Fargate.html" target="_blank" class="resource-card">
+                        <div class="resource-type">☁️ Fargate</div>
+                        <div class="resource-title">AWS Fargate</div>
+                        <div class="resource-desc">Serverless containers, launch type comparison, pricing.</div>
+                        <span class="resource-link">Learn More →</span>
+                    </a>
+                    <a href="https://docs.aws.amazon.com/AmazonECR/latest/userguide/what-is-ecr.html" target="_blank" class="resource-card">
+                        <div class="resource-type">📦 ECR</div>
+                        <div class="resource-title">ECR User Guide</div>
+                        <div class="resource-desc">Image repositories, lifecycle policies, cross-account access.</div>
+                        <span class="resource-link">Read Docs →</span>
+                    </a>
+                    <a href="https://ecsworkshop.com/" target="_blank" class="resource-card">
+                        <div class="resource-type">🛠️ Hands-On</div>
+                        <div class="resource-title">ECS Workshop</div>
+                        <div class="resource-desc">Comprehensive hands-on workshop for ECS and Fargate.</div>
+                        <span class="resource-link">Start Workshop →</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- S3 Section -->
+            <div class="service-section" style="margin-bottom: 40px;">
+                <div class="service-header" style="background: linear-gradient(90deg, rgba(16, 185, 129, 0.1), transparent); padding: 20px; border-radius: 12px; margin-bottom: 20px; border-left: 4px solid var(--accent-green);">
+                    <h3 style="font-size: 1.3rem; margin-bottom: 8px;">📦 Amazon S3 (MEDIUM - 3-5 Questions)</h3>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem;">Object storage, presigned URLs, events, and encryption</p>
+                </div>
+                <div class="resource-grid">
+                    <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html" target="_blank" class="resource-card">
+                        <div class="resource-type">📖 Documentation</div>
+                        <div class="resource-title">S3 User Guide</div>
+                        <div class="resource-desc">Buckets, objects, storage classes, lifecycle policies.</div>
+                        <span class="resource-link">Read Docs →</span>
+                    </a>
+                    <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/ShareObjectPreSignedURL.html" target="_blank" class="resource-card">
+                        <div class="resource-type">🔥 Key Topic</div>
+                        <div class="resource-title">Presigned URLs</div>
+                        <div class="resource-desc">Generate presigned URLs for temporary access - commonly tested!</div>
+                        <span class="resource-link">Study Now →</span>
+                    </a>
+                    <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/NotificationHowTo.html" target="_blank" class="resource-card">
+                        <div class="resource-type">🔔 Events</div>
+                        <div class="resource-title">S3 Event Notifications</div>
+                        <div class="resource-desc">Trigger Lambda, SQS, SNS on object events.</div>
+                        <span class="resource-link">Learn More →</span>
+                    </a>
+                    <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/serv-side-encryption.html" target="_blank" class="resource-card">
+                        <div class="resource-type">🔐 Encryption</div>
+                        <div class="resource-title">S3 Server-Side Encryption</div>
+                        <div class="resource-desc">SSE-S3, SSE-KMS, SSE-C - know the differences!</div>
+                        <span class="resource-link">Study Now →</span>
+                    </a>
+                    <a href="https://aws.amazon.com/s3/faqs/" target="_blank" class="resource-card">
+                        <div class="resource-type">❓ FAQ</div>
+                        <div class="resource-title">S3 FAQs</div>
+                        <div class="resource-desc">Object limits (5TB), bucket limits, consistency model.</div>
+                        <span class="resource-link">Read FAQs →</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Elastic Beanstalk & Step Functions -->
+            <div class="service-section" style="margin-bottom: 40px;">
+                <div class="service-header" style="background: linear-gradient(90deg, rgba(236, 72, 153, 0.1), transparent); padding: 20px; border-radius: 12px; margin-bottom: 20px; border-left: 4px solid var(--accent-pink);">
+                    <h3 style="font-size: 1.3rem; margin-bottom: 8px;">🌱 Elastic Beanstalk & Step Functions (MEDIUM - 4-7 Questions)</h3>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem;">PaaS deployment and workflow orchestration</p>
+                </div>
+                <div class="resource-grid">
+                    <a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/Welcome.html" target="_blank" class="resource-card">
+                        <div class="resource-type">📖 Documentation</div>
+                        <div class="resource-title">Elastic Beanstalk Developer Guide</div>
+                        <div class="resource-desc">Environments, deployment policies, configuration.</div>
+                        <span class="resource-link">Read Docs →</span>
+                    </a>
+                    <a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/using-features.deploy-existing-version.html" target="_blank" class="resource-card">
+                        <div class="resource-type">🔥 Key Topic</div>
+                        <div class="resource-title">Deployment Policies</div>
+                        <div class="resource-desc">All at once, Rolling, Rolling with batch, Immutable, Blue/Green.</div>
+                        <span class="resource-link">Study Now →</span>
+                    </a>
+                    <a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/ebextensions.html" target="_blank" class="resource-card">
+                        <div class="resource-type">⚙️ Config</div>
+                        <div class="resource-title">.ebextensions Configuration</div>
+                        <div class="resource-desc">Custom configuration files, packages, commands, files.</div>
+                        <span class="resource-link">Learn More →</span>
+                    </a>
+                    <a href="https://docs.aws.amazon.com/step-functions/latest/dg/welcome.html" target="_blank" class="resource-card">
+                        <div class="resource-type">📖 Step Functions</div>
+                        <div class="resource-title">Step Functions Developer Guide</div>
+                        <div class="resource-desc">State machines, ASL, Standard vs Express workflows.</div>
+                        <span class="resource-link">Read Docs →</span>
+                    </a>
+                    <a href="https://docs.aws.amazon.com/step-functions/latest/dg/concepts-error-handling.html" target="_blank" class="resource-card">
+                        <div class="resource-type">🔥 Key Topic</div>
+                        <div class="resource-title">Error Handling in Step Functions</div>
+                        <div class="resource-desc">Retry, Catch, error types, fallback states.</div>
+                        <span class="resource-link">Study Now →</span>
+                    </a>
+                    <a href="https://aws.amazon.com/elasticbeanstalk/faqs/" target="_blank" class="resource-card">
+                        <div class="resource-type">❓ FAQ</div>
+                        <div class="resource-title">Elastic Beanstalk FAQs</div>
+                        <div class="resource-desc">Platform support, deployment options, pricing.</div>
+                        <span class="resource-link">Read FAQs →</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- SAM & CloudFormation -->
+            <div class="service-section" style="margin-bottom: 40px;">
+                <div class="service-header" style="background: linear-gradient(90deg, rgba(6, 182, 212, 0.1), transparent); padding: 20px; border-radius: 12px; margin-bottom: 20px; border-left: 4px solid var(--accent-cyan);">
+                    <h3 style="font-size: 1.3rem; margin-bottom: 8px;">📜 SAM & CloudFormation (MEDIUM - 3-5 Questions)</h3>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem;">Infrastructure as Code for serverless applications</p>
+                </div>
+                <div class="resource-grid">
+                    <a href="https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/what-is-sam.html" target="_blank" class="resource-card">
+                        <div class="resource-type">📖 Documentation</div>
+                        <div class="resource-title">SAM Developer Guide</div>
+                        <div class="resource-desc">SAM template syntax, SAM CLI commands, local testing.</div>
+                        <span class="resource-link">Read Docs →</span>
+                    </a>
+                    <a href="https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-specification.html" target="_blank" class="resource-card">
+                        <div class="resource-type">🔥 Key Topic</div>
+                        <div class="resource-title">SAM Template Specification</div>
+                        <div class="resource-desc">AWS::Serverless::Function, Api, SimpleTable resource types.</div>
+                        <span class="resource-link">Study Now →</span>
+                    </a>
+                    <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference.html" target="_blank" class="resource-card">
+                        <div class="resource-type">🔧 Functions</div>
+                        <div class="resource-title">CloudFormation Intrinsic Functions</div>
+                        <div class="resource-desc">!Ref, !Sub, !GetAtt, !Join, !ImportValue - know these!</div>
+                        <span class="resource-link">Study Now →</span>
+                    </a>
+                    <a href="https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-command-reference.html" target="_blank" class="resource-card">
+                        <div class="resource-type">💻 CLI</div>
+                        <div class="resource-title">SAM CLI Reference</div>
+                        <div class="resource-desc">sam init, sam build, sam local, sam deploy commands.</div>
+                        <span class="resource-link">Learn More →</span>
+                    </a>
+                    <a href="https://github.com/aws/serverless-application-model/tree/master/examples" target="_blank" class="resource-card">
+                        <div class="resource-type">💡 Examples</div>
+                        <div class="resource-title">SAM Template Examples</div>
+                        <div class="resource-desc">Official SAM template examples for various use cases.</div>
+                        <span class="resource-link">View Examples →</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Kinesis Section -->
+            <div class="service-section" style="margin-bottom: 40px;">
+                <div class="service-header" style="background: linear-gradient(90deg, rgba(255, 153, 0, 0.1), transparent); padding: 20px; border-radius: 12px; margin-bottom: 20px; border-left: 4px solid var(--accent-orange);">
+                    <h3 style="font-size: 1.3rem; margin-bottom: 8px;">🌊 Amazon Kinesis (MEDIUM - 2-4 Questions)</h3>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem;">Real-time data streaming and processing</p>
+                </div>
+                <div class="resource-grid">
+                    <a href="https://docs.aws.amazon.com/streams/latest/dev/introduction.html" target="_blank" class="resource-card">
+                        <div class="resource-type">📖 Documentation</div>
+                        <div class="resource-title">Kinesis Data Streams Developer Guide</div>
+                        <div class="resource-desc">Shards, producers, consumers, retention, scaling.</div>
+                        <span class="resource-link">Read Docs →</span>
+                    </a>
+                    <a href="https://docs.aws.amazon.com/streams/latest/dev/key-concepts.html" target="_blank" class="resource-card">
+                        <div class="resource-type">🔥 Key Topic</div>
+                        <div class="resource-title">Kinesis Key Concepts</div>
+                        <div class="resource-desc">Shards, partition keys, sequence numbers, iterators.</div>
+                        <span class="resource-link">Study Now →</span>
+                    </a>
+                    <a href="https://docs.aws.amazon.com/streams/latest/dev/developing-consumers-with-kcl.html" target="_blank" class="resource-card">
+                        <div class="resource-type">📖 KCL</div>
+                        <div class="resource-title">Kinesis Client Library</div>
+                        <div class="resource-desc">KCL checkpointing, shard processing, worker coordination.</div>
+                        <span class="resource-link">Learn More →</span>
+                    </a>
+                    <a href="https://docs.aws.amazon.com/streams/latest/dev/enhanced-consumers.html" target="_blank" class="resource-card">
+                        <div class="resource-type">⚡ Enhanced</div>
+                        <div class="resource-title">Enhanced Fan-Out</div>
+                        <div class="resource-desc">Dedicated throughput per consumer, push-based delivery.</div>
+                        <span class="resource-link">Learn More →</span>
+                    </a>
+                    <a href="https://aws.amazon.com/kinesis/data-streams/faqs/" target="_blank" class="resource-card">
+                        <div class="resource-type">❓ FAQ</div>
+                        <div class="resource-title">Kinesis FAQs</div>
+                        <div class="resource-desc">Shard limits, retention (24hr-365 days), throughput.</div>
+                        <span class="resource-link">Read FAQs →</span>
+                    </a>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- AWS Workshops & Hands-On Labs -->
+        <section class="container">
+            <div class="section-header">
+                <div class="section-icon" style="background: linear-gradient(135deg, rgba(236, 72, 153, 0.2), rgba(236, 72, 153, 0.05));">🛠️</div>
+                <div>
+                    <h2 class="section-title">AWS Workshops & Hands-On Labs</h2>
+                    <p class="section-subtitle">Free official AWS workshops for practical experience</p>
+                </div>
+            </div>
+            
+            <div class="resource-grid">
+                <a href="https://workshops.aws/" target="_blank" class="resource-card">
+                    <div class="resource-type">🏠 Portal</div>
+                    <div class="resource-title">AWS Workshops Portal</div>
+                    <div class="resource-desc">Central hub for all AWS workshops - filter by topic and difficulty.</div>
+                    <span class="resource-link">Browse All Workshops →</span>
+                </a>
+                <a href="https://catalog.us-east-1.prod.workshops.aws/workshops/63320e83-6abc-493d-83d8-f822584fb3cb" target="_blank" class="resource-card">
+                    <div class="resource-type">⚡ Serverless</div>
+                    <div class="resource-title">Wild Rydes Serverless Workshop</div>
+                    <div class="resource-desc">Build a complete serverless web app with Lambda, API Gateway, DynamoDB, Cognito.</div>
+                    <span class="resource-link">Start Workshop →</span>
+                </a>
+                <a href="https://catalog.workshops.aws/serverless-patterns/en-US" target="_blank" class="resource-card">
+                    <div class="resource-type">📐 Patterns</div>
+                    <div class="resource-title">Serverless Patterns Workshop</div>
+                    <div class="resource-desc">Learn common serverless patterns: fan-out, CQRS, event sourcing.</div>
+                    <span class="resource-link">Start Workshop →</span>
+                </a>
+                <a href="https://cicd.serverlessworkshops.io/" target="_blank" class="resource-card">
+                    <div class="resource-type">🔄 CI/CD</div>
+                    <div class="resource-title">Serverless CI/CD Workshop</div>
+                    <div class="resource-desc">Build CI/CD pipelines for serverless apps using CodePipeline, CodeBuild.</div>
+                    <span class="resource-link">Start Workshop →</span>
+                </a>
+                <a href="https://amazon-dynamodb-labs.workshop.aws/" target="_blank" class="resource-card">
+                    <div class="resource-type">🗄️ DynamoDB</div>
+                    <div class="resource-title">DynamoDB Labs</div>
+                    <div class="resource-desc">Comprehensive DynamoDB workshop - design patterns, GSI, Streams, DAX.</div>
+                    <span class="resource-link">Start Workshop →</span>
+                </a>
+                <a href="https://ecsworkshop.com/" target="_blank" class="resource-card">
+                    <div class="resource-type">🐳 Containers</div>
+                    <div class="resource-title">Amazon ECS Workshop</div>
+                    <div class="resource-desc">Deploy containerized applications on ECS and Fargate.</div>
+                    <span class="resource-link">Start Workshop →</span>
+                </a>
+                <a href="https://catalog.workshops.aws/observability/en-US" target="_blank" class="resource-card">
+                    <div class="resource-type">📊 Observability</div>
+                    <div class="resource-title">One Observability Workshop</div>
+                    <div class="resource-desc">CloudWatch, X-Ray, Container Insights - complete observability setup.</div>
+                    <span class="resource-link">Start Workshop →</span>
+                </a>
+                <a href="https://catalog.us-east-1.prod.workshops.aws/workshops/026f84fd-f589-4a59-a4d1-81dc543fcd30" target="_blank" class="resource-card">
+                    <div class="resource-type">🔐 Security</div>
+                    <div class="resource-title">AWS Security Workshop</div>
+                    <div class="resource-desc">IAM, KMS, Secrets Manager hands-on security practices.</div>
+                    <span class="resource-link">Start Workshop →</span>
+                </a>
+                <a href="https://cdkworkshop.com/" target="_blank" class="resource-card">
+                    <div class="resource-type">📜 IaC</div>
+                    <div class="resource-title">AWS CDK Workshop</div>
+                    <div class="resource-desc">Learn CDK to define cloud infrastructure using familiar programming languages.</div>
+                    <span class="resource-link">Start Workshop →</span>
+                </a>
+            </div>
+        </section>
+
+        <!-- Practice Exams & Final Prep -->
+        <section class="container" style="background: linear-gradient(180deg, transparent, rgba(255, 153, 0, 0.03), transparent);">
+            <div class="section-header">
+                <div class="section-icon" style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(16, 185, 129, 0.05));">📝</div>
+                <div>
+                    <h2 class="section-title">Practice Exams & Final Preparation</h2>
+                    <p class="section-subtitle">Test your knowledge with these practice resources</p>
+                </div>
+            </div>
+            
+            <div class="resource-grid">
+                <a href="https://explore.skillbuilder.aws/learn/course/14724/aws-certified-developer-associate-official-practice-question-set-dva-c02-english" target="_blank" class="resource-card">
+                    <div class="resource-type">⭐ Official</div>
+                    <div class="resource-title">AWS Official Practice Questions (FREE)</div>
+                    <div class="resource-desc">20 official questions from AWS Skill Builder - FREE with AWS account.</div>
+                    <span class="resource-link">Start Practice →</span>
+                </a>
+                <a href="https://explore.skillbuilder.aws/learn/course/internal/view/elearning/13757/exam-prep-standard-course-aws-certified-developer-associate-dva-c02" target="_blank" class="resource-card">
+                    <div class="resource-type">⭐ Official</div>
+                    <div class="resource-title">AWS Exam Prep Course (FREE)</div>
+                    <div class="resource-desc">Official exam prep course covering all domains with practice questions.</div>
+                    <span class="resource-link">Start Course →</span>
+                </a>
+                <a href="https://tutorialsdojo.com/courses/aws-certified-developer-associate-practice-exams/" target="_blank" class="resource-card">
+                    <div class="resource-type">🏆 Best Practice</div>
+                    <div class="resource-title">Tutorials Dojo Practice Exams</div>
+                    <div class="resource-desc">Gold standard practice tests - 390+ questions, closest to real exam difficulty.</div>
+                    <span class="resource-link">Get Practice Exams →</span>
+                </a>
+                <a href="https://www.udemy.com/course/aws-certified-developer-associate-practice-tests-dva-c01/" target="_blank" class="resource-card">
+                    <div class="resource-type">📊 Udemy</div>
+                    <div class="resource-title">Stephane Maarek Practice Exams</div>
+                    <div class="resource-desc">6 full practice exams (390 questions) from the course instructor.</div>
+                    <span class="resource-link">Get Practice Exams →</span>
+                </a>
+                <a href="https://www.whizlabs.com/aws-developer-associate/" target="_blank" class="resource-card">
+                    <div class="resource-type">💻 Whizlabs</div>
+                    <div class="resource-title">Whizlabs DVA-C02 Practice Tests</div>
+                    <div class="resource-desc">550+ practice questions with detailed explanations.</div>
+                    <span class="resource-link">Get Practice Exams →</span>
+                </a>
+                <a href="https://www.examtopics.com/exams/amazon/aws-certified-developer-associate-dva-c02/" target="_blank" class="resource-card">
+                    <div class="resource-type">📚 Community</div>
+                    <div class="resource-title">ExamTopics DVA-C02</div>
+                    <div class="resource-desc">Community-contributed questions - use to supplement official resources.</div>
+                    <span class="resource-link">View Questions →</span>
+                </a>
+                <a href="https://d1.awsstatic.com/training-and-certification/docs-dev-associate/AWS-Certified-Developer-Associate_Exam-Guide.pdf" target="_blank" class="resource-card">
+                    <div class="resource-type">📄 Official</div>
+                    <div class="resource-title">Official Exam Guide PDF</div>
+                    <div class="resource-desc">Must read - domain breakdown, task statements, in-scope services.</div>
+                    <span class="resource-link">Download PDF →</span>
+                </a>
+                <a href="https://d1.awsstatic.com/training-and-certification/docs-dev-associate/AWS-Certified-Developer-Associate_Sample-Questions.pdf" target="_blank" class="resource-card">
+                    <div class="resource-type">📄 Official</div>
+                    <div class="resource-title">Official Sample Questions PDF</div>
+                    <div class="resource-desc">10 sample questions directly from AWS to understand question format.</div>
+                    <span class="resource-link">Download PDF →</span>
+                </a>
+                <a href="https://aws.amazon.com/certification/certified-developer-associate/" target="_blank" class="resource-card">
+                    <div class="resource-type">🎯 Register</div>
+                    <div class="resource-title">Schedule Your Exam</div>
+                    <div class="resource-desc">Ready to certify? Schedule via Pearson VUE or PSI.</div>
+                    <span class="resource-link">Register for Exam →</span>
+                </a>
+            </div>
+        </section>
+
+        <!-- Pro Tips -->
+        <section class="container" style="background: linear-gradient(180deg, transparent, rgba(16, 185, 129, 0.02), transparent);">
+            <div class="section-header">
+                <div class="section-icon" style="background: linear-gradient(135deg, rgba(6, 182, 212, 0.2), rgba(6, 182, 212, 0.05));">💡</div>
+                <div>
+                    <h2 class="section-title">Pro Tips for Experienced Practitioners</h2>
+                    <p class="section-subtitle">Leveraging your 7+ years of AWS experience for exam success</p>
+                </div>
+            </div>
+            
+            <div class="tips-grid">
+                <div class="tip-card">
+                    <div class="tip-number">01</div>
+                    <div class="tip-title">Don't Rely on Experience Alone</div>
+                    <div class="tip-content">
+                        The exam tests specific limits, timeouts, and configurations that you may not encounter daily. 
+                        Memorize Lambda timeout limits, SQS visibility timeouts, DynamoDB capacity calculations. 
+                        These are frequently tested.
+                    </div>
+                </div>
+                
+                <div class="tip-card">
+                    <div class="tip-number">02</div>
+                    <div class="tip-title">Focus on Serverless First</div>
+                    <div class="tip-content">
+                        DVA-C02 heavily emphasizes serverless. If your experience is more EC2/ECS-focused, 
+                        spend extra time on Lambda event source mappings, Step Functions error handling, 
+                        and API Gateway integration types.
+                    </div>
+                </div>
+                
+                <div class="tip-card">
+                    <div class="tip-number">03</div>
+                    <div class="tip-title">Master the CI/CD Tools</div>
+                    <div class="tip-content">
+                        Know buildspec.yml and appspec.yml structure cold. Understand the difference between 
+                        CodePipeline actions, CodeBuild phases, and CodeDeploy hooks. Many questions test 
+                        "which file/phase/hook" scenarios.
+                    </div>
+                </div>
+                
+                <div class="tip-card">
+                    <div class="tip-number">04</div>
+                    <div class="tip-title">Security is 26% of the Exam</div>
+                    <div class="tip-content">
+                        Don't underestimate security. Know when to use IAM policies vs resource policies, 
+                        understand Cognito User Pools vs Identity Pools, and master KMS envelope encryption. 
+                        STS AssumeRole scenarios are common.
+                    </div>
+                </div>
+                
+                <div class="tip-card">
+                    <div class="tip-number">05</div>
+                    <div class="tip-title">Understand "Why" Not Just "How"</div>
+                    <div class="tip-content">
+                        Questions often present scenarios where multiple options seem valid. Understanding 
+                        trade-offs (REST vs HTTP API, SQS Standard vs FIFO, DAX vs ElastiCache) helps 
+                        eliminate wrong answers.
+                    </div>
+                </div>
+                
+                <div class="tip-card">
+                    <div class="tip-number">06</div>
+                    <div class="tip-title">Take Practice Exams Seriously</div>
+                    <div class="tip-content">
+                        With 7+ years experience, don't skip practice exams. Use Tutorials Dojo or 
+                        AWS official practice questions. Aim for 80%+ consistently before scheduling. 
+                        Review every wrong answer thoroughly.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Exam Day Checklist -->
+        <section class="container">
+            <div class="section-header">
+                <div class="section-icon" style="background: linear-gradient(135deg, rgba(255, 153, 0, 0.2), rgba(255, 153, 0, 0.05));">✅</div>
+                <div>
+                    <h2 class="section-title">Exam Day Checklist</h2>
+                    <p class="section-subtitle">Final preparation for exam success</p>
+                </div>
+            </div>
+            
+            <div class="cheat-grid">
+                <div class="cheat-card">
+                    <div class="cheat-header">
+                        <span class="cheat-icon">📋</span>
+                        <span class="cheat-title">Before the Exam</span>
+                    </div>
+                    <div class="cheat-content">
+                        <div class="cheat-item">
+                            <div class="cheat-value">✓ Review all cheat sheets one final time</div>
+                        </div>
+                        <div class="cheat-item">
+                            <div class="cheat-value">✓ Get good sleep - no late-night cramming</div>
+                        </div>
+                        <div class="cheat-item">
+                            <div class="cheat-value">✓ Arrive early or test your online proctoring setup</div>
+                        </div>
+                        <div class="cheat-item">
+                            <div class="cheat-value">✓ Have valid ID ready (must match registration name)</div>
+                        </div>
+                        <div class="cheat-item">
+                            <div class="cheat-value">✓ Light meal, stay hydrated (no breaks during exam)</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="cheat-card">
+                    <div class="cheat-header">
+                        <span class="cheat-icon">⏱️</span>
+                        <span class="cheat-title">During the Exam</span>
+                    </div>
+                    <div class="cheat-content">
+                        <div class="cheat-item">
+                            <div class="cheat-value">✓ 130 minutes for 65 questions (~2 min per question)</div>
+                        </div>
+                        <div class="cheat-item">
+                            <div class="cheat-value">✓ Flag difficult questions, don't spend more than 3 min</div>
+                        </div>
+                        <div class="cheat-item">
+                            <div class="cheat-value">✓ Read questions carefully - look for keywords</div>
+                        </div>
+                        <div class="cheat-item">
+                            <div class="cheat-value">✓ Eliminate obviously wrong answers first</div>
+                        </div>
+                        <div class="cheat-item">
+                            <div class="cheat-value">✓ "Most cost-effective" vs "fastest" vs "most secure"</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>AWS Developer Associate DVA-C02 Exam Roadmap | Created for experienced AWS practitioners</p>
+        <p style="margin-top: 8px; font-size: 0.75rem;">Last updated: January 2026 | Good luck on your certification journey! 🚀</p>
+    </footer>
+
+    <script>
+        function showTab(tabId) {
+            // Hide all tab contents
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Remove active class from all tabs
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected tab content
+            document.getElementById(tabId).classList.add('active');
+            
+            // Add active class to clicked tab
+            event.target.classList.add('active');
+        }
+        
+        // Add smooth scroll behavior
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Animate elements on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('.domain-card, .timeline-item, .cheat-card, .resource-card, .tip-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,2083 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>n8n Automation Mastery Roadmap | AWS Developer Edition</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0a0e14;
+            --bg-card: #121820;
+            --bg-card-hover: #1a2330;
+            --accent-orange: #ff6b35;
+            --accent-cyan: #00d4aa;
+            --accent-purple: #a855f7;
+            --accent-blue: #3b82f6;
+            --accent-yellow: #fbbf24;
+            --text-primary: #e6edf3;
+            --text-secondary: #8b949e;
+            --text-muted: #484f58;
+            --border-color: #21262d;
+            --gradient-1: linear-gradient(135deg, #ff6b35 0%, #ff8c42 100%);
+            --gradient-2: linear-gradient(135deg, #00d4aa 0%, #00f5c4 100%);
+            --gradient-3: linear-gradient(135deg, #a855f7 0%, #c084fc 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .bg-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: 
+                radial-gradient(ellipse at 20% 20%, rgba(255, 107, 53, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 80%, rgba(0, 212, 170, 0.06) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 50%, rgba(168, 85, 247, 0.04) 0%, transparent 70%);
+        }
+
+        .grid-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background-image: 
+                linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+            background-size: 60px 60px;
+        }
+
+        /* Header */
+        header {
+            padding: 60px 20px 40px;
+            text-align: center;
+            position: relative;
+        }
+
+        .logo-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 12px 24px;
+            border-radius: 50px;
+            margin-bottom: 30px;
+            animation: fadeInDown 0.8s ease;
+        }
+
+        .logo-badge svg {
+            width: 32px;
+            height: 32px;
+        }
+
+        .logo-badge span {
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 500;
+            font-size: 14px;
+            color: var(--accent-orange);
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 800;
+            letter-spacing: -2px;
+            margin-bottom: 20px;
+            animation: fadeInUp 0.8s ease 0.2s both;
+        }
+
+        h1 .gradient-text {
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto 30px;
+            animation: fadeInUp 0.8s ease 0.4s both;
+        }
+
+        .aws-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #ff9900 0%, #ffb84d 100%);
+            color: #000;
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 14px;
+            animation: fadeInUp 0.8s ease 0.6s both;
+        }
+
+        /* Navigation */
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(10, 14, 20, 0.9);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 15px 20px;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .nav-btn {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn:hover, .nav-btn.active {
+            background: var(--accent-orange);
+            color: #000;
+            border-color: var(--accent-orange);
+            transform: translateY(-2px);
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Section Styles */
+        section {
+            margin-bottom: 80px;
+            animation: fadeIn 0.8s ease;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 40px;
+        }
+
+        .section-number {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: var(--gradient-1);
+            border-radius: 12px;
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 700;
+            font-size: 20px;
+            color: #000;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+
+        .section-subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-left: auto;
+        }
+
+        /* Timeline Roadmap */
+        .roadmap-timeline {
+            position: relative;
+            padding-left: 40px;
+        }
+
+        .roadmap-timeline::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, var(--accent-orange), var(--accent-cyan), var(--accent-purple));
+            border-radius: 3px;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 40px;
+            padding: 30px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            transition: all 0.4s ease;
+        }
+
+        .timeline-item:hover {
+            background: var(--bg-card-hover);
+            transform: translateX(10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -33px;
+            top: 35px;
+            width: 16px;
+            height: 16px;
+            background: var(--bg-dark);
+            border: 3px solid var(--accent-orange);
+            border-radius: 50%;
+        }
+
+        .timeline-item.month-2::before { border-color: var(--accent-cyan); }
+        .timeline-item.month-3::before { border-color: var(--accent-purple); }
+        .timeline-item.month-4::before { border-color: var(--accent-blue); }
+        .timeline-item.month-5::before { border-color: var(--accent-yellow); }
+        .timeline-item.month-6::before { border-color: var(--accent-orange); }
+
+        .timeline-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .month-badge {
+            background: var(--gradient-1);
+            color: #000;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 13px;
+        }
+
+        .timeline-item.month-2 .month-badge { background: var(--gradient-2); }
+        .timeline-item.month-3 .month-badge { background: var(--gradient-3); }
+        .timeline-item.month-4 .month-badge { background: linear-gradient(135deg, #3b82f6, #60a5fa); }
+        .timeline-item.month-5 .month-badge { background: linear-gradient(135deg, #fbbf24, #fcd34d); }
+        .timeline-item.month-6 .month-badge { background: var(--gradient-1); }
+
+        .timeline-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+        }
+
+        .timeline-content ul {
+            list-style: none;
+            display: grid;
+            gap: 12px;
+        }
+
+        .timeline-content li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            color: var(--text-secondary);
+        }
+
+        .timeline-content li::before {
+            content: '→';
+            color: var(--accent-orange);
+            font-weight: bold;
+        }
+
+        /* Cards Grid */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 30px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-1);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.4);
+            border-color: var(--accent-orange);
+        }
+
+        .card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .card-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 107, 53, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .card-description {
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .card-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .tag {
+            background: rgba(255, 107, 53, 0.15);
+            color: var(--accent-orange);
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .tag.cyan { background: rgba(0, 212, 170, 0.15); color: var(--accent-cyan); }
+        .tag.purple { background: rgba(168, 85, 247, 0.15); color: var(--accent-purple); }
+        .tag.blue { background: rgba(59, 130, 246, 0.15); color: var(--accent-blue); }
+
+        /* Tutorial Sections */
+        .tutorial-block {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+
+        .tutorial-header {
+            background: rgba(255, 107, 53, 0.1);
+            padding: 20px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .tutorial-header:hover {
+            background: rgba(255, 107, 53, 0.15);
+        }
+
+        .tutorial-header h3 {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .tutorial-step {
+            background: var(--accent-orange);
+            color: #000;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        .tutorial-toggle {
+            font-size: 24px;
+            color: var(--accent-orange);
+            transition: transform 0.3s ease;
+        }
+
+        .tutorial-content {
+            padding: 30px;
+            display: none;
+        }
+
+        .tutorial-content.active {
+            display: block;
+            animation: slideDown 0.4s ease;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Code Blocks */
+        .code-block {
+            background: #0d1117;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+
+        .code-header {
+            background: rgba(255,255,255,0.05);
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        .code-dots {
+            display: flex;
+            gap: 6px;
+        }
+
+        .code-dots span {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .code-dots span:nth-child(1) { background: #ff5f56; }
+        .code-dots span:nth-child(2) { background: #ffbd2e; }
+        .code-dots span:nth-child(3) { background: #27ca40; }
+
+        .code-content {
+            padding: 20px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
+            line-height: 1.8;
+            overflow-x: auto;
+        }
+
+        .code-content .comment { color: #6a737d; }
+        .code-content .keyword { color: #ff7b72; }
+        .code-content .string { color: #a5d6ff; }
+        .code-content .function { color: #d2a8ff; }
+        .code-content .variable { color: #ffa657; }
+        .code-content .number { color: #79c0ff; }
+
+        /* Steps List */
+        .steps-list {
+            counter-reset: steps;
+        }
+
+        .step-item {
+            position: relative;
+            padding: 20px 20px 20px 70px;
+            margin-bottom: 15px;
+            background: rgba(255,255,255,0.02);
+            border-radius: 12px;
+            border-left: 3px solid var(--accent-cyan);
+            counter-increment: steps;
+        }
+
+        .step-item::before {
+            content: counter(steps);
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 35px;
+            height: 35px;
+            background: var(--gradient-2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 700;
+            color: #000;
+        }
+
+        .step-item h4 {
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .step-item p {
+            color: var(--text-secondary);
+            font-size: 15px;
+        }
+
+        /* AWS Integration Section */
+        .aws-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .aws-card {
+            background: linear-gradient(135deg, rgba(255, 153, 0, 0.1) 0%, rgba(255, 153, 0, 0.02) 100%);
+            border: 1px solid rgba(255, 153, 0, 0.3);
+            border-radius: 12px;
+            padding: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .aws-card:hover {
+            transform: translateY(-5px);
+            border-color: #ff9900;
+            box-shadow: 0 15px 30px rgba(255, 153, 0, 0.1);
+        }
+
+        .aws-card h4 {
+            color: #ff9900;
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .aws-card p {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        /* Progress Tracker */
+        .progress-section {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .progress-bar-container {
+            background: var(--bg-dark);
+            height: 12px;
+            border-radius: 6px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: var(--gradient-1);
+            border-radius: 6px;
+            width: 0%;
+            transition: width 1s ease;
+        }
+
+        .milestone-markers {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .milestone {
+            text-align: center;
+            opacity: 0.5;
+            transition: all 0.3s ease;
+        }
+
+        .milestone.completed {
+            opacity: 1;
+        }
+
+        .milestone-dot {
+            width: 20px;
+            height: 20px;
+            background: var(--border-color);
+            border-radius: 50%;
+            margin: 0 auto 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .milestone.completed .milestone-dot {
+            background: var(--accent-cyan);
+        }
+
+        .milestone-label {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        /* Resources Section */
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .resource-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 25px;
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .resource-card:hover {
+            border-color: var(--accent-cyan);
+            transform: translateX(5px);
+        }
+
+        .resource-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(0, 212, 170, 0.1);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+
+        .resource-info h4 {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+
+        .resource-info p {
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .resource-link {
+            color: var(--accent-cyan);
+            font-size: 13px;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .resource-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Checklist */
+        .checklist {
+            list-style: none;
+        }
+
+        .checklist li {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px 0;
+            border-bottom: 1px solid var(--border-color);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .checklist li:hover {
+            padding-left: 10px;
+        }
+
+        .checkbox {
+            width: 24px;
+            height: 24px;
+            border: 2px solid var(--accent-cyan);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .checklist li.checked .checkbox {
+            background: var(--accent-cyan);
+        }
+
+        .checklist li.checked .checkbox::after {
+            content: '✓';
+            color: #000;
+            font-weight: bold;
+        }
+
+        .checklist li.checked span {
+            text-decoration: line-through;
+            opacity: 0.6;
+        }
+
+        /* Projects Section */
+        .project-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.4);
+        }
+
+        .project-banner {
+            height: 150px;
+            background: linear-gradient(135deg, var(--accent-orange) 0%, var(--accent-purple) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 60px;
+        }
+
+        .project-card:nth-child(2) .project-banner {
+            background: linear-gradient(135deg, var(--accent-cyan) 0%, var(--accent-blue) 100%);
+        }
+
+        .project-card:nth-child(3) .project-banner {
+            background: linear-gradient(135deg, var(--accent-purple) 0%, var(--accent-orange) 100%);
+        }
+
+        .project-body {
+            padding: 25px;
+        }
+
+        .project-body h4 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+
+        .project-body p {
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .difficulty {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        .difficulty-dots {
+            display: flex;
+            gap: 4px;
+        }
+
+        .difficulty-dots span {
+            width: 8px;
+            height: 8px;
+            background: var(--border-color);
+            border-radius: 50%;
+        }
+
+        .difficulty-dots span.active {
+            background: var(--accent-orange);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 60px 20px;
+            border-top: 1px solid var(--border-color);
+            margin-top: 80px;
+        }
+
+        .footer-quote {
+            font-size: 1.5rem;
+            font-weight: 300;
+            font-style: italic;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 20px;
+        }
+
+        .footer-author {
+            color: var(--accent-orange);
+            font-weight: 600;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .roadmap-timeline {
+                padding-left: 25px;
+            }
+
+            .roadmap-timeline::before {
+                left: 8px;
+            }
+
+            .timeline-item::before {
+                left: -22px;
+                width: 12px;
+                height: 12px;
+            }
+
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .section-subtitle {
+                margin-left: 0;
+            }
+
+            .nav-container {
+                gap: 5px;
+            }
+
+            .nav-btn {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+        }
+
+        /* Print Styles */
+        @media print {
+            .bg-pattern, .grid-overlay, nav {
+                display: none;
+            }
+
+            body {
+                background: white;
+                color: black;
+            }
+
+            .card, .timeline-item, .tutorial-block {
+                break-inside: avoid;
+                border: 1px solid #ddd;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-pattern"></div>
+    <div class="grid-overlay"></div>
+
+    <header>
+        <div class="logo-badge">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2L2 7L12 12L22 7L12 2Z" fill="#ff6b35"/>
+                <path d="M2 17L12 22L22 17" stroke="#ff6b35" stroke-width="2" stroke-linecap="round"/>
+                <path d="M2 12L12 17L22 12" stroke="#ff6b35" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            <span>AUTOMATION MASTERY</span>
+        </div>
+        <h1><span class="gradient-text">n8n</span> Learning Roadmap</h1>
+        <p class="subtitle">A comprehensive 3-6 month guide to mastering workflow automation, tailored for experienced developers transitioning from traditional development to no-code/low-code automation.</p>
+        <div class="aws-badge">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M7.5 3C4.462 3 2 5.462 2 8.5c0 2.33 1.42 4.32 3.44 5.16L12 22l6.56-8.34C20.58 12.82 22 10.83 22 8.5 22 5.462 19.538 3 16.5 3c-1.88 0-3.54.95-4.5 2.4A5.48 5.48 0 007.5 3z"/>
+            </svg>
+            Optimized for AWS Full-Stack Developers with 7+ Years Experience
+        </div>
+    </header>
+
+    <nav>
+        <div class="nav-container">
+            <a href="learning_dashboard.html" class="nav-btn" style="background: var(--gradient-1); color: #000; font-weight: 600;">🏠 Dashboard</a>
+            <button class="nav-btn active" onclick="scrollToSection('overview')">Overview</button>
+            <button class="nav-btn" onclick="scrollToSection('roadmap')">Roadmap</button>
+            <button class="nav-btn" onclick="scrollToSection('tutorials')">Tutorials</button>
+            <button class="nav-btn" onclick="scrollToSection('aws-integration')">AWS Integration</button>
+            <button class="nav-btn" onclick="scrollToSection('projects')">Projects</button>
+            <button class="nav-btn" onclick="scrollToSection('resources')">Resources</button>
+        </div>
+    </nav>
+
+    <main class="container">
+        <!-- Overview Section -->
+        <section id="overview">
+            <div class="section-header">
+                <div class="section-number">01</div>
+                <h2 class="section-title">What is n8n & Why Learn It?</h2>
+            </div>
+
+            <div class="cards-grid">
+                <div class="card">
+                    <div class="card-icon">🔄</div>
+                    <h3 class="card-title">Workflow Automation Platform</h3>
+                    <p class="card-description">n8n is a fair-code licensed, extendable workflow automation tool. It allows you to connect anything to everything with a powerful node-based approach.</p>
+                    <div class="card-tags">
+                        <span class="tag">Open Source</span>
+                        <span class="tag cyan">Self-Hosted</span>
+                        <span class="tag purple">400+ Integrations</span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">💼</div>
+                    <h3 class="card-title">Career Growth Opportunity</h3>
+                    <p class="card-description">Automation specialists are in high demand. With your AWS background, you can build enterprise-grade automated solutions that integrate cloud services.</p>
+                    <div class="card-tags">
+                        <span class="tag">High Demand</span>
+                        <span class="tag cyan">Enterprise Ready</span>
+                        <span class="tag blue">Future-Proof</span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">⚡</div>
+                    <h3 class="card-title">Leverage Your AWS Skills</h3>
+                    <p class="card-description">Your Lambda, S3, DynamoDB, and API Gateway experience directly translates to building powerful n8n workflows with AWS integrations.</p>
+                    <div class="card-tags">
+                        <span class="tag">Lambda</span>
+                        <span class="tag cyan">S3</span>
+                        <span class="tag purple">DynamoDB</span>
+                        <span class="tag blue">SQS/SNS</span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">🚀</div>
+                    <h3 class="card-title">Rapid Development</h3>
+                    <p class="card-description">Build in hours what used to take days. Visual workflow builder with code capabilities gives you the best of both worlds.</p>
+                    <div class="card-tags">
+                        <span class="tag">Visual Builder</span>
+                        <span class="tag cyan">Code When Needed</span>
+                        <span class="tag purple">Instant Deploy</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Roadmap Section -->
+        <section id="roadmap">
+            <div class="section-header">
+                <div class="section-number">02</div>
+                <h2 class="section-title">3-6 Month Learning Roadmap</h2>
+                <span class="section-subtitle">Progressive skill building path</span>
+            </div>
+
+            <!-- Progress Tracker -->
+            <div class="progress-section">
+                <div class="progress-header">
+                    <h3>Your Progress</h3>
+                    <span id="progress-text">0% Complete</span>
+                </div>
+                <div class="progress-bar-container">
+                    <div class="progress-bar" id="main-progress"></div>
+                </div>
+                <div class="milestone-markers">
+                    <div class="milestone" data-month="1">
+                        <div class="milestone-dot"></div>
+                        <span class="milestone-label">Month 1</span>
+                    </div>
+                    <div class="milestone" data-month="2">
+                        <div class="milestone-dot"></div>
+                        <span class="milestone-label">Month 2</span>
+                    </div>
+                    <div class="milestone" data-month="3">
+                        <div class="milestone-dot"></div>
+                        <span class="milestone-label">Month 3</span>
+                    </div>
+                    <div class="milestone" data-month="4">
+                        <div class="milestone-dot"></div>
+                        <span class="milestone-label">Month 4</span>
+                    </div>
+                    <div class="milestone" data-month="5">
+                        <div class="milestone-dot"></div>
+                        <span class="milestone-label">Month 5</span>
+                    </div>
+                    <div class="milestone" data-month="6">
+                        <div class="milestone-dot"></div>
+                        <span class="milestone-label">Month 6</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="roadmap-timeline">
+                <!-- Month 1 -->
+                <div class="timeline-item month-1">
+                    <div class="timeline-header">
+                        <span class="month-badge">MONTH 1</span>
+                        <h3 class="timeline-title">Foundation & Core Concepts</h3>
+                    </div>
+                    <div class="timeline-content">
+                        <ul>
+                            <li><strong>Week 1-2:</strong> Install n8n locally (Docker recommended for AWS devs), understand UI, explore starter templates</li>
+                            <li><strong>Week 2:</strong> Learn node types: Trigger nodes, Regular nodes, and how data flows between them</li>
+                            <li><strong>Week 3:</strong> Master basic nodes: HTTP Request, IF, Switch, Set, Code, Merge, Split nodes</li>
+                            <li><strong>Week 4:</strong> Build 5 simple workflows: Email automation, Slack notifications, Data transformation, API polling, Webhooks</li>
+                            <li><strong>Goal:</strong> Complete 10+ basic workflows and understand n8n's execution model</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Month 2 -->
+                <div class="timeline-item month-2">
+                    <div class="timeline-header">
+                        <span class="month-badge">MONTH 2</span>
+                        <h3 class="timeline-title">Intermediate Workflows & Error Handling</h3>
+                    </div>
+                    <div class="timeline-content">
+                        <ul>
+                            <li><strong>Week 1:</strong> Deep dive into expressions, JavaScript in Function nodes, and data manipulation</li>
+                            <li><strong>Week 2:</strong> Error handling strategies: Error Trigger, Try/Catch patterns, notification on failure</li>
+                            <li><strong>Week 3:</strong> Working with databases: PostgreSQL, MySQL, MongoDB nodes - CRUD operations</li>
+                            <li><strong>Week 4:</strong> API integrations: REST APIs, Authentication (OAuth2, API Keys, JWT), pagination handling</li>
+                            <li><strong>Goal:</strong> Build production-ready workflows with proper error handling</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Month 3 -->
+                <div class="timeline-item month-3">
+                    <div class="timeline-header">
+                        <span class="month-badge">MONTH 3</span>
+                        <h3 class="timeline-title">AWS Integration Mastery</h3>
+                    </div>
+                    <div class="timeline-content">
+                        <ul>
+                            <li><strong>Week 1:</strong> AWS credential setup in n8n, S3 operations (upload, download, list, pre-signed URLs)</li>
+                            <li><strong>Week 2:</strong> Lambda integration: Trigger Lambda functions, process responses, chain Lambda calls</li>
+                            <li><strong>Week 3:</strong> DynamoDB operations: Query, Scan, Put, Update, Delete with expressions</li>
+                            <li><strong>Week 4:</strong> SQS/SNS integration: Queue processing, pub/sub patterns, dead letter handling</li>
+                            <li><strong>Goal:</strong> Build AWS-native automation workflows replacing custom Lambda code</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Month 4 -->
+                <div class="timeline-item month-4">
+                    <div class="timeline-header">
+                        <span class="month-badge">MONTH 4</span>
+                        <h3 class="timeline-title">Advanced Patterns & Custom Nodes</h3>
+                    </div>
+                    <div class="timeline-content">
+                        <ul>
+                            <li><strong>Week 1:</strong> Sub-workflows: Creating reusable workflow components, parameters, and triggers</li>
+                            <li><strong>Week 2:</strong> Custom node development: TypeScript nodes for your specific integrations</li>
+                            <li><strong>Week 3:</strong> Advanced patterns: Batching, rate limiting, retry logic, idempotency</li>
+                            <li><strong>Week 4:</strong> AI integration: OpenAI, Anthropic nodes for intelligent automation</li>
+                            <li><strong>Goal:</strong> Create custom nodes and complex workflow architectures</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Month 5 -->
+                <div class="timeline-item month-5">
+                    <div class="timeline-header">
+                        <span class="month-badge">MONTH 5</span>
+                        <h3 class="timeline-title">Production Deployment & Scaling</h3>
+                    </div>
+                    <div class="timeline-content">
+                        <ul>
+                            <li><strong>Week 1:</strong> Deploy n8n on AWS: ECS/Fargate, RDS for persistence, proper networking</li>
+                            <li><strong>Week 2:</strong> High availability setup: Load balancing, auto-scaling, worker mode</li>
+                            <li><strong>Week 3:</strong> Monitoring & logging: CloudWatch integration, custom metrics, alerting</li>
+                            <li><strong>Week 4:</strong> Security best practices: Secrets management, IAM roles, VPC configuration</li>
+                            <li><strong>Goal:</strong> Production-grade n8n deployment with AWS infrastructure</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Month 6 -->
+                <div class="timeline-item month-6">
+                    <div class="timeline-header">
+                        <span class="month-badge">MONTH 6</span>
+                        <h3 class="timeline-title">Enterprise Projects & Certification</h3>
+                    </div>
+                    <div class="timeline-content">
+                        <ul>
+                            <li><strong>Week 1-2:</strong> Build enterprise project: Multi-tenant automation platform or data pipeline</li>
+                            <li><strong>Week 3:</strong> CI/CD for workflows: Version control, testing, automated deployment</li>
+                            <li><strong>Week 4:</strong> Documentation, knowledge sharing, and community contribution</li>
+                            <li><strong>Goal:</strong> Complete portfolio project and share knowledge with team</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tutorials Section -->
+        <section id="tutorials">
+            <div class="section-header">
+                <div class="section-number">03</div>
+                <h2 class="section-title">Step-by-Step Tutorials</h2>
+                <span class="section-subtitle">Hands-on learning modules</span>
+            </div>
+
+            <!-- Tutorial 1: Installation -->
+            <div class="tutorial-block">
+                <div class="tutorial-header" onclick="toggleTutorial(this)">
+                    <h3><span class="tutorial-step">1</span> Installing n8n with Docker (AWS Developer Setup)</h3>
+                    <span class="tutorial-toggle">+</span>
+                </div>
+                <div class="tutorial-content">
+                    <p>As an AWS developer, Docker is your best friend. Let's set up n8n locally with persistence.</p>
+                    
+                    <div class="steps-list">
+                        <div class="step-item">
+                            <h4>Install Docker Desktop</h4>
+                            <p>Download and install Docker Desktop from docker.com if not already installed.</p>
+                        </div>
+                        
+                        <div class="step-item">
+                            <h4>Create a project directory</h4>
+                            <p>Create a dedicated folder for your n8n installation and data persistence.</p>
+                        </div>
+                        
+                        <div class="step-item">
+                            <h4>Create docker-compose.yml</h4>
+                            <p>Use the configuration below for a production-like setup.</p>
+                        </div>
+                    </div>
+
+                    <div class="code-block">
+                        <div class="code-header">
+                            <div class="code-dots">
+                                <span></span><span></span><span></span>
+                            </div>
+                            docker-compose.yml
+                        </div>
+                        <div class="code-content">
+<span class="comment"># n8n Docker Setup for AWS Developers</span>
+<span class="keyword">version</span>: <span class="string">'3.8'</span>
+
+<span class="keyword">services</span>:
+  <span class="function">n8n</span>:
+    <span class="keyword">image</span>: n8nio/n8n:latest
+    <span class="keyword">restart</span>: always
+    <span class="keyword">ports</span>:
+      - <span class="string">"5678:5678"</span>
+    <span class="keyword">environment</span>:
+      - <span class="variable">N8N_BASIC_AUTH_ACTIVE</span>=<span class="keyword">true</span>
+      - <span class="variable">N8N_BASIC_AUTH_USER</span>=admin
+      - <span class="variable">N8N_BASIC_AUTH_PASSWORD</span>=your_secure_password
+      - <span class="variable">N8N_HOST</span>=localhost
+      - <span class="variable">N8N_PORT</span>=<span class="number">5678</span>
+      - <span class="variable">N8N_PROTOCOL</span>=http
+      - <span class="variable">WEBHOOK_URL</span>=http://localhost:5678/
+      - <span class="variable">GENERIC_TIMEZONE</span>=America/New_York
+    <span class="keyword">volumes</span>:
+      - <span class="string">./n8n_data:/home/node/.n8n</span>
+      - <span class="string">./local_files:/files</span>
+                        </div>
+                    </div>
+
+                    <div class="steps-list">
+                        <div class="step-item">
+                            <h4>Start n8n</h4>
+                            <p>Run <code>docker-compose up -d</code> and access n8n at <code>http://localhost:5678</code></p>
+                        </div>
+                        
+                        <div class="step-item">
+                            <h4>Verify Installation</h4>
+                            <p>Login with your credentials and explore the interface. Create your first "Hello World" workflow!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tutorial 2: First Workflow -->
+            <div class="tutorial-block">
+                <div class="tutorial-header" onclick="toggleTutorial(this)">
+                    <h3><span class="tutorial-step">2</span> Building Your First Webhook-Triggered Workflow</h3>
+                    <span class="tutorial-toggle">+</span>
+                </div>
+                <div class="tutorial-content">
+                    <p>Create a webhook that processes incoming data - similar to API Gateway + Lambda, but visual!</p>
+                    
+                    <div class="steps-list">
+                        <div class="step-item">
+                            <h4>Add Webhook Trigger Node</h4>
+                            <p>Click the "+" button, search for "Webhook", and add it as your trigger. Set the HTTP Method to POST.</p>
+                        </div>
+                        
+                        <div class="step-item">
+                            <h4>Add a Set Node for Data Transformation</h4>
+                            <p>Connect a "Set" node to transform incoming data. This is like your Lambda event processing.</p>
+                        </div>
+                        
+                        <div class="step-item">
+                            <h4>Add Respond to Webhook Node</h4>
+                            <p>Always respond to webhooks! Add this node to send back a proper response.</p>
+                        </div>
+                    </div>
+
+                    <div class="code-block">
+                        <div class="code-header">
+                            <div class="code-dots">
+                                <span></span><span></span><span></span>
+                            </div>
+                            Testing your webhook with curl
+                        </div>
+                        <div class="code-content">
+<span class="comment"># Test your webhook endpoint</span>
+<span class="function">curl</span> -X POST http://localhost:5678/webhook/your-path \
+  -H <span class="string">"Content-Type: application/json"</span> \
+  -d <span class="string">'{"name": "AWS Developer", "action": "learning n8n"}'</span>
+
+<span class="comment"># Expected response from your workflow</span>
+{
+  <span class="string">"success"</span>: <span class="keyword">true</span>,
+  <span class="string">"message"</span>: <span class="string">"Processed successfully"</span>,
+  <span class="string">"processed_data"</span>: {
+    <span class="string">"name"</span>: <span class="string">"AWS Developer"</span>,
+    <span class="string">"timestamp"</span>: <span class="string">"2024-01-15T10:30:00Z"</span>
+  }
+}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tutorial 3: S3 Integration -->
+            <div class="tutorial-block">
+                <div class="tutorial-header" onclick="toggleTutorial(this)">
+                    <h3><span class="tutorial-step">3</span> AWS S3 Integration Workflow</h3>
+                    <span class="tutorial-toggle">+</span>
+                </div>
+                <div class="tutorial-content">
+                    <p>Leverage your S3 knowledge! Build a workflow that monitors S3 and processes files automatically.</p>
+                    
+                    <div class="steps-list">
+                        <div class="step-item">
+                            <h4>Configure AWS Credentials in n8n</h4>
+                            <p>Go to Credentials → Add Credential → AWS. Enter your Access Key ID and Secret Access Key (use IAM roles in production!).</p>
+                        </div>
+                        
+                        <div class="step-item">
+                            <h4>Add Schedule Trigger</h4>
+                            <p>Use a Schedule Trigger to poll S3 periodically (e.g., every 5 minutes). In production, consider S3 Event → SNS → Webhook.</p>
+                        </div>
+                        
+                        <div class="step-item">
+                            <h4>Add AWS S3 Node</h4>
+                            <p>Configure the S3 node to list objects in your bucket with a specific prefix.</p>
+                        </div>
+                        
+                        <div class="step-item">
+                            <h4>Process and Move Files</h4>
+                            <p>Add logic to process files and move them to a "processed" folder.</p>
+                        </div>
+                    </div>
+
+                    <div class="code-block">
+                        <div class="code-header">
+                            <div class="code-dots">
+                                <span></span><span></span><span></span>
+                            </div>
+                            S3 Processing Logic (Code Node)
+                        </div>
+                        <div class="code-content">
+<span class="comment">// Code node to process S3 file content</span>
+<span class="keyword">const</span> <span class="variable">items</span> = <span class="variable">$input</span>.all();
+
+<span class="keyword">for</span> (<span class="keyword">const</span> <span class="variable">item</span> <span class="keyword">of</span> <span class="variable">items</span>) {
+  <span class="comment">// Access the file content from S3 download</span>
+  <span class="keyword">const</span> <span class="variable">fileContent</span> = <span class="variable">item</span>.json.Body;
+  <span class="keyword">const</span> <span class="variable">fileName</span> = <span class="variable">item</span>.json.Key;
+  
+  <span class="comment">// Parse if JSON</span>
+  <span class="keyword">if</span> (<span class="variable">fileName</span>.endsWith(<span class="string">'.json'</span>)) {
+    <span class="variable">item</span>.json.parsedContent = <span class="function">JSON.parse</span>(<span class="variable">fileContent</span>);
+  }
+  
+  <span class="comment">// Add processing metadata</span>
+  <span class="variable">item</span>.json.processedAt = <span class="keyword">new</span> <span class="function">Date</span>().toISOString();
+  <span class="variable">item</span>.json.processedBy = <span class="string">'n8n-workflow'</span>;
+}
+
+<span class="keyword">return</span> <span class="variable">items</span>;
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tutorial 4: Lambda Trigger -->
+            <div class="tutorial-block">
+                <div class="tutorial-header" onclick="toggleTutorial(this)">
+                    <h3><span class="tutorial-step">4</span> Triggering AWS Lambda from n8n</h3>
+                    <span class="tutorial-toggle">+</span>
+                </div>
+                <div class="tutorial-content">
+                    <p>Use n8n as an orchestrator for your existing Lambda functions!</p>
+                    
+                    <div class="steps-list">
+                        <div class="step-item">
+                            <h4>Add AWS Lambda Node</h4>
+                            <p>Search for "AWS Lambda" and add it to your workflow. Select your credentials.</p>
+                        </div>
+                        
+                        <div class="step-item">
+                            <h4>Configure Function Invocation</h4>
+                            <p>Select the function, region, and invocation type (RequestResponse for sync, Event for async).</p>
+                        </div>
+                        
+                        <div class="step-item">
+                            <h4>Pass Payload to Lambda</h4>
+                            <p>Use expressions to build the payload from previous nodes' data.</p>
+                        </div>
+                    </div>
+
+                    <div class="code-block">
+                        <div class="code-header">
+                            <div class="code-dots">
+                                <span></span><span></span><span></span>
+                            </div>
+                            Lambda Payload Expression
+                        </div>
+                        <div class="code-content">
+<span class="comment">// In the Lambda node's Payload field, use expression:</span>
+{{
+  {
+    <span class="string">"action"</span>: <span class="string">"processData"</span>,
+    <span class="string">"data"</span>: <span class="variable">$json</span>,
+    <span class="string">"metadata"</span>: {
+      <span class="string">"workflowId"</span>: <span class="variable">$workflow</span>.id,
+      <span class="string">"executionId"</span>: <span class="variable">$execution</span>.id,
+      <span class="string">"timestamp"</span>: <span class="variable">$now</span>.toISOString()
+    }
+  }
+}}
+
+<span class="comment">// Pro tip: Use $json to access current item's data</span>
+<span class="comment">// Use $('NodeName').item.json for specific node data</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tutorial 5: Error Handling -->
+            <div class="tutorial-block">
+                <div class="tutorial-header" onclick="toggleTutorial(this)">
+                    <h3><span class="tutorial-step">5</span> Production-Grade Error Handling</h3>
+                    <span class="tutorial-toggle">+</span>
+                </div>
+                <div class="tutorial-content">
+                    <p>Build robust workflows that gracefully handle failures - essential for production!</p>
+                    
+                    <div class="steps-list">
+                        <div class="step-item">
+                            <h4>Add Error Trigger Workflow</h4>
+                            <p>Create a separate workflow with "Error Trigger" node. This catches all workflow failures globally.</p>
+                        </div>
+                        
+                        <div class="step-item">
+                            <h4>Configure Error Workflow in Settings</h4>
+                            <p>In your main workflow settings, set the Error Workflow to your error handler.</p>
+                        </div>
+                        
+                        <div class="step-item">
+                            <h4>Add Notifications</h4>
+                            <p>In error workflow, add Slack/Email/SNS notifications with error details.</p>
+                        </div>
+                    </div>
+
+                    <div class="code-block">
+                        <div class="code-header">
+                            <div class="code-dots">
+                                <span></span><span></span><span></span>
+                            </div>
+                            Error Handler Code Node
+                        </div>
+                        <div class="code-content">
+<span class="comment">// Format error for notification</span>
+<span class="keyword">const</span> <span class="variable">error</span> = <span class="variable">$input</span>.first().json;
+
+<span class="keyword">const</span> <span class="variable">errorReport</span> = {
+  <span class="string">"title"</span>: <span class="string">`🚨 Workflow Failed: ${error.workflow.name}`</span>,
+  <span class="string">"workflow_id"</span>: <span class="variable">error</span>.workflow.id,
+  <span class="string">"execution_id"</span>: <span class="variable">error</span>.execution.id,
+  <span class="string">"error_message"</span>: <span class="variable">error</span>.execution.error.message,
+  <span class="string">"failed_node"</span>: <span class="variable">error</span>.execution.lastNodeExecuted,
+  <span class="string">"timestamp"</span>: <span class="keyword">new</span> <span class="function">Date</span>().toISOString(),
+  <span class="string">"execution_url"</span>: <span class="string">`https://your-n8n.com/execution/${error.execution.id}`</span>
+};
+
+<span class="keyword">return</span> [{ json: <span class="variable">errorReport</span> }];
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tutorial 6: DynamoDB -->
+            <div class="tutorial-block">
+                <div class="tutorial-header" onclick="toggleTutorial(this)">
+                    <h3><span class="tutorial-step">6</span> DynamoDB CRUD Operations</h3>
+                    <span class="tutorial-toggle">+</span>
+                </div>
+                <div class="tutorial-content">
+                    <p>Integrate with DynamoDB for serverless data storage - perfect for AWS developers!</p>
+                    
+                    <div class="steps-list">
+                        <div class="step-item">
+                            <h4>Use HTTP Request Node with AWS Signature</h4>
+                            <p>n8n doesn't have a native DynamoDB node, but you can use HTTP Request with AWS credentials for signing.</p>
+                        </div>
+                        
+                        <div class="step-item">
+                            <h4>Alternative: Use AWS Lambda as Proxy</h4>
+                            <p>Create a simple Lambda function that interfaces with DynamoDB and call it from n8n.</p>
+                        </div>
+                    </div>
+
+                    <div class="code-block">
+                        <div class="code-header">
+                            <div class="code-dots">
+                                <span></span><span></span><span></span>
+                            </div>
+                            DynamoDB via HTTP Request
+                        </div>
+                        <div class="code-content">
+<span class="comment">// HTTP Request Node Configuration</span>
+<span class="comment">// Method: POST</span>
+<span class="comment">// URL: https://dynamodb.us-east-1.amazonaws.com</span>
+
+<span class="comment">// Headers:</span>
+{
+  <span class="string">"Content-Type"</span>: <span class="string">"application/x-amz-json-1.0"</span>,
+  <span class="string">"X-Amz-Target"</span>: <span class="string">"DynamoDB_20120810.PutItem"</span>
+}
+
+<span class="comment">// Body (for PutItem):</span>
+{
+  <span class="string">"TableName"</span>: <span class="string">"YourTable"</span>,
+  <span class="string">"Item"</span>: {
+    <span class="string">"pk"</span>: { <span class="string">"S"</span>: <span class="string">"{{ $json.userId }}"</span> },
+    <span class="string">"sk"</span>: { <span class="string">"S"</span>: <span class="string">"{{ $json.timestamp }}"</span> },
+    <span class="string">"data"</span>: { <span class="string">"S"</span>: <span class="string">"{{ JSON.stringify($json.data) }}"</span> }
+  }
+}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tutorial 7: Custom Node -->
+            <div class="tutorial-block">
+                <div class="tutorial-header" onclick="toggleTutorial(this)">
+                    <h3><span class="tutorial-step">7</span> Creating a Custom n8n Node</h3>
+                    <span class="tutorial-toggle">+</span>
+                </div>
+                <div class="tutorial-content">
+                    <p>Build custom nodes when built-in nodes don't meet your needs - leverage your TypeScript skills!</p>
+                    
+                    <div class="steps-list">
+                        <div class="step-item">
+                            <h4>Set Up Development Environment</h4>
+                            <p>Clone the n8n-nodes-starter repository and install dependencies.</p>
+                        </div>
+                        
+                        <div class="step-item">
+                            <h4>Create Node Structure</h4>
+                            <p>Each node needs: Node file, Credentials file (optional), and Icon.</p>
+                        </div>
+                        
+                        <div class="step-item">
+                            <h4>Build and Link</h4>
+                            <p>Build your node package and link it to your n8n installation.</p>
+                        </div>
+                    </div>
+
+                    <div class="code-block">
+                        <div class="code-header">
+                            <div class="code-dots">
+                                <span></span><span></span><span></span>
+                            </div>
+                            Custom Node Template (TypeScript)
+                        </div>
+                        <div class="code-content">
+<span class="keyword">import</span> {
+  <span class="variable">IExecuteFunctions</span>,
+  <span class="variable">INodeExecutionData</span>,
+  <span class="variable">INodeType</span>,
+  <span class="variable">INodeTypeDescription</span>,
+} <span class="keyword">from</span> <span class="string">'n8n-workflow'</span>;
+
+<span class="keyword">export class</span> <span class="function">MyAwsService</span> <span class="keyword">implements</span> <span class="variable">INodeType</span> {
+  <span class="variable">description</span>: <span class="variable">INodeTypeDescription</span> = {
+    <span class="variable">displayName</span>: <span class="string">'My AWS Service'</span>,
+    <span class="variable">name</span>: <span class="string">'myAwsService'</span>,
+    <span class="variable">group</span>: [<span class="string">'transform'</span>],
+    <span class="variable">version</span>: <span class="number">1</span>,
+    <span class="variable">description</span>: <span class="string">'Custom AWS integration'</span>,
+    <span class="variable">defaults</span>: { <span class="variable">name</span>: <span class="string">'My AWS Service'</span> },
+    <span class="variable">inputs</span>: [<span class="string">'main'</span>],
+    <span class="variable">outputs</span>: [<span class="string">'main'</span>],
+    <span class="variable">properties</span>: [
+      {
+        <span class="variable">displayName</span>: <span class="string">'Operation'</span>,
+        <span class="variable">name</span>: <span class="string">'operation'</span>,
+        <span class="variable">type</span>: <span class="string">'options'</span>,
+        <span class="variable">options</span>: [
+          { <span class="variable">name</span>: <span class="string">'Create'</span>, <span class="variable">value</span>: <span class="string">'create'</span> },
+          { <span class="variable">name</span>: <span class="string">'Read'</span>, <span class="variable">value</span>: <span class="string">'read'</span> },
+        ],
+        <span class="variable">default</span>: <span class="string">'create'</span>,
+      },
+    ],
+  };
+
+  <span class="keyword">async</span> <span class="function">execute</span>(<span class="keyword">this</span>: <span class="variable">IExecuteFunctions</span>) {
+    <span class="keyword">const</span> <span class="variable">items</span> = <span class="keyword">this</span>.getInputData();
+    <span class="keyword">const</span> <span class="variable">returnData</span>: <span class="variable">INodeExecutionData</span>[] = [];
+    
+    <span class="comment">// Your AWS integration logic here</span>
+    
+    <span class="keyword">return</span> [<span class="variable">returnData</span>];
+  }
+}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- AWS Integration Section -->
+        <section id="aws-integration">
+            <div class="section-header">
+                <div class="section-number">04</div>
+                <h2 class="section-title">AWS Services Integration Guide</h2>
+                <span class="section-subtitle">Leverage your AWS expertise</span>
+            </div>
+
+            <div class="aws-grid">
+                <div class="aws-card">
+                    <h4>🪣 Amazon S3</h4>
+                    <p>Upload, download, list objects, generate pre-signed URLs. Perfect for file processing workflows.</p>
+                </div>
+                
+                <div class="aws-card">
+                    <h4>⚡ AWS Lambda</h4>
+                    <p>Invoke functions synchronously or asynchronously. Use n8n as an orchestrator for complex Lambda chains.</p>
+                </div>
+                
+                <div class="aws-card">
+                    <h4>📊 DynamoDB</h4>
+                    <p>CRUD operations via HTTP Request with AWS signing. Consider Lambda proxy for complex queries.</p>
+                </div>
+                
+                <div class="aws-card">
+                    <h4>📨 SQS</h4>
+                    <p>Send messages, receive and process queue items. Great for decoupled architectures.</p>
+                </div>
+                
+                <div class="aws-card">
+                    <h4>📢 SNS</h4>
+                    <p>Publish to topics, trigger workflows via SNS → HTTP webhook. Fan-out patterns made easy.</p>
+                </div>
+                
+                <div class="aws-card">
+                    <h4>🔐 Secrets Manager</h4>
+                    <p>Retrieve secrets dynamically. Keep sensitive data out of workflow configurations.</p>
+                </div>
+                
+                <div class="aws-card">
+                    <h4>📧 SES</h4>
+                    <p>Send transactional emails directly. Templates and bulk sending supported.</p>
+                </div>
+                
+                <div class="aws-card">
+                    <h4>🔍 CloudWatch</h4>
+                    <p>Send custom metrics and logs. Monitor workflow executions with AWS-native tools.</p>
+                </div>
+                
+                <div class="aws-card">
+                    <h4>🤖 Bedrock</h4>
+                    <p>Access Claude, Llama, and other AI models for intelligent automation workflows.</p>
+                </div>
+                
+                <div class="aws-card">
+                    <h4>📝 Textract</h4>
+                    <p>Extract text from documents and images. Perfect for document processing automation.</p>
+                </div>
+                
+                <div class="aws-card">
+                    <h4>🎙️ Transcribe</h4>
+                    <p>Convert audio to text automatically. Build voice-to-action workflows.</p>
+                </div>
+                
+                <div class="aws-card">
+                    <h4>🗄️ RDS</h4>
+                    <p>Connect to MySQL, PostgreSQL via database nodes. Use RDS for n8n's own database too!</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects">
+            <div class="section-header">
+                <div class="section-number">05</div>
+                <h2 class="section-title">Portfolio Projects</h2>
+                <span class="section-subtitle">Build these to demonstrate mastery</span>
+            </div>
+
+            <div class="cards-grid">
+                <div class="project-card">
+                    <div class="project-banner">📄</div>
+                    <div class="project-body">
+                        <h4>Document Processing Pipeline</h4>
+                        <p>S3 trigger → Textract OCR → Data extraction → DynamoDB storage → Slack notification</p>
+                        <div class="difficulty">
+                            <span>Difficulty:</span>
+                            <div class="difficulty-dots">
+                                <span class="active"></span>
+                                <span class="active"></span>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-banner">🔄</div>
+                    <div class="project-body">
+                        <h4>Multi-Cloud Data Sync</h4>
+                        <p>Sync data between AWS S3, Google Drive, and Dropbox with conflict resolution and logging.</p>
+                        <div class="difficulty">
+                            <span>Difficulty:</span>
+                            <div class="difficulty-dots">
+                                <span class="active"></span>
+                                <span class="active"></span>
+                                <span class="active"></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-banner">🤖</div>
+                    <div class="project-body">
+                        <h4>AI-Powered Customer Support</h4>
+                        <p>Email trigger → AI classification → Auto-response or escalation → CRM update → Analytics</p>
+                        <div class="difficulty">
+                            <span>Difficulty:</span>
+                            <div class="difficulty-dots">
+                                <span class="active"></span>
+                                <span class="active"></span>
+                                <span class="active"></span>
+                                <span class="active"></span>
+                                <span></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-banner">📊</div>
+                    <div class="project-body">
+                        <h4>Real-Time Dashboard Updater</h4>
+                        <p>Multiple API sources → Data aggregation → Transform → Push to analytics dashboard</p>
+                        <div class="difficulty">
+                            <span>Difficulty:</span>
+                            <div class="difficulty-dots">
+                                <span class="active"></span>
+                                <span class="active"></span>
+                                <span class="active"></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-banner">🏢</div>
+                    <div class="project-body">
+                        <h4>Enterprise Onboarding Automation</h4>
+                        <p>HR system trigger → Create accounts (AD, Slack, Email) → Provision AWS resources → Welcome flow</p>
+                        <div class="difficulty">
+                            <span>Difficulty:</span>
+                            <div class="difficulty-dots">
+                                <span class="active"></span>
+                                <span class="active"></span>
+                                <span class="active"></span>
+                                <span class="active"></span>
+                                <span class="active"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-banner">🔒</div>
+                    <div class="project-body">
+                        <h4>Security Incident Response</h4>
+                        <p>CloudWatch alarm → Gather context → Auto-remediation → Slack alert → Ticket creation</p>
+                        <div class="difficulty">
+                            <span>Difficulty:</span>
+                            <div class="difficulty-dots">
+                                <span class="active"></span>
+                                <span class="active"></span>
+                                <span class="active"></span>
+                                <span class="active"></span>
+                                <span></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Weekly Checklist -->
+        <section id="checklist">
+            <div class="section-header">
+                <div class="section-number">06</div>
+                <h2 class="section-title">Weekly Learning Checklist</h2>
+                <span class="section-subtitle">Track your progress</span>
+            </div>
+
+            <div class="cards-grid">
+                <div class="card">
+                    <h3 class="card-title">Month 1 Checklist</h3>
+                    <ul class="checklist">
+                        <li onclick="toggleCheck(this)"><span class="checkbox"></span><span>Install n8n locally with Docker</span></li>
+                        <li onclick="toggleCheck(this)"><span class="checkbox"></span><span>Complete n8n official tutorials</span></li>
+                        <li onclick="toggleCheck(this)"><span class="checkbox"></span><span>Build 5 basic workflows</span></li>
+                        <li onclick="toggleCheck(this)"><span class="checkbox"></span><span>Understand all core node types</span></li>
+                        <li onclick="toggleCheck(this)"><span class="checkbox"></span><span>Create first webhook-triggered workflow</span></li>
+                        <li onclick="toggleCheck(this)"><span class="checkbox"></span><span>Master expressions and data transformation</span></li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">Month 2-3 Checklist</h3>
+                    <ul class="checklist">
+                        <li onclick="toggleCheck(this)"><span class="checkbox"></span><span>Configure AWS credentials in n8n</span></li>
+                        <li onclick="toggleCheck(this)"><span class="checkbox"></span><span>Build S3 file processing workflow</span></li>
+                        <li onclick="toggleCheck(this)"><span class="checkbox"></span><span>Integrate with Lambda functions</span></li>
+                        <li onclick="toggleCheck(this)"><span class="checkbox"></span><span>Implement error handling workflow</span></li>
+                        <li onclick="toggleCheck(this)"><span class="checkbox"></span><span>Connect to databases (RDS)</span></li>
+                        <li onclick="toggleCheck(this)"><span class="checkbox"></span><span>Build SQS message processor</span></li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">Month 4-6 Checklist</h3>
+                    <ul class="checklist">
+                        <li onclick="toggleCheck(this)"><span class="checkbox"></span><span>Deploy n8n to AWS (ECS/Fargate)</span></li>
+                        <li onclick="toggleCheck(this)"><span class="checkbox"></span><span>Create custom n8n node</span></li>
+                        <li onclick="toggleCheck(this)"><span class="checkbox"></span><span>Set up monitoring and alerting</span></li>
+                        <li onclick="toggleCheck(this)"><span class="checkbox"></span><span>Complete portfolio project</span></li>
+                        <li onclick="toggleCheck(this)"><span class="checkbox"></span><span>Implement CI/CD for workflows</span></li>
+                        <li onclick="toggleCheck(this)"><span class="checkbox"></span><span>Present learnings to team</span></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Resources Section -->
+        <section id="resources">
+            <div class="section-header">
+                <div class="section-number">07</div>
+                <h2 class="section-title">Learning Resources</h2>
+                <span class="section-subtitle">Curated materials for your journey</span>
+            </div>
+
+            <div class="resources-grid">
+                <div class="resource-card">
+                    <div class="resource-icon">📚</div>
+                    <div class="resource-info">
+                        <h4>Official n8n Documentation</h4>
+                        <p>Comprehensive guides, API reference, and node documentation.</p>
+                        <a href="https://docs.n8n.io" target="_blank" class="resource-link">docs.n8n.io →</a>
+                    </div>
+                </div>
+
+                <div class="resource-card">
+                    <div class="resource-icon">🎓</div>
+                    <div class="resource-info">
+                        <h4>n8n Academy</h4>
+                        <p>Free courses from beginner to advanced automation concepts.</p>
+                        <a href="https://n8n.io/academy" target="_blank" class="resource-link">n8n.io/academy →</a>
+                    </div>
+                </div>
+
+                <div class="resource-card">
+                    <div class="resource-icon">💬</div>
+                    <div class="resource-info">
+                        <h4>n8n Community Forum</h4>
+                        <p>Active community for questions, templates, and discussions.</p>
+                        <a href="https://community.n8n.io" target="_blank" class="resource-link">community.n8n.io →</a>
+                    </div>
+                </div>
+
+                <div class="resource-card">
+                    <div class="resource-icon">📺</div>
+                    <div class="resource-info">
+                        <h4>n8n YouTube Channel</h4>
+                        <p>Video tutorials, workflow walkthroughs, and live sessions.</p>
+                        <a href="https://youtube.com/@n8n-io" target="_blank" class="resource-link">youtube.com/@n8n-io →</a>
+                    </div>
+                </div>
+
+                <div class="resource-card">
+                    <div class="resource-icon">🔧</div>
+                    <div class="resource-info">
+                        <h4>n8n Workflow Templates</h4>
+                        <p>1000+ ready-to-use workflow templates for various use cases.</p>
+                        <a href="https://n8n.io/workflows" target="_blank" class="resource-link">n8n.io/workflows →</a>
+                    </div>
+                </div>
+
+                <div class="resource-card">
+                    <div class="resource-icon">🐙</div>
+                    <div class="resource-info">
+                        <h4>n8n GitHub Repository</h4>
+                        <p>Source code, issues, and contribution guidelines.</p>
+                        <a href="https://github.com/n8n-io/n8n" target="_blank" class="resource-link">github.com/n8n-io →</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tips Section -->
+        <section id="tips">
+            <div class="section-header">
+                <div class="section-number">08</div>
+                <h2 class="section-title">Pro Tips for AWS Developers</h2>
+            </div>
+
+            <div class="cards-grid">
+                <div class="card">
+                    <div class="card-icon">🎯</div>
+                    <h3 class="card-title">Think in Event-Driven Patterns</h3>
+                    <p class="card-description">Your Lambda experience translates directly! Think triggers → processing → actions. n8n workflows are essentially visual serverless functions.</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">🔗</div>
+                    <h3 class="card-title">Use SNS for Real-Time Triggers</h3>
+                    <p class="card-description">Instead of polling, configure S3/DynamoDB events → SNS → n8n webhook. This gives you true event-driven automation.</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">🏗️</div>
+                    <h3 class="card-title">Hybrid Architecture</h3>
+                    <p class="card-description">Use n8n for orchestration and simple logic, Lambda for complex processing. Best of both worlds!</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">🔒</div>
+                    <h3 class="card-title">Security First</h3>
+                    <p class="card-description">Use IAM roles (not access keys) in production. Store secrets in Secrets Manager. Run n8n in a private VPC.</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">📈</div>
+                    <h3 class="card-title">Monitor Everything</h3>
+                    <p class="card-description">Send workflow metrics to CloudWatch. Set up alarms for failed executions. Use X-Ray for distributed tracing.</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">🔄</div>
+                    <h3 class="card-title">Version Control Workflows</h3>
+                    <p class="card-description">Export workflows as JSON and store in Git. Use branches for development. Implement proper CI/CD.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p class="footer-quote">"Automation is not about replacing humans, it's about amplifying human capability."</p>
+        <p class="footer-author">— Your n8n Learning Journey Starts Now</p>
+        <p style="margin-top: 30px; color: var(--text-muted);">Created for AWS Developers | 2024-2025 Learning Roadmap</p>
+    </footer>
+
+    <script>
+        // Navigation scroll
+        function scrollToSection(id) {
+            const element = document.getElementById(id);
+            const navHeight = document.querySelector('nav').offsetHeight;
+            const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+            
+            window.scrollTo({
+                top: elementPosition - navHeight - 20,
+                behavior: 'smooth'
+            });
+
+            // Update active nav button
+            document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+
+        // Tutorial toggle
+        function toggleTutorial(header) {
+            const content = header.nextElementSibling;
+            const toggle = header.querySelector('.tutorial-toggle');
+            
+            content.classList.toggle('active');
+            toggle.textContent = content.classList.contains('active') ? '−' : '+';
+        }
+
+        // Checklist toggle
+        function toggleCheck(item) {
+            item.classList.toggle('checked');
+            saveProgress();
+            updateProgress();
+        }
+
+        // Save progress to localStorage
+        function saveProgress() {
+            const checkedItems = [];
+            document.querySelectorAll('.checklist li.checked').forEach((item, index) => {
+                checkedItems.push(item.querySelector('span:last-child').textContent);
+            });
+            localStorage.setItem('n8n-progress', JSON.stringify(checkedItems));
+        }
+
+        // Load progress from localStorage
+        function loadProgress() {
+            const saved = localStorage.getItem('n8n-progress');
+            if (saved) {
+                const checkedItems = JSON.parse(saved);
+                document.querySelectorAll('.checklist li').forEach(item => {
+                    const text = item.querySelector('span:last-child').textContent;
+                    if (checkedItems.includes(text)) {
+                        item.classList.add('checked');
+                    }
+                });
+            }
+            updateProgress();
+        }
+
+        // Update progress bar
+        function updateProgress() {
+            const total = document.querySelectorAll('.checklist li').length;
+            const checked = document.querySelectorAll('.checklist li.checked').length;
+            const percentage = Math.round((checked / total) * 100);
+            
+            document.getElementById('main-progress').style.width = percentage + '%';
+            document.getElementById('progress-text').textContent = percentage + '% Complete';
+
+            // Update milestones
+            const milestones = document.querySelectorAll('.milestone');
+            const monthProgress = percentage / 100 * 6;
+            
+            milestones.forEach((milestone, index) => {
+                if (index < Math.floor(monthProgress)) {
+                    milestone.classList.add('completed');
+                } else {
+                    milestone.classList.remove('completed');
+                }
+            });
+        }
+
+        // Animate on scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.card, .timeline-item, .tutorial-block').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            loadProgress();
+            
+            // Animate progress bar on load
+            setTimeout(() => {
+                updateProgress();
+            }, 500);
+        });
+
+        // Update nav on scroll
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section[id]');
+            const navBtns = document.querySelectorAll('.nav-btn');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 100;
+                if (scrollY >= sectionTop) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navBtns.forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.getAttribute('onclick').includes(current)) {
+                    btn.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+

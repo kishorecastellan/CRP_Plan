@@ -1,0 +1,1992 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flutter Mastery Roadmap | From Next.js to Mobile</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a0e17;
+            --bg-secondary: #111827;
+            --bg-card: #1a2234;
+            --bg-card-hover: #232f46;
+            --accent-cyan: #22d3ee;
+            --accent-teal: #14b8a6;
+            --accent-orange: #fb923c;
+            --accent-pink: #f472b6;
+            --accent-lime: #a3e635;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --border-color: #2d3a52;
+            --gradient-1: linear-gradient(135deg, #22d3ee 0%, #14b8a6 100%);
+            --gradient-2: linear-gradient(135deg, #fb923c 0%, #f472b6 100%);
+            --gradient-3: linear-gradient(135deg, #a3e635 0%, #22d3ee 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+
+        /* Animated Background */
+        .bg-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.4;
+            background: 
+                radial-gradient(ellipse 80% 50% at 20% 0%, rgba(34, 211, 238, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse 60% 40% at 80% 100%, rgba(244, 114, 182, 0.12) 0%, transparent 50%),
+                radial-gradient(ellipse 50% 30% at 50% 50%, rgba(163, 230, 53, 0.08) 0%, transparent 50%);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Header */
+        header {
+            padding: 60px 0 40px;
+            text-align: center;
+            position: relative;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            color: var(--accent-cyan);
+            margin-bottom: 24px;
+            font-weight: 500;
+        }
+
+        .badge::before {
+            content: '🚀';
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 800;
+            margin-bottom: 16px;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.02em;
+        }
+
+        .subtitle {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto 32px;
+            font-weight: 300;
+        }
+
+        .highlight {
+            color: var(--accent-orange);
+            font-weight: 500;
+        }
+
+        /* Stats Bar */
+        .stats-bar {
+            display: flex;
+            justify-content: center;
+            gap: 48px;
+            flex-wrap: wrap;
+            padding: 24px 0;
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 60px;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--accent-cyan);
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        /* Section Styles */
+        section {
+            margin-bottom: 80px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+
+        .section-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+        }
+
+        h2 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: var(--text-primary);
+        }
+
+        /* Context Section */
+        .context-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .context-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 28px;
+            transition: all 0.3s ease;
+        }
+
+        .context-card:hover {
+            background: var(--bg-card-hover);
+            transform: translateY(-4px);
+            border-color: var(--accent-cyan);
+        }
+
+        .context-card h4 {
+            font-size: 1.1rem;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .context-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 40px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 12px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, var(--accent-cyan), var(--accent-teal), var(--accent-lime), var(--accent-orange), var(--accent-pink));
+            border-radius: 2px;
+        }
+
+        .week-block {
+            position: relative;
+            margin-bottom: 48px;
+            animation: fadeInUp 0.6s ease forwards;
+            opacity: 0;
+        }
+
+        .week-block:nth-child(1) { animation-delay: 0.1s; }
+        .week-block:nth-child(2) { animation-delay: 0.2s; }
+        .week-block:nth-child(3) { animation-delay: 0.3s; }
+        .week-block:nth-child(4) { animation-delay: 0.4s; }
+        .week-block:nth-child(5) { animation-delay: 0.5s; }
+        .week-block:nth-child(6) { animation-delay: 0.6s; }
+        .week-block:nth-child(7) { animation-delay: 0.7s; }
+        .week-block:nth-child(8) { animation-delay: 0.8s; }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .week-marker {
+            position: absolute;
+            left: -40px;
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            background: var(--bg-primary);
+            border: 3px solid var(--accent-cyan);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: 700;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .week-block:nth-child(3) .week-marker,
+        .week-block:nth-child(4) .week-marker {
+            border-color: var(--accent-teal);
+        }
+
+        .week-block:nth-child(5) .week-marker,
+        .week-block:nth-child(6) .week-marker {
+            border-color: var(--accent-lime);
+        }
+
+        .week-block:nth-child(7) .week-marker,
+        .week-block:nth-child(8) .week-marker {
+            border-color: var(--accent-orange);
+        }
+
+        .week-content {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 28px;
+            transition: all 0.3s ease;
+        }
+
+        .week-content:hover {
+            background: var(--bg-card-hover);
+        }
+
+        .week-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .week-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        .phase-tag {
+            font-size: 0.75rem;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .phase-foundation {
+            background: rgba(34, 211, 238, 0.15);
+            color: var(--accent-cyan);
+        }
+
+        .phase-core {
+            background: rgba(20, 184, 166, 0.15);
+            color: var(--accent-teal);
+        }
+
+        .phase-advanced {
+            background: rgba(163, 230, 53, 0.15);
+            color: var(--accent-lime);
+        }
+
+        .phase-integration {
+            background: rgba(251, 146, 60, 0.15);
+            color: var(--accent-orange);
+        }
+
+        .topics-list {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+
+        .topics-list li {
+            padding: 8px 0;
+            padding-left: 28px;
+            position: relative;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .topics-list li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--accent-cyan);
+            font-weight: bold;
+        }
+
+        .project-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(244, 114, 182, 0.1);
+            border: 1px solid rgba(244, 114, 182, 0.3);
+            padding: 10px 16px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            color: var(--accent-pink);
+        }
+
+        .project-badge::before {
+            content: '🛠️';
+        }
+
+        /* Week Resources */
+        .week-resources {
+            background: rgba(34, 211, 238, 0.05);
+            border: 1px solid rgba(34, 211, 238, 0.15);
+            border-radius: 10px;
+            padding: 16px;
+            margin: 16px 0;
+        }
+
+        .resources-label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--accent-cyan);
+            margin-bottom: 10px;
+        }
+
+        .resource-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .resource-links a {
+            display: inline-flex;
+            align-items: center;
+            padding: 6px 14px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: all 0.2s ease;
+        }
+
+        .resource-links a:hover {
+            background: var(--accent-cyan);
+            color: var(--bg-primary);
+            border-color: var(--accent-cyan);
+            transform: translateY(-2px);
+        }
+
+        .topics-list a {
+            color: var(--accent-teal);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--accent-teal);
+            transition: all 0.2s ease;
+        }
+
+        .topics-list a:hover {
+            color: var(--accent-cyan);
+            border-bottom-color: var(--accent-cyan);
+        }
+
+        /* Quick Start Links */
+        .quick-links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 16px;
+        }
+
+        .quick-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 20px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            text-decoration: none;
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        .quick-link:hover {
+            background: var(--bg-card-hover);
+            border-color: var(--accent-cyan);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(34, 211, 238, 0.1);
+        }
+
+        .quick-link-icon {
+            font-size: 1.5rem;
+        }
+
+        .quick-link-text {
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        /* Comparison Table */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--bg-card);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 16px 20px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .comparison-table th {
+            background: var(--bg-secondary);
+            font-weight: 600;
+            color: var(--accent-cyan);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .comparison-table td:first-child {
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .comparison-table td:not(:first-child) {
+            color: var(--text-secondary);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+        }
+
+        .comparison-table a {
+            color: var(--accent-teal);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .comparison-table a:hover {
+            color: var(--accent-cyan);
+            text-decoration: underline;
+        }
+
+        /* Resources Grid */
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
+        }
+
+        .resource-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 24px;
+            transition: all 0.3s ease;
+        }
+
+        .resource-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent-teal);
+        }
+
+        .resource-type {
+            font-size: 0.75rem;
+            color: var(--accent-teal);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .resource-card h4 {
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+        }
+
+        .resource-card p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 16px;
+        }
+
+        .resource-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--accent-cyan);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: gap 0.2s ease;
+        }
+
+        .resource-link:hover {
+            gap: 10px;
+        }
+
+        .resource-link::after {
+            content: '→';
+        }
+
+        /* Code Block */
+        .code-block {
+            background: #0d1117;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            overflow-x: auto;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            line-height: 1.8;
+        }
+
+        .code-block .comment {
+            color: #6a737d;
+        }
+
+        .code-block .keyword {
+            color: #ff7b72;
+        }
+
+        .code-block .class {
+            color: #79c0ff;
+        }
+
+        .code-block .string {
+            color: #a5d6ff;
+        }
+
+        .code-block .function {
+            color: #d2a8ff;
+        }
+
+        .code-block .property {
+            color: #7ee787;
+        }
+
+        /* Checklist */
+        .checklist {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 28px;
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .checklist-item:last-child {
+            border-bottom: none;
+        }
+
+        .checkbox {
+            width: 22px;
+            height: 22px;
+            border: 2px solid var(--accent-cyan);
+            border-radius: 6px;
+            flex-shrink: 0;
+            margin-top: 2px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .checkbox:hover {
+            background: rgba(34, 211, 238, 0.2);
+        }
+
+        .checklist-text {
+            color: var(--text-secondary);
+        }
+
+        /* Tips Section */
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+        }
+
+        .tip-card {
+            background: linear-gradient(135deg, rgba(34, 211, 238, 0.05) 0%, rgba(20, 184, 166, 0.05) 100%);
+            border: 1px solid rgba(34, 211, 238, 0.2);
+            border-radius: 16px;
+            padding: 24px;
+        }
+
+        .tip-card.warning {
+            background: linear-gradient(135deg, rgba(251, 146, 60, 0.05) 0%, rgba(244, 114, 182, 0.05) 100%);
+            border-color: rgba(251, 146, 60, 0.2);
+        }
+
+        .tip-icon {
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+        }
+
+        .tip-card h4 {
+            margin-bottom: 8px;
+            font-size: 1rem;
+        }
+
+        .tip-card p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* AWS Integration Section */
+        .aws-flow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            padding: 40px 20px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            margin: 24px 0;
+        }
+
+        .flow-item {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .flow-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 16px;
+            background: var(--bg-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin: 0 auto 12px;
+            border: 1px solid var(--border-color);
+        }
+
+        .flow-label {
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .flow-arrow {
+            font-size: 1.5rem;
+            color: var(--accent-cyan);
+        }
+
+        /* Daily Schedule */
+        .schedule-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+        }
+
+        .schedule-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .schedule-time {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--accent-lime);
+            margin-bottom: 8px;
+        }
+
+        .schedule-activity {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 60px 0;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-muted);
+        }
+
+        .footer-quote {
+            font-size: 1.25rem;
+            font-style: italic;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .stats-bar {
+                gap: 24px;
+            }
+            
+            .timeline {
+                padding-left: 30px;
+            }
+            
+            .week-marker {
+                left: -30px;
+                width: 22px;
+                height: 22px;
+            }
+            
+            .comparison-table {
+                font-size: 0.85rem;
+            }
+            
+            .comparison-table th,
+            .comparison-table td {
+                padding: 12px;
+            }
+        }
+
+        /* Progress Tracker */
+        .progress-section {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 28px;
+            margin-bottom: 40px;
+        }
+
+        .progress-bar-container {
+            background: var(--bg-secondary);
+            border-radius: 10px;
+            height: 20px;
+            overflow: hidden;
+            margin-top: 16px;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: var(--gradient-1);
+            width: 0%;
+            border-radius: 10px;
+            transition: width 1s ease;
+        }
+
+        .progress-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 12px;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-pattern"></div>
+    
+    <div class="container">
+        <header>
+            <a href="learning_dashboard.html" class="dashboard-link" style="display: inline-flex; align-items: center; gap: 8px; background: var(--bg-card); border: 1px solid var(--accent-pink); padding: 10px 20px; border-radius: 50px; font-size: 0.9rem; color: var(--accent-pink); margin-bottom: 20px; text-decoration: none; font-weight: 500; transition: all 0.3s ease;">🏠 Back to Dashboard</a>
+            <div class="badge">8-Week Intensive Learning Path</div>
+            <h1>Flutter Mastery Roadmap</h1>
+            <p class="subtitle">
+                A structured guide for <span class="highlight">AWS Full-Stack Developers</span> transitioning from Next.js to cross-platform mobile development
+            </p>
+        </header>
+
+        <div class="stats-bar">
+            <div class="stat">
+                <div class="stat-value">8</div>
+                <div class="stat-label">Weeks</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">2-3h</div>
+                <div class="stat-label">Daily</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">5+</div>
+                <div class="stat-label">Projects</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">∞</div>
+                <div class="stat-label">Potential</div>
+            </div>
+        </div>
+
+        <!-- Quick Start Links -->
+        <section class="quick-start">
+            <div class="section-header">
+                <div class="section-icon">⚡</div>
+                <h2>Quick Start Links</h2>
+            </div>
+            <p style="color: var(--text-secondary); margin-bottom: 20px;">
+                Bookmark these essential links. You'll use them daily during your learning journey.
+            </p>
+            <div class="quick-links-grid">
+                <a href="https://docs.flutter.dev/get-started/install" target="_blank" class="quick-link">
+                    <span class="quick-link-icon">🚀</span>
+                    <span class="quick-link-text">Install Flutter</span>
+                </a>
+                <a href="https://dartpad.dev" target="_blank" class="quick-link">
+                    <span class="quick-link-icon">⌨️</span>
+                    <span class="quick-link-text">DartPad (Practice)</span>
+                </a>
+                <a href="https://docs.flutter.dev/cookbook" target="_blank" class="quick-link">
+                    <span class="quick-link-icon">📖</span>
+                    <span class="quick-link-text">Flutter Cookbook</span>
+                </a>
+                <a href="https://docs.flutter.dev/ui/widgets" target="_blank" class="quick-link">
+                    <span class="quick-link-icon">🧩</span>
+                    <span class="quick-link-text">Widget Catalog</span>
+                </a>
+                <a href="https://pub.dev" target="_blank" class="quick-link">
+                    <span class="quick-link-icon">📦</span>
+                    <span class="quick-link-text">pub.dev (Packages)</span>
+                </a>
+                <a href="https://docs.amplify.aws/flutter/" target="_blank" class="quick-link">
+                    <span class="quick-link-icon">☁️</span>
+                    <span class="quick-link-text">AWS Amplify Flutter</span>
+                </a>
+                <a href="https://api.flutter.dev" target="_blank" class="quick-link">
+                    <span class="quick-link-icon">📚</span>
+                    <span class="quick-link-text">API Reference</span>
+                </a>
+                <a href="https://dart.dev/guides/language/language-tour" target="_blank" class="quick-link">
+                    <span class="quick-link-icon">🎯</span>
+                    <span class="quick-link-text">Dart Language Tour</span>
+                </a>
+                <a href="https://docs.flutter.dev/codelabs" target="_blank" class="quick-link">
+                    <span class="quick-link-icon">🎓</span>
+                    <span class="quick-link-text">Codelabs</span>
+                </a>
+                <a href="https://www.youtube.com/c/flutterdev" target="_blank" class="quick-link">
+                    <span class="quick-link-icon">▶️</span>
+                    <span class="quick-link-text">Flutter YouTube</span>
+                </a>
+                <a href="https://stackoverflow.com/questions/tagged/flutter" target="_blank" class="quick-link">
+                    <span class="quick-link-icon">💬</span>
+                    <span class="quick-link-text">Stack Overflow</span>
+                </a>
+                <a href="https://github.com/Solido/awesome-flutter" target="_blank" class="quick-link">
+                    <span class="quick-link-icon">⭐</span>
+                    <span class="quick-link-text">Awesome Flutter</span>
+                </a>
+            </div>
+        </section>
+
+        <!-- Your Background Context -->
+        <section>
+            <div class="section-header">
+                <div class="section-icon">🎯</div>
+                <h2>Leveraging Your Background</h2>
+            </div>
+            
+            <div class="context-grid">
+                <div class="context-card">
+                    <h4>✅ What You Already Know</h4>
+                    <p>React/Next.js component-based architecture, state management patterns, async/await, REST APIs, AWS services (Amplify, Lambda, DynamoDB, Cognito), serverless architecture, and modern JavaScript/TypeScript.</p>
+                </div>
+                <div class="context-card">
+                    <h4>🔄 Transferable Skills</h4>
+                    <p>Widget trees mirror component trees. Dart's syntax is similar to TypeScript. AWS Amplify has excellent Flutter support. Your serverless backend knowledge transfers directly!</p>
+                </div>
+                <div class="context-card">
+                    <h4>📱 New Concepts to Learn</h4>
+                    <p>Dart language specifics, Flutter widget system, mobile-specific UX patterns, platform channels, app lifecycle, native integrations, and mobile deployment pipelines.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Concept Mapping -->
+        <section>
+            <div class="section-header">
+                <div class="section-icon">🔀</div>
+                <h2>Next.js → Flutter Concept Mapping</h2>
+            </div>
+            
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Concept</th>
+                        <th>Next.js / React</th>
+                        <th>Flutter / Dart</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>UI Building Blocks</td>
+                        <td>Components (JSX)</td>
+                        <td>Widgets (Dart classes)</td>
+                    </tr>
+                    <tr>
+                        <td>Local State</td>
+                        <td>useState, useReducer</td>
+                        <td>StatefulWidget, setState()</td>
+                    </tr>
+                    <tr>
+                        <td>Global State</td>
+                        <td>Context, Redux, Zustand</td>
+                        <td>Provider, Riverpod, BLoC</td>
+                    </tr>
+                    <tr>
+                        <td>Side Effects</td>
+                        <td>useEffect</td>
+                        <td>initState(), didChangeDependencies()</td>
+                    </tr>
+                    <tr>
+                        <td>Routing</td>
+                        <td>next/router, App Router</td>
+                        <td>Navigator, GoRouter</td>
+                    </tr>
+                    <tr>
+                        <td>Styling</td>
+                        <td>CSS, Tailwind, styled-components</td>
+                        <td>Widget properties, ThemeData</td>
+                    </tr>
+                    <tr>
+                        <td>Async Data</td>
+                        <td>useQuery, SWR, fetch</td>
+                        <td>FutureBuilder, StreamBuilder</td>
+                    </tr>
+                    <tr>
+                        <td>Package Manager</td>
+                        <td>npm / yarn</td>
+                        <td>pub (pubspec.yaml)</td>
+                    </tr>
+                    <tr>
+                        <td>Build Tool</td>
+                        <td>Webpack / Turbopack</td>
+                        <td>Flutter CLI</td>
+                    </tr>
+                    <tr>
+                        <td>Type System</td>
+                        <td>TypeScript</td>
+                        <td>Dart (sound null safety)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- 8-Week Roadmap -->
+        <section>
+            <div class="section-header">
+                <div class="section-icon">📅</div>
+                <h2>8-Week Learning Roadmap</h2>
+            </div>
+
+            <div class="timeline">
+                <!-- Week 1 -->
+                <div class="week-block">
+                    <div class="week-marker">1</div>
+                    <div class="week-content">
+                        <div class="week-header">
+                            <div class="week-title">Dart Fundamentals & Environment Setup</div>
+                            <span class="phase-tag phase-foundation">Foundation</span>
+                        </div>
+                        <ul class="topics-list">
+                            <li><a href="https://docs.flutter.dev/get-started/install" target="_blank">Install Flutter SDK</a>, <a href="https://docs.flutter.dev/get-started/editor?tab=vscode" target="_blank">VS Code extensions</a>, <a href="https://docs.flutter.dev/get-started/install/macos#android-setup" target="_blank">Android Studio</a> & <a href="https://docs.flutter.dev/get-started/install/macos#ios-setup" target="_blank">Xcode</a></li>
+                            <li><a href="https://dart.dev/language/variables" target="_blank">Dart syntax: variables, types</a>, <a href="https://dart.dev/null-safety" target="_blank">null safety</a> (compare to TypeScript)</li>
+                            <li><a href="https://dart.dev/language/functions" target="_blank">Functions</a>, <a href="https://dart.dev/language/classes" target="_blank">classes</a>, <a href="https://dart.dev/language/mixins" target="_blank">mixins</a>, <a href="https://dart.dev/language/extension-methods" target="_blank">extensions</a></li>
+                            <li><a href="https://dart.dev/language/collections" target="_blank">Collections: List, Map, Set</a> + <a href="https://dart.dev/language/collections#spread-operators" target="_blank">collection operators</a></li>
+                            <li><a href="https://dart.dev/libraries/async/async-await" target="_blank">Async programming: Future, async/await</a>, <a href="https://dart.dev/libraries/async/using-streams" target="_blank">Streams</a></li>
+                            <li><a href="https://docs.flutter.dev/get-started/test-drive" target="_blank">Run first Flutter app</a> on emulator and physical device</li>
+                        </ul>
+                        <div class="week-resources">
+                            <span class="resources-label">📖 Study Materials:</span>
+                            <div class="resource-links">
+                                <a href="https://dart.dev/tutorials" target="_blank">Dart Tutorials</a>
+                                <a href="https://dart.dev/codelabs/dart-cheatsheet" target="_blank">Dart Cheatsheet</a>
+                                <a href="https://dartpad.dev" target="_blank">DartPad Practice</a>
+                                <a href="https://www.youtube.com/watch?v=5rtujDjt50I&list=PLlxmoA0rQ-LyHW9voBdNo4gEEIh0SjG-q" target="_blank">Dart Tutorial (YouTube)</a>
+                            </div>
+                        </div>
+                        <div class="project-badge">Project: Dart CLI Calculator with unit tests</div>
+                    </div>
+                </div>
+
+                <!-- Week 2 -->
+                <div class="week-block">
+                    <div class="week-marker">2</div>
+                    <div class="week-content">
+                        <div class="week-header">
+                            <div class="week-title">Flutter Basics & Widget System</div>
+                            <span class="phase-tag phase-foundation">Foundation</span>
+                        </div>
+                        <ul class="topics-list">
+                            <li><a href="https://docs.flutter.dev/ui/widgets-intro" target="_blank">Understanding the Widget tree</a> (like React component tree)</li>
+                            <li><a href="https://docs.flutter.dev/ui/interactivity#stateful-and-stateless-widgets" target="_blank">StatelessWidget vs StatefulWidget</a> (functional vs class components)</li>
+                            <li>Material Design widgets: <a href="https://api.flutter.dev/flutter/material/Scaffold-class.html" target="_blank">Scaffold</a>, <a href="https://api.flutter.dev/flutter/material/AppBar-class.html" target="_blank">AppBar</a>, <a href="https://api.flutter.dev/flutter/widgets/Container-class.html" target="_blank">Container</a>, <a href="https://api.flutter.dev/flutter/widgets/Text-class.html" target="_blank">Text</a>, <a href="https://api.flutter.dev/flutter/material/ElevatedButton-class.html" target="_blank">Button</a></li>
+                            <li>Layout widgets: <a href="https://docs.flutter.dev/ui/layout#lay-out-multiple-widgets-vertically-and-horizontally" target="_blank">Row, Column</a>, <a href="https://api.flutter.dev/flutter/widgets/Stack-class.html" target="_blank">Stack</a>, <a href="https://api.flutter.dev/flutter/widgets/Expanded-class.html" target="_blank">Expanded</a>, <a href="https://api.flutter.dev/flutter/widgets/Flexible-class.html" target="_blank">Flexible</a></li>
+                            <li><a href="https://docs.flutter.dev/cookbook/lists/basic-list" target="_blank">ListView</a>, <a href="https://docs.flutter.dev/cookbook/lists/grid-lists" target="_blank">GridView</a>, <a href="https://api.flutter.dev/flutter/widgets/SingleChildScrollView-class.html" target="_blank">SingleChildScrollView</a></li>
+                            <li><a href="https://docs.flutter.dev/tools/hot-reload" target="_blank">Hot reload vs Hot restart</a> (faster than Next.js!)</li>
+                        </ul>
+                        <div class="week-resources">
+                            <span class="resources-label">📖 Study Materials:</span>
+                            <div class="resource-links">
+                                <a href="https://docs.flutter.dev/ui/layout/tutorial" target="_blank">Layout Tutorial</a>
+                                <a href="https://docs.flutter.dev/ui/widgets/layout" target="_blank">Layout Widgets</a>
+                                <a href="https://docs.flutter.dev/codelabs/layout-basics" target="_blank">Layout Codelab</a>
+                                <a href="https://www.youtube.com/watch?v=W1pNjxmNHNQ" target="_blank">Widget of the Week</a>
+                            </div>
+                        </div>
+                        <div class="project-badge">Project: Personal Profile Card App</div>
+                    </div>
+                </div>
+
+                <!-- Week 3 -->
+                <div class="week-block">
+                    <div class="week-marker">3</div>
+                    <div class="week-content">
+                        <div class="week-header">
+                            <div class="week-title">State Management Fundamentals</div>
+                            <span class="phase-tag phase-core">Core Skills</span>
+                        </div>
+                        <ul class="topics-list">
+                            <li><a href="https://docs.flutter.dev/ui/interactivity#changing-widgets-in-response-to-input" target="_blank">setState()</a> and <a href="https://docs.flutter.dev/data-and-backend/state-mgmt/simple#lifting-state-up" target="_blank">lifting state up</a> (like React patterns)</li>
+                            <li><a href="https://api.flutter.dev/flutter/widgets/InheritedWidget-class.html" target="_blank">InheritedWidget concept</a> (similar to React Context)</li>
+                            <li><a href="https://pub.dev/packages/provider" target="_blank">Provider package</a>: <a href="https://docs.flutter.dev/data-and-backend/state-mgmt/simple#changenotifier" target="_blank">ChangeNotifier</a>, Consumer, Provider.of</li>
+                            <li><a href="https://riverpod.dev/docs/introduction/getting_started" target="_blank">Introduction to Riverpod</a> (modern alternative)</li>
+                            <li><a href="https://docs.flutter.dev/data-and-backend/state-mgmt/options" target="_blank">When to use local vs global state</a></li>
+                            <li><a href="https://docs.flutter.dev/cookbook/forms/validation" target="_blank">Form handling and validation</a> (TextFormField, Form widget)</li>
+                        </ul>
+                        <div class="week-resources">
+                            <span class="resources-label">📖 Study Materials:</span>
+                            <div class="resource-links">
+                                <a href="https://docs.flutter.dev/data-and-backend/state-mgmt/intro" target="_blank">State Management Intro</a>
+                                <a href="https://www.youtube.com/watch?v=d_m5csmrf7I" target="_blank">Provider Tutorial</a>
+                                <a href="https://codewithandrea.com/videos/flutter-state-management-riverpod/" target="_blank">Riverpod Guide</a>
+                                <a href="https://bloclibrary.dev" target="_blank">BLoC Library</a>
+                            </div>
+                        </div>
+                        <div class="project-badge">Project: Todo App with Provider</div>
+                    </div>
+                </div>
+
+                <!-- Week 4 -->
+                <div class="week-block">
+                    <div class="week-marker">4</div>
+                    <div class="week-content">
+                        <div class="week-header">
+                            <div class="week-title">Navigation & Routing</div>
+                            <span class="phase-tag phase-core">Core Skills</span>
+                        </div>
+                        <ul class="topics-list">
+                            <li><a href="https://docs.flutter.dev/cookbook/navigation/navigation-basics" target="_blank">Navigator 1.0: push, pop</a>, <a href="https://docs.flutter.dev/cookbook/navigation/navigate-with-arguments" target="_blank">pushReplacement</a></li>
+                            <li><a href="https://docs.flutter.dev/cookbook/navigation/named-routes" target="_blank">Named routes</a> and <a href="https://docs.flutter.dev/cookbook/navigation/navigate-with-arguments" target="_blank">route arguments</a></li>
+                            <li><a href="https://pub.dev/packages/go_router" target="_blank">GoRouter</a> (<a href="https://docs.flutter.dev/ui/navigation" target="_blank">declarative routing like Next.js</a>)</li>
+                            <li><a href="https://docs.flutter.dev/ui/navigation/deep-linking" target="_blank">Deep linking configuration</a></li>
+                            <li><a href="https://docs.flutter.dev/cookbook/design/tabs" target="_blank">Bottom navigation & tab-based navigation</a></li>
+                            <li><a href="https://docs.flutter.dev/cookbook/design/drawer" target="_blank">Drawer navigation</a> and <a href="https://api.flutter.dev/flutter/material/showModalBottomSheet.html" target="_blank">modal sheets</a></li>
+                        </ul>
+                        <div class="week-resources">
+                            <span class="resources-label">📖 Study Materials:</span>
+                            <div class="resource-links">
+                                <a href="https://docs.flutter.dev/ui/navigation" target="_blank">Navigation Overview</a>
+                                <a href="https://pub.dev/documentation/go_router/latest/" target="_blank">GoRouter Docs</a>
+                                <a href="https://codewithandrea.com/articles/flutter-navigation-gorouter-go-vs-push/" target="_blank">GoRouter Tutorial</a>
+                                <a href="https://www.youtube.com/watch?v=nyvwx7o277U" target="_blank">Navigation Deep Dive</a>
+                            </div>
+                        </div>
+                        <div class="project-badge">Project: Multi-screen News Reader App</div>
+                    </div>
+                </div>
+
+                <!-- Week 5 -->
+                <div class="week-block">
+                    <div class="week-marker">5</div>
+                    <div class="week-content">
+                        <div class="week-header">
+                            <div class="week-title">Networking & API Integration</div>
+                            <span class="phase-tag phase-advanced">Advanced</span>
+                        </div>
+                        <ul class="topics-list">
+                            <li><a href="https://pub.dev/packages/http" target="_blank">HTTP package</a> and <a href="https://pub.dev/packages/dio" target="_blank">Dio</a> for REST APIs</li>
+                            <li><a href="https://docs.flutter.dev/data-and-backend/serialization/json" target="_blank">JSON serialization</a> with <a href="https://pub.dev/packages/json_serializable" target="_blank">json_serializable</a></li>
+                            <li><a href="https://api.flutter.dev/flutter/widgets/FutureBuilder-class.html" target="_blank">FutureBuilder</a> and <a href="https://api.flutter.dev/flutter/widgets/StreamBuilder-class.html" target="_blank">StreamBuilder</a> for async UI</li>
+                            <li><a href="https://docs.flutter.dev/cookbook/networking/fetch-data" target="_blank">Error handling and loading states</a></li>
+                            <li><a href="https://pub.dev/packages/flutter_cache_manager" target="_blank">Caching strategies</a> and <a href="https://docs.flutter.dev/data-and-backend/networking" target="_blank">offline support</a></li>
+                            <li>Connect to your existing <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/welcome.html" target="_blank">AWS API Gateway</a>/<a href="https://aws.amazon.com/lambda/" target="_blank">Lambda</a> backends!</li>
+                        </ul>
+                        <div class="week-resources">
+                            <span class="resources-label">📖 Study Materials:</span>
+                            <div class="resource-links">
+                                <a href="https://docs.flutter.dev/cookbook/networking/fetch-data" target="_blank">Fetch Data Tutorial</a>
+                                <a href="https://pub.dev/packages/dio#examples" target="_blank">Dio Examples</a>
+                                <a href="https://codewithandrea.com/articles/parse-json-dart/" target="_blank">JSON Parsing Guide</a>
+                                <a href="https://www.youtube.com/watch?v=1rXFKhBZXxY" target="_blank">API Integration Video</a>
+                            </div>
+                        </div>
+                        <div class="project-badge">Project: Weather App with Real API</div>
+                    </div>
+                </div>
+
+                <!-- Week 6 -->
+                <div class="week-block">
+                    <div class="week-marker">6</div>
+                    <div class="week-content">
+                        <div class="week-header">
+                            <div class="week-title">AWS Amplify Flutter Integration</div>
+                            <span class="phase-tag phase-advanced">Advanced</span>
+                        </div>
+                        <ul class="topics-list">
+                            <li><a href="https://docs.amplify.aws/flutter/start/getting-started/installation/" target="_blank">Setting up Amplify Flutter SDK</a></li>
+                            <li><a href="https://docs.amplify.aws/flutter/build-a-backend/auth/set-up-auth/" target="_blank">Authentication with Cognito</a> (you know this from Next.js!)</li>
+                            <li><a href="https://docs.amplify.aws/flutter/build-a-backend/data/set-up-data/" target="_blank">DataStore for offline-first data sync</a></li>
+                            <li><a href="https://docs.amplify.aws/flutter/build-a-backend/graphqlapi/set-up-graphql-api/" target="_blank">GraphQL with AppSync</a></li>
+                            <li><a href="https://docs.amplify.aws/flutter/build-a-backend/storage/set-up-storage/" target="_blank">S3 Storage integration</a></li>
+                            <li><a href="https://docs.amplify.aws/flutter/build-a-backend/push-notifications/set-up-push-notifications/" target="_blank">Push notifications with Pinpoint</a></li>
+                        </ul>
+                        <div class="week-resources">
+                            <span class="resources-label">📖 Study Materials:</span>
+                            <div class="resource-links">
+                                <a href="https://docs.amplify.aws/flutter/" target="_blank">Amplify Flutter Docs</a>
+                                <a href="https://docs.amplify.aws/flutter/start/getting-started/introduction/" target="_blank">Getting Started</a>
+                                <a href="https://www.youtube.com/watch?v=uRq0ah4Qx24" target="_blank">Amplify Flutter Video</a>
+                                <a href="https://github.com/aws-amplify/amplify-flutter/tree/main/packages/amplify_flutter/example" target="_blank">Example Apps</a>
+                            </div>
+                        </div>
+                        <div class="project-badge">Project: Auth Flow + CRUD App with Amplify</div>
+                    </div>
+                </div>
+
+                <!-- Week 7 -->
+                <div class="week-block">
+                    <div class="week-marker">7</div>
+                    <div class="week-content">
+                        <div class="week-header">
+                            <div class="week-title">Advanced UI & Animations</div>
+                            <span class="phase-tag phase-integration">Polish</span>
+                        </div>
+                        <ul class="topics-list">
+                            <li><a href="https://docs.flutter.dev/ui/widgets/painting" target="_blank">Custom painting</a> with <a href="https://api.flutter.dev/flutter/rendering/CustomPainter-class.html" target="_blank">CustomPainter</a></li>
+                            <li><a href="https://docs.flutter.dev/ui/animations/implicit-animations" target="_blank">Implicit animations</a> (<a href="https://api.flutter.dev/flutter/widgets/AnimatedContainer-class.html" target="_blank">AnimatedContainer</a>, <a href="https://api.flutter.dev/flutter/widgets/AnimatedOpacity-class.html" target="_blank">AnimatedOpacity</a>)</li>
+                            <li><a href="https://docs.flutter.dev/ui/animations/tutorial" target="_blank">Explicit animations</a> with <a href="https://api.flutter.dev/flutter/animation/AnimationController-class.html" target="_blank">AnimationController</a></li>
+                            <li><a href="https://docs.flutter.dev/ui/animations/hero-animations" target="_blank">Hero animations</a> for page transitions</li>
+                            <li><a href="https://docs.flutter.dev/ui/layout/scrolling/slivers" target="_blank">Slivers</a> for advanced scrolling (<a href="https://api.flutter.dev/flutter/material/SliverAppBar-class.html" target="_blank">SliverAppBar</a>, <a href="https://api.flutter.dev/flutter/widgets/SliverList-class.html" target="_blank">SliverList</a>)</li>
+                            <li><a href="https://docs.flutter.dev/platform-integration/platform-adaptations" target="_blank">Platform-adaptive UI</a> (iOS vs Android conventions)</li>
+                        </ul>
+                        <div class="week-resources">
+                            <span class="resources-label">📖 Study Materials:</span>
+                            <div class="resource-links">
+                                <a href="https://docs.flutter.dev/ui/animations" target="_blank">Animations Overview</a>
+                                <a href="https://docs.flutter.dev/codelabs/implicit-animations" target="_blank">Animations Codelab</a>
+                                <a href="https://www.youtube.com/watch?v=txLvvlooT20" target="_blank">Animations Video</a>
+                                <a href="https://flutter.github.io/samples/animations.html" target="_blank">Animation Samples</a>
+                            </div>
+                        </div>
+                        <div class="project-badge">Project: Animated E-commerce Product Page</div>
+                    </div>
+                </div>
+
+                <!-- Week 8 -->
+                <div class="week-block">
+                    <div class="week-marker">8</div>
+                    <div class="week-content">
+                        <div class="week-header">
+                            <div class="week-title">Testing, Deployment & Production</div>
+                            <span class="phase-tag phase-integration">Ship It!</span>
+                        </div>
+                        <ul class="topics-list">
+                            <li><a href="https://docs.flutter.dev/testing/overview#unit-tests" target="_blank">Unit tests</a>, <a href="https://docs.flutter.dev/testing/overview#widget-tests" target="_blank">Widget tests</a>, <a href="https://docs.flutter.dev/testing/integration-tests" target="_blank">Integration tests</a></li>
+                            <li><a href="https://docs.flutter.dev/deployment/android" target="_blank">Building release APK</a> and <a href="https://docs.flutter.dev/deployment/ios" target="_blank">iOS App Bundle</a></li>
+                            <li><a href="https://docs.flutter.dev/deployment/ios#create-a-build-archive-and-upload-to-app-store-connect" target="_blank">Code signing for iOS</a> and <a href="https://docs.flutter.dev/deployment/android#signing-the-app" target="_blank">Android</a></li>
+                            <li><a href="https://developer.apple.com/app-store-connect/" target="_blank">App Store Connect</a> and <a href="https://play.google.com/console/" target="_blank">Google Play Console</a> setup</li>
+                            <li><a href="https://docs.flutter.dev/deployment/cd" target="_blank">CI/CD</a> with <a href="https://github.com/features/actions" target="_blank">GitHub Actions</a> or <a href="https://docs.aws.amazon.com/codepipeline/latest/userguide/welcome.html" target="_blank">AWS CodePipeline</a></li>
+                            <li><a href="https://firebase.google.com/docs/crashlytics/get-started?platform=flutter" target="_blank">Firebase Crashlytics</a> or <a href="https://docs.sentry.io/platforms/flutter/" target="_blank">Sentry</a> for crash reporting</li>
+                        </ul>
+                        <div class="week-resources">
+                            <span class="resources-label">📖 Study Materials:</span>
+                            <div class="resource-links">
+                                <a href="https://docs.flutter.dev/testing" target="_blank">Testing Guide</a>
+                                <a href="https://docs.flutter.dev/deployment" target="_blank">Deployment Docs</a>
+                                <a href="https://codemagic.io/start/" target="_blank">Codemagic CI/CD</a>
+                                <a href="https://www.youtube.com/watch?v=n2lJXHlr0io" target="_blank">App Store Deployment</a>
+                            </div>
+                        </div>
+                        <div class="project-badge">Project: Deploy Your Complete App to Both Stores!</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- AWS Integration Architecture -->
+        <section>
+            <div class="section-header">
+                <div class="section-icon">☁️</div>
+                <h2>Your AWS + Flutter Architecture</h2>
+            </div>
+            
+            <p style="color: var(--text-secondary); margin-bottom: 20px;">
+                Great news! Your existing AWS serverless backend works seamlessly with Flutter. Here's how it connects:
+            </p>
+
+            <div class="aws-flow">
+                <div class="flow-item">
+                    <div class="flow-icon">📱</div>
+                    <div class="flow-label">Flutter App</div>
+                </div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-item">
+                    <div class="flow-icon">🔐</div>
+                    <div class="flow-label">Cognito Auth</div>
+                </div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-item">
+                    <div class="flow-icon">🌐</div>
+                    <div class="flow-label">API Gateway</div>
+                </div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-item">
+                    <div class="flow-icon">⚡</div>
+                    <div class="flow-label">Lambda</div>
+                </div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-item">
+                    <div class="flow-icon">🗄️</div>
+                    <div class="flow-label">DynamoDB</div>
+                </div>
+            </div>
+
+            <div class="code-block">
+<span class="comment">// Flutter + AWS Amplify Example (similar to your Next.js Amplify code!)</span>
+
+<span class="keyword">import</span> <span class="string">'package:amplify_flutter/amplify_flutter.dart'</span>;
+<span class="keyword">import</span> <span class="string">'package:amplify_auth_cognito/amplify_auth_cognito.dart'</span>;
+
+<span class="keyword">Future</span>&lt;<span class="keyword">void</span>&gt; <span class="function">signIn</span>(<span class="class">String</span> username, <span class="class">String</span> password) <span class="keyword">async</span> {
+  <span class="keyword">try</span> {
+    <span class="keyword">final</span> result = <span class="keyword">await</span> <span class="class">Amplify</span>.<span class="class">Auth</span>.<span class="function">signIn</span>(
+      <span class="property">username:</span> username,
+      <span class="property">password:</span> password,
+    );
+    <span class="comment">// Handle sign in result - same flow as your Next.js app!</span>
+  } <span class="keyword">on</span> <span class="class">AuthException</span> <span class="keyword">catch</span> (e) {
+    <span class="function">print</span>(<span class="string">'Error signing in: ${e.message}'</span>);
+  }
+}
+            </div>
+        </section>
+
+        <!-- Daily Study Schedule -->
+        <section>
+            <div class="section-header">
+                <div class="section-icon">⏰</div>
+                <h2>Recommended Daily Schedule</h2>
+            </div>
+            
+            <p style="color: var(--text-secondary); margin-bottom: 24px;">
+                Aim for 2-3 hours daily. Consistency beats intensity!
+            </p>
+
+            <div class="schedule-grid">
+                <div class="schedule-item">
+                    <div class="schedule-time">30 min</div>
+                    <div class="schedule-activity">Theory & Documentation</div>
+                </div>
+                <div class="schedule-item">
+                    <div class="schedule-time">60 min</div>
+                    <div class="schedule-activity">Hands-on Coding</div>
+                </div>
+                <div class="schedule-item">
+                    <div class="schedule-time">30 min</div>
+                    <div class="schedule-activity">Mini Project Work</div>
+                </div>
+                <div class="schedule-item">
+                    <div class="schedule-time">30 min</div>
+                    <div class="schedule-activity">Review & Notes</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Essential Resources -->
+        <section>
+            <div class="section-header">
+                <div class="section-icon">📚</div>
+                <h2>Essential Learning Resources</h2>
+            </div>
+
+            <h3 style="color: var(--accent-cyan); margin-bottom: 20px;">📖 Official Documentation & Guides</h3>
+            <div class="resources-grid">
+                <div class="resource-card">
+                    <div class="resource-type">Official Docs</div>
+                    <h4>Flutter Documentation</h4>
+                    <p>The best starting point. Excellent tutorials, cookbook, and widget catalog.</p>
+                    <a href="https://docs.flutter.dev" class="resource-link" target="_blank">docs.flutter.dev</a>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-type">Official Docs</div>
+                    <h4>Dart Documentation</h4>
+                    <p>Complete Dart language reference, tutorials, and effective Dart guide.</p>
+                    <a href="https://dart.dev/guides" class="resource-link" target="_blank">dart.dev/guides</a>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-type">Cookbook</div>
+                    <h4>Flutter Cookbook</h4>
+                    <p>Practical recipes for common Flutter tasks. Copy-paste ready solutions.</p>
+                    <a href="https://docs.flutter.dev/cookbook" class="resource-link" target="_blank">Flutter Cookbook</a>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-type">Widget Catalog</div>
+                    <h4>Flutter Widget Catalog</h4>
+                    <p>Browse all available widgets with examples and documentation.</p>
+                    <a href="https://docs.flutter.dev/ui/widgets" class="resource-link" target="_blank">Widget Catalog</a>
+                </div>
+            </div>
+
+            <h3 style="color: var(--accent-teal); margin: 40px 0 20px;">🎓 Interactive Learning & Practice</h3>
+            <div class="resources-grid">
+                <div class="resource-card">
+                    <div class="resource-type">Interactive</div>
+                    <h4>DartPad</h4>
+                    <p>Browser-based Dart/Flutter playground. Practice without setup.</p>
+                    <a href="https://dartpad.dev" class="resource-link" target="_blank">dartpad.dev</a>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-type">Codelabs</div>
+                    <h4>Flutter Codelabs</h4>
+                    <p>Step-by-step guided tutorials. Excellent for hands-on learning.</p>
+                    <a href="https://docs.flutter.dev/codelabs" class="resource-link" target="_blank">Flutter Codelabs</a>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-type">Samples</div>
+                    <h4>Flutter Samples Gallery</h4>
+                    <p>Collection of sample apps showcasing Flutter features and patterns.</p>
+                    <a href="https://flutter.github.io/samples/" class="resource-link" target="_blank">Flutter Samples</a>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-type">Practice</div>
+                    <h4>Dart Exercises (Exercism)</h4>
+                    <p>Practice Dart with 90+ exercises and mentor feedback.</p>
+                    <a href="https://exercism.org/tracks/dart" class="resource-link" target="_blank">Exercism Dart Track</a>
+                </div>
+            </div>
+
+            <h3 style="color: var(--accent-lime); margin: 40px 0 20px;">🎬 Video Courses & Tutorials</h3>
+            <div class="resources-grid">
+                <div class="resource-card">
+                    <div class="resource-type">Udemy Course</div>
+                    <h4>Flutter & Dart - The Complete Guide</h4>
+                    <p>Maximilian Schwarzmüller's comprehensive course. Best for structured learning.</p>
+                    <a href="https://www.udemy.com/course/learn-flutter-dart-to-build-ios-android-apps/" class="resource-link" target="_blank">View on Udemy</a>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-type">Free Course</div>
+                    <h4>The Complete Flutter Development Bootcamp</h4>
+                    <p>App Brewery's Flutter bootcamp. Angela Yu's teaching style.</p>
+                    <a href="https://www.udemy.com/course/flutter-bootcamp-with-dart/" class="resource-link" target="_blank">View on Udemy</a>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-type">YouTube</div>
+                    <h4>Flutter Official Channel</h4>
+                    <p>Widget of the Week, Flutter in Focus, and conference talks.</p>
+                    <a href="https://www.youtube.com/c/flutterdev" class="resource-link" target="_blank">YouTube Channel</a>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-type">YouTube</div>
+                    <h4>Code With Andrea</h4>
+                    <p>In-depth Flutter tutorials covering architecture, state management, and more.</p>
+                    <a href="https://www.youtube.com/c/CodeWithAndrea" class="resource-link" target="_blank">Code With Andrea</a>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-type">YouTube</div>
+                    <h4>Fireship - Flutter in 100 Seconds</h4>
+                    <p>Quick, engaging Flutter overview and tutorials.</p>
+                    <a href="https://www.youtube.com/watch?v=lHhRhPV--G0" class="resource-link" target="_blank">Watch Video</a>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-type">YouTube</div>
+                    <h4>Reso Coder</h4>
+                    <p>Advanced Flutter architecture, clean code, and TDD tutorials.</p>
+                    <a href="https://www.youtube.com/c/ResoCoder" class="resource-link" target="_blank">Reso Coder</a>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-type">YouTube</div>
+                    <h4>Flutter Mapp</h4>
+                    <p>Real-world app tutorials and practical Flutter development.</p>
+                    <a href="https://www.youtube.com/@FlutterMapp" class="resource-link" target="_blank">Flutter Mapp</a>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-type">YouTube</div>
+                    <h4>The Net Ninja - Flutter Tutorial</h4>
+                    <p>Beginner-friendly Flutter series with clear explanations.</p>
+                    <a href="https://www.youtube.com/playlist?list=PL4cUxeGkcC9jLYyp2Aoh6hcWuxFDX6PBJ" class="resource-link" target="_blank">Watch Playlist</a>
+                </div>
+            </div>
+
+            <h3 style="color: var(--accent-orange); margin: 40px 0 20px;">☁️ AWS & Backend Integration</h3>
+            <div class="resources-grid">
+                <div class="resource-card">
+                    <div class="resource-type">AWS Integration</div>
+                    <h4>Amplify Flutter Docs</h4>
+                    <p>Official guide for integrating AWS Amplify with Flutter. Leverage your existing knowledge!</p>
+                    <a href="https://docs.amplify.aws/flutter/" class="resource-link" target="_blank">Amplify Flutter Docs</a>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-type">AWS Tutorial</div>
+                    <h4>Build a Flutter App with Amplify</h4>
+                    <p>Step-by-step tutorial for building a full-stack Flutter app.</p>
+                    <a href="https://docs.amplify.aws/flutter/start/getting-started/introduction/" class="resource-link" target="_blank">Getting Started Guide</a>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-type">Authentication</div>
+                    <h4>Amplify Auth for Flutter</h4>
+                    <p>Implement Cognito authentication in your Flutter app.</p>
+                    <a href="https://docs.amplify.aws/flutter/build-a-backend/auth/set-up-auth/" class="resource-link" target="_blank">Auth Documentation</a>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-type">GitHub</div>
+                    <h4>Amplify Flutter Examples</h4>
+                    <p>Official example apps demonstrating Amplify Flutter features.</p>
+                    <a href="https://github.com/aws-amplify/amplify-flutter/tree/main/packages/amplify_flutter/example" class="resource-link" target="_blank">View Examples</a>
+                </div>
+            </div>
+
+            <h3 style="color: var(--accent-pink); margin: 40px 0 20px;">📦 State Management & Architecture</h3>
+            <div class="resources-grid">
+                <div class="resource-card">
+                    <div class="resource-type">State Management</div>
+                    <h4>Provider Documentation</h4>
+                    <p>The recommended state management solution for beginners.</p>
+                    <a href="https://pub.dev/packages/provider" class="resource-link" target="_blank">Provider Package</a>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-type">State Management</div>
+                    <h4>Riverpod Documentation</h4>
+                    <p>Modern state management solution. Cleaner than Provider, great DX.</p>
+                    <a href="https://riverpod.dev" class="resource-link" target="_blank">riverpod.dev</a>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-type">State Management</div>
+                    <h4>BLoC Library</h4>
+                    <p>Business Logic Component pattern. Great for complex apps.</p>
+                    <a href="https://bloclibrary.dev" class="resource-link" target="_blank">bloclibrary.dev</a>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-type">Architecture</div>
+                    <h4>Flutter App Architecture Guide</h4>
+                    <p>Best practices for structuring Flutter applications.</p>
+                    <a href="https://docs.flutter.dev/app-architecture" class="resource-link" target="_blank">Architecture Guide</a>
+                </div>
+            </div>
+
+            <h3 style="color: var(--accent-cyan); margin: 40px 0 20px;">🛠️ Tools & Package Registry</h3>
+            <div class="resources-grid">
+                <div class="resource-card">
+                    <div class="resource-type">Package Registry</div>
+                    <h4>pub.dev</h4>
+                    <p>Official Dart/Flutter package registry. Like npm for Flutter.</p>
+                    <a href="https://pub.dev" class="resource-link" target="_blank">pub.dev</a>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-type">DevTools</div>
+                    <h4>Flutter DevTools</h4>
+                    <p>Performance profiling, debugging, and inspection tools.</p>
+                    <a href="https://docs.flutter.dev/tools/devtools/overview" class="resource-link" target="_blank">DevTools Guide</a>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-type">IDE</div>
+                    <h4>VS Code Flutter Extension</h4>
+                    <p>Official Flutter extension for VS Code with debugging and snippets.</p>
+                    <a href="https://marketplace.visualstudio.com/items?itemName=Dart-Code.flutter" class="resource-link" target="_blank">Install Extension</a>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-type">CI/CD</div>
+                    <h4>Codemagic</h4>
+                    <p>CI/CD platform built specifically for Flutter. Easy app deployment.</p>
+                    <a href="https://codemagic.io/start/" class="resource-link" target="_blank">codemagic.io</a>
+                </div>
+            </div>
+
+            <h3 style="color: var(--accent-teal); margin: 40px 0 20px;">👥 Community & Support</h3>
+            <div class="resources-grid">
+                <div class="resource-card">
+                    <div class="resource-type">Community</div>
+                    <h4>r/FlutterDev</h4>
+                    <p>Active Reddit community. Great for questions, showcases, and tips.</p>
+                    <a href="https://reddit.com/r/FlutterDev" class="resource-link" target="_blank">Reddit Community</a>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-type">Community</div>
+                    <h4>Flutter Discord</h4>
+                    <p>Official Flutter Discord server with help channels and discussions.</p>
+                    <a href="https://discord.gg/N7Yshp4" class="resource-link" target="_blank">Join Discord</a>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-type">Q&A</div>
+                    <h4>Stack Overflow - Flutter</h4>
+                    <p>Ask questions and find solutions to common Flutter problems.</p>
+                    <a href="https://stackoverflow.com/questions/tagged/flutter" class="resource-link" target="_blank">Stack Overflow</a>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-type">Blog</div>
+                    <h4>Flutter Medium Publication</h4>
+                    <p>Official Flutter blog with announcements, tutorials, and case studies.</p>
+                    <a href="https://medium.com/flutter" class="resource-link" target="_blank">Flutter on Medium</a>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-type">Newsletter</div>
+                    <h4>Flutter Weekly</h4>
+                    <p>Weekly newsletter with the latest Flutter articles, tutorials, and packages.</p>
+                    <a href="https://flutterweekly.net" class="resource-link" target="_blank">flutterweekly.net</a>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-type">Blog</div>
+                    <h4>Code With Andrea (Articles)</h4>
+                    <p>In-depth articles on Flutter architecture, patterns, and best practices.</p>
+                    <a href="https://codewithandrea.com/articles/" class="resource-link" target="_blank">Read Articles</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Practice Projects Section -->
+        <section>
+            <div class="section-header">
+                <div class="section-icon">💻</div>
+                <h2>Practice Projects & Exercises</h2>
+            </div>
+            
+            <p style="color: var(--text-secondary); margin-bottom: 24px;">
+                Build these projects to reinforce your learning. Each includes reference tutorials and source code.
+            </p>
+
+            <div class="resources-grid">
+                <div class="resource-card">
+                    <div class="resource-type">Beginner</div>
+                    <h4>Counter App (Your First App)</h4>
+                    <p>The classic first Flutter app. Understand widgets, state, and hot reload.</p>
+                    <a href="https://docs.flutter.dev/get-started/codelab" class="resource-link" target="_blank">Follow Tutorial</a>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-type">Beginner</div>
+                    <h4>BMI Calculator</h4>
+                    <p>Practice forms, input handling, and basic calculations.</p>
+                    <a href="https://www.youtube.com/watch?v=FDQE4o9O2GI" class="resource-link" target="_blank">Watch Tutorial</a>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-type">Beginner</div>
+                    <h4>Quiz App</h4>
+                    <p>Learn state management, lists, and navigation with a fun quiz app.</p>
+                    <a href="https://www.youtube.com/watch?v=T40RHjz1kqU" class="resource-link" target="_blank">Watch Tutorial</a>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-type">Intermediate</div>
+                    <h4>Todo App with Provider</h4>
+                    <p>Master state management with a full-featured todo application.</p>
+                    <a href="https://www.youtube.com/watch?v=d_m5csmrf7I" class="resource-link" target="_blank">Watch Tutorial</a>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-type">Intermediate</div>
+                    <h4>Weather App</h4>
+                    <p>Learn API integration, JSON parsing, and async programming.</p>
+                    <a href="https://www.youtube.com/watch?v=CzRQ9mnmh44" class="resource-link" target="_blank">Watch Tutorial</a>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-type">Intermediate</div>
+                    <h4>News Reader App</h4>
+                    <p>Build a news app with API integration and beautiful UI.</p>
+                    <a href="https://www.youtube.com/watch?v=oBJx2Z2l2nM" class="resource-link" target="_blank">Watch Tutorial</a>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-type">Advanced</div>
+                    <h4>E-commerce App</h4>
+                    <p>Full e-commerce with auth, cart, payments, and admin panel.</p>
+                    <a href="https://www.youtube.com/watch?v=VPvVD8t02U8" class="resource-link" target="_blank">Watch Tutorial</a>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-type">Advanced</div>
+                    <h4>Chat App with Firebase</h4>
+                    <p>Real-time messaging, authentication, and cloud storage.</p>
+                    <a href="https://www.youtube.com/watch?v=FTju8w4zEno" class="resource-link" target="_blank">Watch Tutorial</a>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-type">Advanced</div>
+                    <h4>Social Media App Clone</h4>
+                    <p>Build an Instagram-like app with posts, likes, and user profiles.</p>
+                    <a href="https://www.youtube.com/watch?v=mEPm9w5QlJM" class="resource-link" target="_blank">Watch Tutorial</a>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-type">AWS Project</div>
+                    <h4>Full-Stack App with Amplify</h4>
+                    <p>Complete app with Cognito auth, AppSync API, and S3 storage.</p>
+                    <a href="https://docs.amplify.aws/flutter/start/getting-started/introduction/" class="resource-link" target="_blank">Follow Guide</a>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-type">Open Source</div>
+                    <h4>Flutter Gallery</h4>
+                    <p>Official showcase app demonstrating Material Design components.</p>
+                    <a href="https://github.com/flutter/gallery" class="resource-link" target="_blank">View Source</a>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-type">Open Source</div>
+                    <h4>Awesome Flutter</h4>
+                    <p>Curated list of Flutter resources, libraries, and open-source apps.</p>
+                    <a href="https://github.com/Solido/awesome-flutter" class="resource-link" target="_blank">Browse Collection</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Cheatsheets Section -->
+        <section>
+            <div class="section-header">
+                <div class="section-icon">📋</div>
+                <h2>Cheatsheets & Quick Reference</h2>
+            </div>
+            
+            <p style="color: var(--text-secondary); margin-bottom: 24px;">
+                Keep these cheatsheets handy while coding. Great for quick syntax lookups!
+            </p>
+
+            <div class="resources-grid">
+                <div class="resource-card">
+                    <div class="resource-type">Cheatsheet</div>
+                    <h4>Dart Cheatsheet</h4>
+                    <p>Official Dart language cheatsheet with syntax examples and code snippets.</p>
+                    <a href="https://dart.dev/codelabs/dart-cheatsheet" class="resource-link" target="_blank">View Cheatsheet</a>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-type">Cheatsheet</div>
+                    <h4>Flutter Layout Cheatsheet</h4>
+                    <p>Visual guide to Flutter's layout widgets with examples.</p>
+                    <a href="https://medium.com/flutter-community/flutter-layout-cheat-sheet-5363348d037e" class="resource-link" target="_blank">View Cheatsheet</a>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-type">Reference</div>
+                    <h4>Material Design Icons</h4>
+                    <p>Browse all Material icons available in Flutter's Icons class.</p>
+                    <a href="https://fonts.google.com/icons" class="resource-link" target="_blank">Browse Icons</a>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-type">Reference</div>
+                    <h4>Flutter Roadmap (Visual)</h4>
+                    <p>Interactive visual roadmap for Flutter development.</p>
+                    <a href="https://roadmap.sh/flutter" class="resource-link" target="_blank">View Roadmap</a>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-type">Cheatsheet</div>
+                    <h4>Effective Dart</h4>
+                    <p>Style guide and best practices for writing Dart code.</p>
+                    <a href="https://dart.dev/effective-dart" class="resource-link" target="_blank">Read Guide</a>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-type">Reference</div>
+                    <h4>Flutter DevTools Guide</h4>
+                    <p>Learn to use Flutter DevTools for debugging and performance.</p>
+                    <a href="https://docs.flutter.dev/tools/devtools/overview" class="resource-link" target="_blank">View Guide</a>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-type">Cheatsheet</div>
+                    <h4>Riverpod Cheatsheet</h4>
+                    <p>Quick reference for Riverpod state management patterns.</p>
+                    <a href="https://codewithandrea.com/articles/flutter-riverpod-2-cheatsheet/" class="resource-link" target="_blank">View Cheatsheet</a>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-type">Reference</div>
+                    <h4>Flutter CLI Commands</h4>
+                    <p>All Flutter command-line tools and options explained.</p>
+                    <a href="https://docs.flutter.dev/reference/flutter-cli" class="resource-link" target="_blank">View Commands</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pro Tips -->
+        <section>
+            <div class="section-header">
+                <div class="section-icon">💡</div>
+                <h2>Pro Tips for Web Developers</h2>
+            </div>
+
+            <div class="tips-grid">
+                <div class="tip-card">
+                    <div class="tip-icon">🎨</div>
+                    <h4>Forget CSS, Embrace Widgets</h4>
+                    <p>Styling is done through widget properties, not separate stylesheets. Everything is a widget: padding, margins, colors - all are widgets wrapping other widgets.</p>
+                </div>
+                <div class="tip-card">
+                    <div class="tip-icon">🔄</div>
+                    <h4>Use Hot Reload Constantly</h4>
+                    <p>Press 'r' in terminal or save file. Changes appear instantly. It's even faster than Next.js Fast Refresh!</p>
+                </div>
+                <div class="tip-card">
+                    <div class="tip-icon">📦</div>
+                    <h4>const Constructors Matter</h4>
+                    <p>Use 'const' for widgets that don't change. It significantly improves performance by preventing unnecessary rebuilds.</p>
+                </div>
+                <div class="tip-card warning">
+                    <div class="tip-icon">⚠️</div>
+                    <h4>Don't Over-nest Widgets</h4>
+                    <p>Extract widgets into separate classes/methods to avoid the "pyramid of doom". Same as keeping React components small and focused.</p>
+                </div>
+                <div class="tip-card">
+                    <div class="tip-icon">🧪</div>
+                    <h4>Test on Real Devices Early</h4>
+                    <p>Emulators are great but touch, performance, and camera features need real device testing. Keep a test device handy.</p>
+                </div>
+                <div class="tip-card warning">
+                    <div class="tip-icon">🍎</div>
+                    <h4>iOS Requires Mac + Xcode</h4>
+                    <p>You need a Mac to build iOS apps. Android development works on any OS. Plan your setup accordingly.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Must-Know Packages -->
+        <section>
+            <div class="section-header">
+                <div class="section-icon">📦</div>
+                <h2>Essential Packages to Learn</h2>
+            </div>
+
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Category</th>
+                        <th>Package</th>
+                        <th>Purpose</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>State Management</td>
+                        <td><a href="https://pub.dev/packages/provider" target="_blank">provider</a>, <a href="https://pub.dev/packages/flutter_riverpod" target="_blank">riverpod</a>, <a href="https://pub.dev/packages/flutter_bloc" target="_blank">flutter_bloc</a></td>
+                        <td>Global state (pick one to master)</td>
+                    </tr>
+                    <tr>
+                        <td>Networking</td>
+                        <td><a href="https://pub.dev/packages/dio" target="_blank">dio</a>, <a href="https://pub.dev/packages/http" target="_blank">http</a></td>
+                        <td>REST API calls</td>
+                    </tr>
+                    <tr>
+                        <td>Navigation</td>
+                        <td><a href="https://pub.dev/packages/go_router" target="_blank">go_router</a></td>
+                        <td>Declarative routing</td>
+                    </tr>
+                    <tr>
+                        <td>Local Storage</td>
+                        <td><a href="https://pub.dev/packages/shared_preferences" target="_blank">shared_preferences</a>, <a href="https://pub.dev/packages/hive" target="_blank">hive</a></td>
+                        <td>Persist data locally</td>
+                    </tr>
+                    <tr>
+                        <td>JSON</td>
+                        <td><a href="https://pub.dev/packages/json_serializable" target="_blank">json_serializable</a>, <a href="https://pub.dev/packages/freezed" target="_blank">freezed</a></td>
+                        <td>Type-safe JSON parsing</td>
+                    </tr>
+                    <tr>
+                        <td>AWS</td>
+                        <td><a href="https://pub.dev/packages/amplify_flutter" target="_blank">amplify_flutter</a></td>
+                        <td>AWS Amplify integration</td>
+                    </tr>
+                    <tr>
+                        <td>Forms</td>
+                        <td><a href="https://pub.dev/packages/flutter_form_builder" target="_blank">flutter_form_builder</a></td>
+                        <td>Complex form handling</td>
+                    </tr>
+                    <tr>
+                        <td>Images</td>
+                        <td><a href="https://pub.dev/packages/cached_network_image" target="_blank">cached_network_image</a></td>
+                        <td>Efficient image loading</td>
+                    </tr>
+                    <tr>
+                        <td>Icons</td>
+                        <td><a href="https://pub.dev/packages/flutter_launcher_icons" target="_blank">flutter_launcher_icons</a></td>
+                        <td>App icon generation</td>
+                    </tr>
+                    <tr>
+                        <td>Splash Screen</td>
+                        <td><a href="https://pub.dev/packages/flutter_native_splash" target="_blank">flutter_native_splash</a></td>
+                        <td>Native splash screens</td>
+                    </tr>
+                    <tr>
+                        <td>Environment</td>
+                        <td><a href="https://pub.dev/packages/flutter_dotenv" target="_blank">flutter_dotenv</a></td>
+                        <td>Environment variables</td>
+                    </tr>
+                    <tr>
+                        <td>Animations</td>
+                        <td><a href="https://pub.dev/packages/flutter_animate" target="_blank">flutter_animate</a>, <a href="https://pub.dev/packages/lottie" target="_blank">lottie</a></td>
+                        <td>Advanced animations</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Checklist -->
+        <section>
+            <div class="section-header">
+                <div class="section-icon">✓</div>
+                <h2>2-Month Goal Checklist</h2>
+            </div>
+
+            <div class="checklist">
+                <div class="checklist-item">
+                    <div class="checkbox" onclick="this.style.background = this.style.background ? '' : 'var(--accent-cyan)'"></div>
+                    <div class="checklist-text">Set up Flutter development environment (VS Code + emulators)</div>
+                </div>
+                <div class="checklist-item">
+                    <div class="checkbox" onclick="this.style.background = this.style.background ? '' : 'var(--accent-cyan)'"></div>
+                    <div class="checklist-text">Complete Dart language fundamentals (null safety, async)</div>
+                </div>
+                <div class="checklist-item">
+                    <div class="checkbox" onclick="this.style.background = this.style.background ? '' : 'var(--accent-cyan)'"></div>
+                    <div class="checklist-text">Build 3 small practice apps (calculator, todo, weather)</div>
+                </div>
+                <div class="checklist-item">
+                    <div class="checkbox" onclick="this.style.background = this.style.background ? '' : 'var(--accent-cyan)'"></div>
+                    <div class="checklist-text">Master one state management solution (Provider or Riverpod)</div>
+                </div>
+                <div class="checklist-item">
+                    <div class="checkbox" onclick="this.style.background = this.style.background ? '' : 'var(--accent-cyan)'"></div>
+                    <div class="checklist-text">Connect Flutter app to REST API / AWS backend</div>
+                </div>
+                <div class="checklist-item">
+                    <div class="checkbox" onclick="this.style.background = this.style.background ? '' : 'var(--accent-cyan)'"></div>
+                    <div class="checklist-text">Integrate AWS Amplify (Auth, API, Storage)</div>
+                </div>
+                <div class="checklist-item">
+                    <div class="checkbox" onclick="this.style.background = this.style.background ? '' : 'var(--accent-cyan)'"></div>
+                    <div class="checklist-text">Implement navigation patterns (tabs, drawer, deep links)</div>
+                </div>
+                <div class="checklist-item">
+                    <div class="checkbox" onclick="this.style.background = this.style.background ? '' : 'var(--accent-cyan)'"></div>
+                    <div class="checklist-text">Add basic animations and polish UI</div>
+                </div>
+                <div class="checklist-item">
+                    <div class="checkbox" onclick="this.style.background = this.style.background ? '' : 'var(--accent-cyan)'"></div>
+                    <div class="checklist-text">Write unit and widget tests</div>
+                </div>
+                <div class="checklist-item">
+                    <div class="checkbox" onclick="this.style.background = this.style.background ? '' : 'var(--accent-cyan)'"></div>
+                    <div class="checklist-text">Build and deploy to Android (APK/Play Store)</div>
+                </div>
+                <div class="checklist-item">
+                    <div class="checkbox" onclick="this.style.background = this.style.background ? '' : 'var(--accent-cyan)'"></div>
+                    <div class="checklist-text">Build and deploy to iOS (TestFlight/App Store)</div>
+                </div>
+                <div class="checklist-item">
+                    <div class="checkbox" onclick="this.style.background = this.style.background ? '' : 'var(--accent-cyan)'"></div>
+                    <div class="checklist-text">Complete capstone project: Full-stack mobile app with AWS backend</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final Project Idea -->
+        <section>
+            <div class="section-header">
+                <div class="section-icon">🏆</div>
+                <h2>Capstone Project Idea</h2>
+            </div>
+
+            <div class="context-card" style="border-left: 4px solid var(--accent-orange);">
+                <h4>📋 Task Management App (Full-Stack)</h4>
+                <p style="margin-bottom: 16px;">
+                    Build a task/project management app that demonstrates all your skills. This mirrors real-world business apps your manager likely has in mind.
+                </p>
+                <ul class="topics-list">
+                    <li><strong>Auth:</strong> Cognito sign up/in/out with social providers</li>
+                    <li><strong>CRUD:</strong> Create, read, update, delete tasks with DynamoDB</li>
+                    <li><strong>Real-time:</strong> AppSync subscriptions for live updates</li>
+                    <li><strong>Offline:</strong> DataStore for offline-first experience</li>
+                    <li><strong>Storage:</strong> Attach images/files to tasks via S3</li>
+                    <li><strong>Push:</strong> Notifications for task reminders</li>
+                    <li><strong>UI:</strong> Beautiful animations, dark mode, responsive layout</li>
+                </ul>
+            </div>
+        </section>
+
+        <footer>
+            <p class="footer-quote">"The best time to start learning Flutter was yesterday. The second best time is now."</p>
+            <p>Good luck on your Flutter journey! Your AWS & Next.js skills give you a massive head start. 🚀</p>
+            <p style="margin-top: 16px; font-size: 0.85rem;">Created for AWS Full-Stack Developers transitioning to Mobile</p>
+        </footer>
+    </div>
+
+    <script>
+        // Animate progress bar on scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            // Intersection Observer for week blocks
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.week-block').forEach(block => {
+                observer.observe(block);
+            });
+
+            // Checkbox interactivity
+            document.querySelectorAll('.checkbox').forEach(checkbox => {
+                checkbox.addEventListener('click', function() {
+                    this.classList.toggle('checked');
+                    if (this.classList.contains('checked')) {
+                        this.innerHTML = '✓';
+                        this.style.background = 'var(--accent-cyan)';
+                        this.style.color = 'var(--bg-primary)';
+                    } else {
+                        this.innerHTML = '';
+                        this.style.background = '';
+                        this.style.color = '';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+
