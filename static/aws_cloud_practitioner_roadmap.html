@@ -1,0 +1,1694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AWS Cloud Practitioner (CLF-C02) | Certification Roadmap</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a0e17;
+            --bg-secondary: #111827;
+            --bg-card: #1a2234;
+            --bg-card-hover: #232f46;
+            --accent-orange: #ff9900;
+            --accent-blue: #232f3e;
+            --accent-cyan: #22d3ee;
+            --accent-teal: #14b8a6;
+            --accent-lime: #a3e635;
+            --accent-pink: #f472b6;
+            --accent-purple: #a855f7;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --border-color: #2d3a52;
+            --gradient-1: linear-gradient(135deg, #ff9900 0%, #ffad33 100%);
+            --gradient-2: linear-gradient(135deg, #22d3ee 0%, #14b8a6 100%);
+            --gradient-3: linear-gradient(135deg, #a855f7 0%, #f472b6 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+
+        /* Animated Background */
+        .bg-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.4;
+            background: 
+                radial-gradient(ellipse 80% 50% at 20% 0%, rgba(255, 153, 0, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse 60% 40% at 80% 100%, rgba(34, 211, 238, 0.12) 0%, transparent 50%),
+                radial-gradient(ellipse 50% 30% at 50% 50%, rgba(168, 85, 247, 0.08) 0%, transparent 50%);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Header */
+        header {
+            padding: 60px 0 40px;
+            text-align: center;
+            position: relative;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            color: var(--accent-orange);
+            margin-bottom: 24px;
+            font-weight: 500;
+        }
+
+        .badge::before {
+            content: '☁️';
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 800;
+            margin-bottom: 16px;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.02em;
+        }
+
+        .subtitle {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto 32px;
+            font-weight: 300;
+        }
+
+        .highlight {
+            color: var(--accent-orange);
+            font-weight: 500;
+        }
+
+        /* Stats Bar */
+        .stats-bar {
+            display: flex;
+            justify-content: center;
+            gap: 48px;
+            flex-wrap: wrap;
+            padding: 24px 0;
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 60px;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--accent-orange);
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        /* Section Styles */
+        section {
+            margin-bottom: 80px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+
+        .section-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+        }
+
+        h2 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: var(--text-primary);
+        }
+
+        /* Context Section */
+        .context-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .context-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 28px;
+            transition: all 0.3s ease;
+        }
+
+        .context-card:hover {
+            background: var(--bg-card-hover);
+            transform: translateY(-4px);
+            border-color: var(--accent-orange);
+        }
+
+        .context-card h4 {
+            font-size: 1.1rem;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .context-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 40px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 12px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, var(--accent-orange), var(--accent-cyan), var(--accent-teal), var(--accent-lime), var(--accent-purple));
+            border-radius: 2px;
+        }
+
+        .week-block {
+            position: relative;
+            margin-bottom: 48px;
+            animation: fadeInUp 0.6s ease forwards;
+            opacity: 0;
+        }
+
+        .week-block:nth-child(1) { animation-delay: 0.1s; }
+        .week-block:nth-child(2) { animation-delay: 0.2s; }
+        .week-block:nth-child(3) { animation-delay: 0.3s; }
+        .week-block:nth-child(4) { animation-delay: 0.4s; }
+        .week-block:nth-child(5) { animation-delay: 0.5s; }
+        .week-block:nth-child(6) { animation-delay: 0.6s; }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .week-marker {
+            position: absolute;
+            left: -40px;
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            background: var(--bg-primary);
+            border: 3px solid var(--accent-orange);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: 700;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .week-block:nth-child(2) .week-marker {
+            border-color: var(--accent-cyan);
+        }
+
+        .week-block:nth-child(3) .week-marker {
+            border-color: var(--accent-teal);
+        }
+
+        .week-block:nth-child(4) .week-marker {
+            border-color: var(--accent-lime);
+        }
+
+        .week-block:nth-child(5) .week-marker,
+        .week-block:nth-child(6) .week-marker {
+            border-color: var(--accent-purple);
+        }
+
+        .week-content {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 28px;
+            transition: all 0.3s ease;
+        }
+
+        .week-content:hover {
+            background: var(--bg-card-hover);
+        }
+
+        .week-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .week-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        .phase-tag {
+            font-size: 0.75rem;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .phase-foundation {
+            background: rgba(255, 153, 0, 0.15);
+            color: var(--accent-orange);
+        }
+
+        .phase-core {
+            background: rgba(34, 211, 238, 0.15);
+            color: var(--accent-cyan);
+        }
+
+        .phase-security {
+            background: rgba(20, 184, 166, 0.15);
+            color: var(--accent-teal);
+        }
+
+        .phase-services {
+            background: rgba(163, 230, 53, 0.15);
+            color: var(--accent-lime);
+        }
+
+        .phase-review {
+            background: rgba(168, 85, 247, 0.15);
+            color: var(--accent-purple);
+        }
+
+        .topics-list {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+
+        .topics-list li {
+            padding: 8px 0;
+            padding-left: 28px;
+            position: relative;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .topics-list li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--accent-orange);
+            font-weight: bold;
+        }
+
+        .project-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(244, 114, 182, 0.1);
+            border: 1px solid rgba(244, 114, 182, 0.3);
+            padding: 10px 16px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            color: var(--accent-pink);
+        }
+
+        .project-badge::before {
+            content: '🎯';
+        }
+
+        /* Week Resources */
+        .week-resources {
+            background: rgba(255, 153, 0, 0.05);
+            border: 1px solid rgba(255, 153, 0, 0.15);
+            border-radius: 10px;
+            padding: 16px;
+            margin: 16px 0;
+        }
+
+        .resources-label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--accent-orange);
+            margin-bottom: 10px;
+        }
+
+        .resource-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .resource-links a {
+            display: inline-flex;
+            align-items: center;
+            padding: 6px 14px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: all 0.2s ease;
+        }
+
+        .resource-links a:hover {
+            background: var(--accent-orange);
+            color: var(--bg-primary);
+            border-color: var(--accent-orange);
+            transform: translateY(-2px);
+        }
+
+        .topics-list a {
+            color: var(--accent-cyan);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--accent-cyan);
+            transition: all 0.2s ease;
+        }
+
+        .topics-list a:hover {
+            color: var(--accent-orange);
+            border-bottom-color: var(--accent-orange);
+        }
+
+        /* Quick Start Links */
+        .quick-links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 16px;
+        }
+
+        .quick-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 20px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            text-decoration: none;
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        .quick-link:hover {
+            background: var(--bg-card-hover);
+            border-color: var(--accent-orange);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(255, 153, 0, 0.1);
+        }
+
+        .quick-link-icon {
+            font-size: 1.5rem;
+        }
+
+        .quick-link-text {
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        /* Exam Domains Table */
+        .domains-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--bg-card);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+
+        .domains-table th,
+        .domains-table td {
+            padding: 16px 20px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .domains-table th {
+            background: var(--bg-secondary);
+            font-weight: 600;
+            color: var(--accent-orange);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .domains-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .domains-table td:first-child {
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .domains-table td:not(:first-child) {
+            color: var(--text-secondary);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+        }
+
+        .domains-table a {
+            color: var(--accent-cyan);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .domains-table a:hover {
+            color: var(--accent-orange);
+            text-decoration: underline;
+        }
+
+        .percentage-bar {
+            height: 8px;
+            background: var(--bg-secondary);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 8px;
+        }
+
+        .percentage-fill {
+            height: 100%;
+            border-radius: 4px;
+            background: var(--gradient-1);
+        }
+
+        /* Resources Grid */
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
+        }
+
+        .resource-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 24px;
+            transition: all 0.3s ease;
+        }
+
+        .resource-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent-orange);
+        }
+
+        .resource-type {
+            font-size: 0.75rem;
+            color: var(--accent-cyan);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .resource-card h4 {
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+        }
+
+        .resource-card p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 16px;
+        }
+
+        .resource-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--accent-orange);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: gap 0.2s ease;
+        }
+
+        .resource-link:hover {
+            gap: 10px;
+        }
+
+        .resource-link::after {
+            content: '→';
+        }
+
+        /* AWS Services Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .service-category {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 24px;
+        }
+
+        .service-category h4 {
+            color: var(--accent-orange);
+            margin-bottom: 16px;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .service-list {
+            list-style: none;
+        }
+
+        .service-list li {
+            padding: 6px 0;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .service-list li::before {
+            content: '•';
+            color: var(--accent-cyan);
+        }
+
+        /* Checklist */
+        .checklist {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 28px;
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .checklist-item:last-child {
+            border-bottom: none;
+        }
+
+        .checkbox {
+            width: 22px;
+            height: 22px;
+            border: 2px solid var(--accent-orange);
+            border-radius: 6px;
+            flex-shrink: 0;
+            margin-top: 2px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .checkbox:hover {
+            background: rgba(255, 153, 0, 0.2);
+        }
+
+        .checklist-text {
+            color: var(--text-secondary);
+        }
+
+        /* Tips Section */
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+        }
+
+        .tip-card {
+            background: linear-gradient(135deg, rgba(255, 153, 0, 0.05) 0%, rgba(34, 211, 238, 0.05) 100%);
+            border: 1px solid rgba(255, 153, 0, 0.2);
+            border-radius: 16px;
+            padding: 24px;
+        }
+
+        .tip-card.warning {
+            background: linear-gradient(135deg, rgba(244, 114, 182, 0.05) 0%, rgba(168, 85, 247, 0.05) 100%);
+            border-color: rgba(244, 114, 182, 0.2);
+        }
+
+        .tip-icon {
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+        }
+
+        .tip-card h4 {
+            margin-bottom: 8px;
+            font-size: 1rem;
+        }
+
+        .tip-card p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Daily Schedule */
+        .schedule-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+        }
+
+        .schedule-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .schedule-time {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--accent-lime);
+            margin-bottom: 8px;
+        }
+
+        .schedule-activity {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Exam Info Box */
+        .exam-info {
+            background: linear-gradient(135deg, rgba(255, 153, 0, 0.1) 0%, rgba(255, 153, 0, 0.05) 100%);
+            border: 2px solid rgba(255, 153, 0, 0.3);
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 40px;
+        }
+
+        .exam-info h3 {
+            color: var(--accent-orange);
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+
+        .exam-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .exam-detail {
+            text-align: center;
+        }
+
+        .exam-detail-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .exam-detail-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 60px 0;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-muted);
+        }
+
+        .footer-quote {
+            font-size: 1.25rem;
+            font-style: italic;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .stats-bar {
+                gap: 24px;
+            }
+            
+            .timeline {
+                padding-left: 30px;
+            }
+            
+            .week-marker {
+                left: -30px;
+                width: 22px;
+                height: 22px;
+            }
+            
+            .domains-table {
+                font-size: 0.85rem;
+            }
+            
+            .domains-table th,
+            .domains-table td {
+                padding: 12px;
+            }
+        }
+
+        /* AWS Logo Animation */
+        .aws-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: linear-gradient(135deg, #232f3e 0%, #1a2634 100%);
+            border: 2px solid var(--accent-orange);
+            padding: 12px 24px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+        }
+
+        .aws-badge img {
+            height: 30px;
+        }
+
+        .aws-badge span {
+            font-weight: 600;
+            color: var(--accent-orange);
+            font-size: 1.1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-pattern"></div>
+    
+    <div class="container">
+        <header>
+            <a href="learning_dashboard.html" class="dashboard-link" style="display: inline-flex; align-items: center; gap: 8px; background: var(--bg-card); border: 1px solid var(--accent-pink); padding: 10px 20px; border-radius: 50px; font-size: 0.9rem; color: var(--accent-pink); margin-bottom: 20px; text-decoration: none; font-weight: 500; transition: all 0.3s ease;">🏠 Back to Dashboard</a>
+            <div class="aws-badge">
+                <span>☁️ AWS Certified</span>
+            </div>
+            <div class="badge">4-6 Week Study Plan</div>
+            <h1>Cloud Practitioner CLF-C02</h1>
+            <p class="subtitle">
+                Your complete guide to passing the <span class="highlight">AWS Cloud Practitioner</span> certification exam — the foundational step into the AWS ecosystem
+            </p>
+        </header>
+
+        <div class="stats-bar">
+            <div class="stat">
+                <div class="stat-value">4-6</div>
+                <div class="stat-label">Weeks</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">1-2h</div>
+                <div class="stat-label">Daily</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">65</div>
+                <div class="stat-label">Questions</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">90</div>
+                <div class="stat-label">Minutes</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">700</div>
+                <div class="stat-label">Pass Score</div>
+            </div>
+        </div>
+
+        <!-- Exam Info Box -->
+        <div class="exam-info">
+            <h3>📋 Exam Overview (CLF-C02)</h3>
+            <div class="exam-details">
+                <div class="exam-detail">
+                    <div class="exam-detail-value">$100</div>
+                    <div class="exam-detail-label">Exam Cost</div>
+                </div>
+                <div class="exam-detail">
+                    <div class="exam-detail-value">90 min</div>
+                    <div class="exam-detail-label">Duration</div>
+                </div>
+                <div class="exam-detail">
+                    <div class="exam-detail-value">65 Qs</div>
+                    <div class="exam-detail-label">Questions</div>
+                </div>
+                <div class="exam-detail">
+                    <div class="exam-detail-value">700/1000</div>
+                    <div class="exam-detail-label">Passing Score</div>
+                </div>
+                <div class="exam-detail">
+                    <div class="exam-detail-value">3 Years</div>
+                    <div class="exam-detail-label">Validity</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Start Links -->
+        <section class="quick-start">
+            <div class="section-header">
+                <div class="section-icon">⚡</div>
+                <h2>Essential Resources</h2>
+            </div>
+            <p style="color: var(--text-secondary); margin-bottom: 20px;">
+                Bookmark these official AWS resources. They're your primary study materials.
+            </p>
+            <div class="quick-links-grid">
+                <a href="https://aws.amazon.com/certification/certified-cloud-practitioner/" target="_blank" class="quick-link">
+                    <span class="quick-link-icon">🎓</span>
+                    <span class="quick-link-text">Official Exam Page</span>
+                </a>
+                <a href="https://d1.awsstatic.com/training-and-certification/docs-cloud-practitioner/AWS-Certified-Cloud-Practitioner_Exam-Guide.pdf" target="_blank" class="quick-link">
+                    <span class="quick-link-icon">📄</span>
+                    <span class="quick-link-text">Exam Guide (PDF)</span>
+                </a>
+                <a href="https://explore.skillbuilder.aws/learn/course/external/view/elearning/134/aws-cloud-practitioner-essentials" target="_blank" class="quick-link">
+                    <span class="quick-link-icon">📚</span>
+                    <span class="quick-link-text">AWS Skill Builder</span>
+                </a>
+                <a href="https://aws.amazon.com/free/" target="_blank" class="quick-link">
+                    <span class="quick-link-icon">🆓</span>
+                    <span class="quick-link-text">AWS Free Tier</span>
+                </a>
+                <a href="https://docs.aws.amazon.com/" target="_blank" class="quick-link">
+                    <span class="quick-link-icon">📖</span>
+                    <span class="quick-link-text">AWS Documentation</span>
+                </a>
+                <a href="https://aws.amazon.com/architecture/well-architected/" target="_blank" class="quick-link">
+                    <span class="quick-link-icon">🏗️</span>
+                    <span class="quick-link-text">Well-Architected</span>
+                </a>
+                <a href="https://aws.amazon.com/pricing/" target="_blank" class="quick-link">
+                    <span class="quick-link-icon">💰</span>
+                    <span class="quick-link-text">AWS Pricing</span>
+                </a>
+                <a href="https://calculator.aws/" target="_blank" class="quick-link">
+                    <span class="quick-link-icon">🧮</span>
+                    <span class="quick-link-text">Pricing Calculator</span>
+                </a>
+                <a href="https://aws.amazon.com/whitepapers/" target="_blank" class="quick-link">
+                    <span class="quick-link-icon">📑</span>
+                    <span class="quick-link-text">AWS Whitepapers</span>
+                </a>
+                <a href="https://www.examtopics.com/exams/amazon/aws-certified-cloud-practitioner-clf-c02/" target="_blank" class="quick-link">
+                    <span class="quick-link-icon">✍️</span>
+                    <span class="quick-link-text">Practice Questions</span>
+                </a>
+                <a href="https://tutorialsdojo.com/aws-certified-cloud-practitioner/" target="_blank" class="quick-link">
+                    <span class="quick-link-icon">🎯</span>
+                    <span class="quick-link-text">Tutorials Dojo</span>
+                </a>
+                <a href="https://www.youtube.com/watch?v=SOTamWNgDKc" target="_blank" class="quick-link">
+                    <span class="quick-link-icon">▶️</span>
+                    <span class="quick-link-text">freeCodeCamp Course</span>
+                </a>
+            </div>
+        </section>
+
+        <!-- Exam Domains -->
+        <section>
+            <div class="section-header">
+                <div class="section-icon">📊</div>
+                <h2>Exam Domains & Weightage</h2>
+            </div>
+            
+            <table class="domains-table">
+                <thead>
+                    <tr>
+                        <th>Domain</th>
+                        <th>Weightage</th>
+                        <th>Focus Areas</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <strong>Domain 1: Cloud Concepts</strong>
+                            <div class="percentage-bar"><div class="percentage-fill" style="width: 24%"></div></div>
+                        </td>
+                        <td>24%</td>
+                        <td>AWS Cloud value proposition, Cloud economics, Cloud architecture design principles</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>Domain 2: Security & Compliance</strong>
+                            <div class="percentage-bar"><div class="percentage-fill" style="width: 30%"></div></div>
+                        </td>
+                        <td>30%</td>
+                        <td>Shared responsibility model, AWS security services, Compliance concepts</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>Domain 3: Cloud Technology & Services</strong>
+                            <div class="percentage-bar"><div class="percentage-fill" style="width: 34%"></div></div>
+                        </td>
+                        <td>34%</td>
+                        <td>AWS core services, AWS global infrastructure, Technology support resources</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>Domain 4: Billing, Pricing & Support</strong>
+                            <div class="percentage-bar"><div class="percentage-fill" style="width: 12%"></div></div>
+                        </td>
+                        <td>12%</td>
+                        <td>AWS pricing models, Billing & cost management, Support plans</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- What Makes Cloud Practitioner Different -->
+        <section>
+            <div class="section-header">
+                <div class="section-icon">🎯</div>
+                <h2>What This Certification Covers</h2>
+            </div>
+            
+            <div class="context-grid">
+                <div class="context-card">
+                    <h4>☁️ Cloud Concepts</h4>
+                    <p>Understand the benefits of cloud computing, the AWS Cloud value proposition, and the economics of cloud vs. on-premises infrastructure. Learn cloud deployment models and the AWS global infrastructure.</p>
+                </div>
+                <div class="context-card">
+                    <h4>🔐 Security Fundamentals</h4>
+                    <p>Master the AWS Shared Responsibility Model, IAM basics, security best practices, and compliance programs. Understand how AWS secures your workloads.</p>
+                </div>
+                <div class="context-card">
+                    <h4>🛠️ Core AWS Services</h4>
+                    <p>Get familiar with essential services: EC2, S3, RDS, Lambda, VPC, CloudFront, Route 53, and more. Know their use cases and how they work together.</p>
+                </div>
+                <div class="context-card">
+                    <h4>💰 Billing & Pricing</h4>
+                    <p>Understand AWS pricing models (On-Demand, Reserved, Spot), the AWS Free Tier, billing tools (Cost Explorer, Budgets), and how to optimize costs.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5-Week Roadmap -->
+        <section>
+            <div class="section-header">
+                <div class="section-icon">📅</div>
+                <h2>5-Week Study Roadmap</h2>
+            </div>
+
+            <div class="timeline">
+                <!-- Week 1 -->
+                <div class="week-block">
+                    <div class="week-marker">1</div>
+                    <div class="week-content">
+                        <div class="week-header">
+                            <div class="week-title">Cloud Concepts & AWS Fundamentals</div>
+                            <span class="phase-tag phase-foundation">Foundation</span>
+                        </div>
+                        <ul class="topics-list">
+                            <li><a href="https://aws.amazon.com/what-is-cloud-computing/" target="_blank">What is Cloud Computing?</a> - Benefits, types (IaaS, PaaS, SaaS)</li>
+                            <li><a href="https://aws.amazon.com/what-is-aws/" target="_blank">Introduction to AWS</a> - History, market position, use cases</li>
+                            <li><a href="https://aws.amazon.com/about-aws/global-infrastructure/" target="_blank">AWS Global Infrastructure</a> - Regions, Availability Zones, Edge Locations</li>
+                            <li>Cloud deployment models: <a href="https://aws.amazon.com/hybrid/" target="_blank">Public, Private, Hybrid Cloud</a></li>
+                            <li><a href="https://aws.amazon.com/architecture/well-architected/" target="_blank">AWS Well-Architected Framework</a> - 6 pillars overview</li>
+                            <li><a href="https://aws.amazon.com/economics/" target="_blank">Cloud Economics</a> - TCO, CapEx vs OpEx, pay-as-you-go</li>
+                            <li>Create your <a href="https://aws.amazon.com/free/" target="_blank">AWS Free Tier account</a> and explore the console</li>
+                        </ul>
+                        <div class="week-resources">
+                            <span class="resources-label">📖 Study Materials:</span>
+                            <div class="resource-links">
+                                <a href="https://explore.skillbuilder.aws/learn/course/external/view/elearning/134/aws-cloud-practitioner-essentials" target="_blank">AWS Essentials Course</a>
+                                <a href="https://www.youtube.com/watch?v=SOTamWNgDKc" target="_blank">freeCodeCamp Full Course</a>
+                                <a href="https://d1.awsstatic.com/whitepapers/aws-overview.pdf" target="_blank">AWS Overview Whitepaper</a>
+                            </div>
+                        </div>
+                        <div class="project-badge">Goal: Understand cloud basics & navigate AWS Console</div>
+                    </div>
+                </div>
+
+                <!-- Week 2 -->
+                <div class="week-block">
+                    <div class="week-marker">2</div>
+                    <div class="week-content">
+                        <div class="week-header">
+                            <div class="week-title">Security, Identity & Compliance</div>
+                            <span class="phase-tag phase-security">Security</span>
+                        </div>
+                        <ul class="topics-list">
+                            <li><a href="https://aws.amazon.com/compliance/shared-responsibility-model/" target="_blank">AWS Shared Responsibility Model</a> - Know this inside out!</li>
+                            <li><a href="https://aws.amazon.com/iam/" target="_blank">IAM (Identity & Access Management)</a> - Users, Groups, Roles, Policies</li>
+                            <li><a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html" target="_blank">IAM Best Practices</a> - MFA, least privilege, password policies</li>
+                            <li><a href="https://aws.amazon.com/organizations/" target="_blank">AWS Organizations</a> - SCPs, consolidated billing</li>
+                            <li>Security services: <a href="https://aws.amazon.com/waf/" target="_blank">WAF</a>, <a href="https://aws.amazon.com/shield/" target="_blank">Shield</a>, <a href="https://aws.amazon.com/guardduty/" target="_blank">GuardDuty</a>, <a href="https://aws.amazon.com/inspector/" target="_blank">Inspector</a></li>
+                            <li><a href="https://aws.amazon.com/kms/" target="_blank">KMS</a> & <a href="https://aws.amazon.com/secrets-manager/" target="_blank">Secrets Manager</a> - Encryption key management</li>
+                            <li><a href="https://aws.amazon.com/compliance/" target="_blank">AWS Compliance Programs</a> - HIPAA, SOC, PCI DSS, GDPR</li>
+                            <li><a href="https://aws.amazon.com/artifact/" target="_blank">AWS Artifact</a> - Compliance reports access</li>
+                        </ul>
+                        <div class="week-resources">
+                            <span class="resources-label">📖 Study Materials:</span>
+                            <div class="resource-links">
+                                <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html" target="_blank">IAM User Guide</a>
+                                <a href="https://www.youtube.com/watch?v=_wiGpBQGCjU" target="_blank">IAM Deep Dive</a>
+                                <a href="https://d1.awsstatic.com/whitepapers/aws-security-whitepaper.pdf" target="_blank">Security Whitepaper</a>
+                            </div>
+                        </div>
+                        <div class="project-badge">Goal: Create IAM users, groups, and policies hands-on</div>
+                    </div>
+                </div>
+
+                <!-- Week 3 -->
+                <div class="week-block">
+                    <div class="week-marker">3</div>
+                    <div class="week-content">
+                        <div class="week-header">
+                            <div class="week-title">Core AWS Services - Compute & Storage</div>
+                            <span class="phase-tag phase-services">Services</span>
+                        </div>
+                        <ul class="topics-list">
+                            <li><strong>Compute:</strong> <a href="https://aws.amazon.com/ec2/" target="_blank">EC2</a> (instance types, pricing), <a href="https://aws.amazon.com/lambda/" target="_blank">Lambda</a>, <a href="https://aws.amazon.com/ecs/" target="_blank">ECS</a>, <a href="https://aws.amazon.com/lightsail/" target="_blank">Lightsail</a></li>
+                            <li><a href="https://aws.amazon.com/ec2/instance-types/" target="_blank">EC2 Instance Types</a> - General, Compute, Memory, Storage optimized</li>
+                            <li><a href="https://aws.amazon.com/ec2/pricing/" target="_blank">EC2 Pricing Models</a> - On-Demand, Reserved, Spot, Savings Plans</li>
+                            <li><a href="https://aws.amazon.com/elasticloadbalancing/" target="_blank">Elastic Load Balancing</a> - ALB, NLB, CLB differences</li>
+                            <li><a href="https://aws.amazon.com/autoscaling/" target="_blank">Auto Scaling</a> - Scale based on demand</li>
+                            <li><strong>Storage:</strong> <a href="https://aws.amazon.com/s3/" target="_blank">S3</a> (storage classes), <a href="https://aws.amazon.com/ebs/" target="_blank">EBS</a>, <a href="https://aws.amazon.com/efs/" target="_blank">EFS</a>, <a href="https://aws.amazon.com/s3/glacier/" target="_blank">Glacier</a></li>
+                            <li><a href="https://aws.amazon.com/s3/storage-classes/" target="_blank">S3 Storage Classes</a> - Standard, IA, One Zone-IA, Glacier, Deep Archive</li>
+                            <li><a href="https://aws.amazon.com/snow/" target="_blank">Snow Family</a> - Snowball, Snowcone, Snowmobile for data migration</li>
+                        </ul>
+                        <div class="week-resources">
+                            <span class="resources-label">📖 Study Materials:</span>
+                            <div class="resource-links">
+                                <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/concepts.html" target="_blank">EC2 User Guide</a>
+                                <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html" target="_blank">S3 User Guide</a>
+                                <a href="https://www.youtube.com/watch?v=hiKPPy584Mg" target="_blank">EC2 Tutorial</a>
+                            </div>
+                        </div>
+                        <div class="project-badge">Goal: Launch EC2 instance & create S3 bucket with lifecycle rules</div>
+                    </div>
+                </div>
+
+                <!-- Week 4 -->
+                <div class="week-block">
+                    <div class="week-marker">4</div>
+                    <div class="week-content">
+                        <div class="week-header">
+                            <div class="week-title">Databases, Networking & Other Services</div>
+                            <span class="phase-tag phase-services">Services</span>
+                        </div>
+                        <ul class="topics-list">
+                            <li><strong>Databases:</strong> <a href="https://aws.amazon.com/rds/" target="_blank">RDS</a>, <a href="https://aws.amazon.com/dynamodb/" target="_blank">DynamoDB</a>, <a href="https://aws.amazon.com/redshift/" target="_blank">Redshift</a>, <a href="https://aws.amazon.com/elasticache/" target="_blank">ElastiCache</a></li>
+                            <li><a href="https://aws.amazon.com/rds/aurora/" target="_blank">Aurora</a> - AWS's MySQL/PostgreSQL compatible database</li>
+                            <li><strong>Networking:</strong> <a href="https://aws.amazon.com/vpc/" target="_blank">VPC</a>, Subnets, Security Groups, NACLs</li>
+                            <li><a href="https://aws.amazon.com/route53/" target="_blank">Route 53</a> - DNS service, routing policies</li>
+                            <li><a href="https://aws.amazon.com/cloudfront/" target="_blank">CloudFront</a> - CDN for content delivery</li>
+                            <li><a href="https://aws.amazon.com/directconnect/" target="_blank">Direct Connect</a> vs <a href="https://aws.amazon.com/vpn/" target="_blank">VPN</a> - Hybrid connectivity</li>
+                            <li><strong>Other Services:</strong> <a href="https://aws.amazon.com/sqs/" target="_blank">SQS</a>, <a href="https://aws.amazon.com/sns/" target="_blank">SNS</a>, <a href="https://aws.amazon.com/cloudwatch/" target="_blank">CloudWatch</a>, <a href="https://aws.amazon.com/cloudtrail/" target="_blank">CloudTrail</a></li>
+                            <li><a href="https://aws.amazon.com/cloudformation/" target="_blank">CloudFormation</a> - Infrastructure as Code</li>
+                        </ul>
+                        <div class="week-resources">
+                            <span class="resources-label">📖 Study Materials:</span>
+                            <div class="resource-links">
+                                <a href="https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html" target="_blank">VPC User Guide</a>
+                                <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Welcome.html" target="_blank">RDS User Guide</a>
+                                <a href="https://www.youtube.com/watch?v=hiKPPy584Mg" target="_blank">VPC Deep Dive</a>
+                            </div>
+                        </div>
+                        <div class="project-badge">Goal: Create VPC with public/private subnets & launch RDS</div>
+                    </div>
+                </div>
+
+                <!-- Week 5 -->
+                <div class="week-block">
+                    <div class="week-marker">5</div>
+                    <div class="week-content">
+                        <div class="week-header">
+                            <div class="week-title">Billing, Pricing & Support + Review</div>
+                            <span class="phase-tag phase-core">Billing</span>
+                        </div>
+                        <ul class="topics-list">
+                            <li><a href="https://aws.amazon.com/pricing/" target="_blank">AWS Pricing Fundamentals</a> - Pay-as-you-go, Reserved, Volume discounts</li>
+                            <li><a href="https://aws.amazon.com/free/" target="_blank">AWS Free Tier</a> - Always free, 12 months free, trials</li>
+                            <li><a href="https://aws.amazon.com/aws-cost-management/aws-cost-explorer/" target="_blank">Cost Explorer</a> - Visualize and analyze costs</li>
+                            <li><a href="https://aws.amazon.com/aws-cost-management/aws-budgets/" target="_blank">AWS Budgets</a> - Set spending alerts</li>
+                            <li><a href="https://calculator.aws/" target="_blank">AWS Pricing Calculator</a> - Estimate costs</li>
+                            <li><a href="https://aws.amazon.com/premiumsupport/plans/" target="_blank">AWS Support Plans</a> - Basic, Developer, Business, Enterprise</li>
+                            <li><a href="https://aws.amazon.com/trusted-advisor/" target="_blank">Trusted Advisor</a> - Best practice recommendations</li>
+                            <li><a href="https://aws.amazon.com/health/" target="_blank">AWS Health Dashboard</a> - Service health monitoring</li>
+                        </ul>
+                        <div class="week-resources">
+                            <span class="resources-label">📖 Study Materials:</span>
+                            <div class="resource-links">
+                                <a href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/billing-what-is.html" target="_blank">Billing Guide</a>
+                                <a href="https://www.youtube.com/watch?v=2xSHrWomM0Q" target="_blank">Cost Optimization</a>
+                                <a href="https://d1.awsstatic.com/whitepapers/aws_pricing_overview.pdf" target="_blank">Pricing Whitepaper</a>
+                            </div>
+                        </div>
+                        <div class="project-badge">Goal: Explore Cost Explorer & set up billing alerts</div>
+                    </div>
+                </div>
+
+                <!-- Week 6 -->
+                <div class="week-block">
+                    <div class="week-marker">6</div>
+                    <div class="week-content">
+                        <div class="week-header">
+                            <div class="week-title">Practice Tests & Final Prep</div>
+                            <span class="phase-tag phase-review">Exam Prep</span>
+                        </div>
+                        <ul class="topics-list">
+                            <li>Take <a href="https://explore.skillbuilder.aws/learn/course/external/view/elearning/14050/aws-certified-cloud-practitioner-official-practice-question-set-clf-c02-english" target="_blank">AWS Official Practice Questions</a></li>
+                            <li>Complete <a href="https://www.examtopics.com/exams/amazon/aws-certified-cloud-practitioner-clf-c02/" target="_blank">ExamTopics practice tests</a></li>
+                            <li>Review <a href="https://tutorialsdojo.com/aws-certified-cloud-practitioner/" target="_blank">Tutorials Dojo cheat sheets</a></li>
+                            <li>Re-read <a href="https://d1.awsstatic.com/training-and-certification/docs-cloud-practitioner/AWS-Certified-Cloud-Practitioner_Exam-Guide.pdf" target="_blank">Exam Guide</a> - ensure you cover all objectives</li>
+                            <li>Focus on weak areas identified in practice tests</li>
+                            <li>Review Shared Responsibility Model one more time</li>
+                            <li>Know the differences between similar services (SQS vs SNS, etc.)</li>
+                            <li><a href="https://aws.amazon.com/certification/certification-prep/" target="_blank">Schedule your exam</a> - don't postpone!</li>
+                        </ul>
+                        <div class="week-resources">
+                            <span class="resources-label">📖 Study Materials:</span>
+                            <div class="resource-links">
+                                <a href="https://explore.skillbuilder.aws/learn/course/external/view/elearning/14050/aws-certified-cloud-practitioner-official-practice-question-set-clf-c02-english" target="_blank">Official Practice Exam</a>
+                                <a href="https://www.whizlabs.com/aws-certified-cloud-practitioner/" target="_blank">Whizlabs Practice</a>
+                                <a href="https://portal.tutorialsdojo.com/courses/aws-certified-cloud-practitioner-practice-exams/" target="_blank">Tutorials Dojo Exams</a>
+                            </div>
+                        </div>
+                        <div class="project-badge">Goal: Score 80%+ on practice tests consistently</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- AWS Services to Know -->
+        <section>
+            <div class="section-header">
+                <div class="section-icon">🛠️</div>
+                <h2>Key AWS Services to Know</h2>
+            </div>
+            
+            <p style="color: var(--text-secondary); margin-bottom: 24px;">
+                You don't need deep knowledge, but understand what each service does and when to use it.
+            </p>
+
+            <div class="services-grid">
+                <div class="service-category">
+                    <h4>💻 Compute</h4>
+                    <ul class="service-list">
+                        <li>EC2 - Virtual servers</li>
+                        <li>Lambda - Serverless functions</li>
+                        <li>ECS/EKS - Container services</li>
+                        <li>Elastic Beanstalk - PaaS</li>
+                        <li>Lightsail - Simple VPS</li>
+                        <li>Batch - Batch processing</li>
+                    </ul>
+                </div>
+                <div class="service-category">
+                    <h4>🗄️ Storage</h4>
+                    <ul class="service-list">
+                        <li>S3 - Object storage</li>
+                        <li>EBS - Block storage</li>
+                        <li>EFS - File storage</li>
+                        <li>S3 Glacier - Archive storage</li>
+                        <li>Storage Gateway - Hybrid</li>
+                        <li>Snow Family - Data transfer</li>
+                    </ul>
+                </div>
+                <div class="service-category">
+                    <h4>🗃️ Database</h4>
+                    <ul class="service-list">
+                        <li>RDS - Relational databases</li>
+                        <li>Aurora - AWS managed MySQL/PostgreSQL</li>
+                        <li>DynamoDB - NoSQL</li>
+                        <li>Redshift - Data warehouse</li>
+                        <li>ElastiCache - In-memory cache</li>
+                        <li>DocumentDB - MongoDB compatible</li>
+                    </ul>
+                </div>
+                <div class="service-category">
+                    <h4>🌐 Networking</h4>
+                    <ul class="service-list">
+                        <li>VPC - Virtual network</li>
+                        <li>CloudFront - CDN</li>
+                        <li>Route 53 - DNS</li>
+                        <li>API Gateway - API management</li>
+                        <li>Direct Connect - Dedicated connection</li>
+                        <li>Global Accelerator - Performance</li>
+                    </ul>
+                </div>
+                <div class="service-category">
+                    <h4>🔐 Security</h4>
+                    <ul class="service-list">
+                        <li>IAM - Identity management</li>
+                        <li>Cognito - User authentication</li>
+                        <li>KMS - Key management</li>
+                        <li>WAF - Web application firewall</li>
+                        <li>Shield - DDoS protection</li>
+                        <li>GuardDuty - Threat detection</li>
+                    </ul>
+                </div>
+                <div class="service-category">
+                    <h4>📊 Management</h4>
+                    <ul class="service-list">
+                        <li>CloudWatch - Monitoring</li>
+                        <li>CloudTrail - API logging</li>
+                        <li>Config - Resource tracking</li>
+                        <li>CloudFormation - IaC</li>
+                        <li>Systems Manager - Operations</li>
+                        <li>Trusted Advisor - Best practices</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Daily Study Schedule -->
+        <section>
+            <div class="section-header">
+                <div class="section-icon">⏰</div>
+                <h2>Recommended Daily Schedule</h2>
+            </div>
+            
+            <p style="color: var(--text-secondary); margin-bottom: 24px;">
+                Aim for 1-2 hours daily. Consistency is key for retention!
+            </p>
+
+            <div class="schedule-grid">
+                <div class="schedule-item">
+                    <div class="schedule-time">20 min</div>
+                    <div class="schedule-activity">Video/Course Content</div>
+                </div>
+                <div class="schedule-item">
+                    <div class="schedule-time">20 min</div>
+                    <div class="schedule-activity">Documentation Reading</div>
+                </div>
+                <div class="schedule-item">
+                    <div class="schedule-time">20 min</div>
+                    <div class="schedule-activity">Hands-on Console Practice</div>
+                </div>
+                <div class="schedule-item">
+                    <div class="schedule-time">20 min</div>
+                    <div class="schedule-activity">Practice Questions</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Learning Resources -->
+        <section>
+            <div class="section-header">
+                <div class="section-icon">📚</div>
+                <h2>Learning Resources</h2>
+            </div>
+
+            <h3 style="color: var(--accent-orange); margin-bottom: 20px;">🎓 Official AWS Resources (Free)</h3>
+            <div class="resources-grid">
+                <div class="resource-card">
+                    <div class="resource-type">Official Course</div>
+                    <h4>AWS Cloud Practitioner Essentials</h4>
+                    <p>Free 6-hour course on AWS Skill Builder. The official preparation course from AWS.</p>
+                    <a href="https://explore.skillbuilder.aws/learn/course/external/view/elearning/134/aws-cloud-practitioner-essentials" class="resource-link" target="_blank">Start Course</a>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-type">Practice Exam</div>
+                    <h4>Official Practice Question Set</h4>
+                    <p>20 official practice questions from AWS to test your readiness.</p>
+                    <a href="https://explore.skillbuilder.aws/learn/course/external/view/elearning/14050/aws-certified-cloud-practitioner-official-practice-question-set-clf-c02-english" class="resource-link" target="_blank">Take Practice Test</a>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-type">Whitepaper</div>
+                    <h4>Overview of Amazon Web Services</h4>
+                    <p>Comprehensive overview of all AWS services and their use cases.</p>
+                    <a href="https://d1.awsstatic.com/whitepapers/aws-overview.pdf" class="resource-link" target="_blank">Read Whitepaper</a>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-type">Whitepaper</div>
+                    <h4>AWS Well-Architected Framework</h4>
+                    <p>Understand the 6 pillars of well-architected cloud solutions.</p>
+                    <a href="https://docs.aws.amazon.com/wellarchitected/latest/framework/welcome.html" class="resource-link" target="_blank">Read Framework</a>
+                </div>
+            </div>
+
+            <h3 style="color: var(--accent-cyan); margin: 40px 0 20px;">🎬 Video Courses</h3>
+            <div class="resources-grid">
+                <div class="resource-card">
+                    <div class="resource-type">Free Course</div>
+                    <h4>freeCodeCamp Full Course</h4>
+                    <p>14-hour comprehensive course by Andrew Brown. Excellent for beginners.</p>
+                    <a href="https://www.youtube.com/watch?v=SOTamWNgDKc" class="resource-link" target="_blank">Watch on YouTube</a>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-type">Udemy Course</div>
+                    <h4>Stephane Maarek's Course</h4>
+                    <p>One of the most popular CCP courses. Comprehensive and up-to-date.</p>
+                    <a href="https://www.udemy.com/course/aws-certified-cloud-practitioner-new/" class="resource-link" target="_blank">View on Udemy</a>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-type">Udemy Course</div>
+                    <h4>Neal Davis - CCP Course</h4>
+                    <p>Digital Cloud Training's comprehensive course with practice exams.</p>
+                    <a href="https://www.udemy.com/course/aws-certified-cloud-practitioner-training-course/" class="resource-link" target="_blank">View on Udemy</a>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-type">YouTube</div>
+                    <h4>AWS Official YouTube</h4>
+                    <p>Official AWS channel with service deep dives and announcements.</p>
+                    <a href="https://www.youtube.com/user/AmazonWebServices" class="resource-link" target="_blank">Watch Channel</a>
+                </div>
+            </div>
+
+            <h3 style="color: var(--accent-teal); margin: 40px 0 20px;">✍️ Practice Exams</h3>
+            <div class="resources-grid">
+                <div class="resource-card">
+                    <div class="resource-type">Practice Tests</div>
+                    <h4>Tutorials Dojo</h4>
+                    <p>Highly recommended practice exams with detailed explanations. Very similar to real exam.</p>
+                    <a href="https://tutorialsdojo.com/aws-certified-cloud-practitioner/" class="resource-link" target="_blank">Get Practice Tests</a>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-type">Practice Tests</div>
+                    <h4>Whizlabs</h4>
+                    <p>Multiple practice tests with hands-on labs included.</p>
+                    <a href="https://www.whizlabs.com/aws-certified-cloud-practitioner/" class="resource-link" target="_blank">Get Practice Tests</a>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-type">Free Questions</div>
+                    <h4>ExamTopics</h4>
+                    <p>Community-contributed practice questions. Use alongside official resources.</p>
+                    <a href="https://www.examtopics.com/exams/amazon/aws-certified-cloud-practitioner-clf-c02/" class="resource-link" target="_blank">Practice Free</a>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-type">Practice Tests</div>
+                    <h4>Udemy Practice Exams</h4>
+                    <p>Stephane Maarek's practice exams - 390 questions with explanations.</p>
+                    <a href="https://www.udemy.com/course/practice-exams-aws-certified-cloud-practitioner/" class="resource-link" target="_blank">Get Practice Tests</a>
+                </div>
+            </div>
+
+            <h3 style="color: var(--accent-lime); margin: 40px 0 20px;">📋 Cheat Sheets & Quick Reference</h3>
+            <div class="resources-grid">
+                <div class="resource-card">
+                    <div class="resource-type">Cheat Sheets</div>
+                    <h4>Tutorials Dojo Cheat Sheets</h4>
+                    <p>Comprehensive cheat sheets for all AWS services covered in the exam.</p>
+                    <a href="https://tutorialsdojo.com/aws-cheat-sheets/" class="resource-link" target="_blank">View Cheat Sheets</a>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-type">Study Guide</div>
+                    <h4>Digital Cloud Training Notes</h4>
+                    <p>Free study notes and comparison tables for exam preparation.</p>
+                    <a href="https://digitalcloud.training/aws-cloud-practitioner-free-study-guide/" class="resource-link" target="_blank">Get Study Notes</a>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-type">Quick Reference</div>
+                    <h4>AWS Service Comparison</h4>
+                    <p>Compare similar AWS services side by side.</p>
+                    <a href="https://tutorialsdojo.com/aws-services-comparison/" class="resource-link" target="_blank">View Comparisons</a>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-type">Visual Guide</div>
+                    <h4>AWS Architecture Icons</h4>
+                    <p>Official AWS architecture icons and diagrams reference.</p>
+                    <a href="https://aws.amazon.com/architecture/icons/" class="resource-link" target="_blank">View Icons</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pro Tips -->
+        <section>
+            <div class="section-header">
+                <div class="section-icon">💡</div>
+                <h2>Exam Tips & Strategies</h2>
+            </div>
+
+            <div class="tips-grid">
+                <div class="tip-card">
+                    <div class="tip-icon">🔐</div>
+                    <h4>Master the Shared Responsibility Model</h4>
+                    <p>This is tested heavily! Know what AWS manages vs. what you manage. Security OF the cloud (AWS) vs. Security IN the cloud (You).</p>
+                </div>
+                <div class="tip-card">
+                    <div class="tip-icon">💰</div>
+                    <h4>Understand Pricing Models</h4>
+                    <p>Know the differences: On-Demand, Reserved (1 or 3 years), Spot Instances, Savings Plans. When to use each one.</p>
+                </div>
+                <div class="tip-card">
+                    <div class="tip-icon">🌍</div>
+                    <h4>Know the Global Infrastructure</h4>
+                    <p>Understand Regions, Availability Zones, Edge Locations. Know which services are global vs. regional.</p>
+                </div>
+                <div class="tip-card warning">
+                    <div class="tip-icon">⚠️</div>
+                    <h4>Read Questions Carefully</h4>
+                    <p>Watch for keywords like "most cost-effective," "highly available," "fastest." They indicate the correct answer approach.</p>
+                </div>
+                <div class="tip-card">
+                    <div class="tip-icon">🎯</div>
+                    <h4>Use Process of Elimination</h4>
+                    <p>Often 2 answers are obviously wrong. Narrow it down to 2 choices, then pick the one that best matches the question's focus.</p>
+                </div>
+                <div class="tip-card warning">
+                    <div class="tip-icon">🚫</div>
+                    <h4>Don't Overthink</h4>
+                    <p>This is a foundational exam. If an answer seems too complex or requires deep technical knowledge, it's probably not right.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Key Concepts to Remember -->
+        <section>
+            <div class="section-header">
+                <div class="section-icon">🧠</div>
+                <h2>Must-Know Concepts</h2>
+            </div>
+
+            <div class="context-grid">
+                <div class="context-card" style="border-left: 4px solid var(--accent-orange);">
+                    <h4>🔄 Shared Responsibility Model</h4>
+                    <p><strong>AWS Responsibility:</strong> Physical security, hardware, networking, virtualization (Security OF the cloud)</p>
+                    <p style="margin-top: 10px;"><strong>Your Responsibility:</strong> Data encryption, IAM, OS patches, firewall configuration, application security (Security IN the cloud)</p>
+                </div>
+                <div class="context-card" style="border-left: 4px solid var(--accent-cyan);">
+                    <h4>🏗️ Well-Architected Framework Pillars</h4>
+                    <p>1. Operational Excellence<br>2. Security<br>3. Reliability<br>4. Performance Efficiency<br>5. Cost Optimization<br>6. Sustainability</p>
+                </div>
+                <div class="context-card" style="border-left: 4px solid var(--accent-teal);">
+                    <h4>📍 Global vs Regional Services</h4>
+                    <p><strong>Global:</strong> IAM, Route 53, CloudFront, WAF, Organizations<br><strong>Regional:</strong> EC2, RDS, S3 (buckets), Lambda, VPC</p>
+                </div>
+                <div class="context-card" style="border-left: 4px solid var(--accent-purple);">
+                    <h4>💳 Support Plans</h4>
+                    <p><strong>Basic:</strong> Free, billing support<br><strong>Developer:</strong> $29/mo, email support<br><strong>Business:</strong> $100/mo, 24/7 phone<br><strong>Enterprise:</strong> $15K/mo, TAM</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Checklist -->
+        <section>
+            <div class="section-header">
+                <div class="section-icon">✓</div>
+                <h2>Exam Readiness Checklist</h2>
+            </div>
+
+            <div class="checklist">
+                <div class="checklist-item">
+                    <div class="checkbox" onclick="this.style.background = this.style.background ? '' : 'var(--accent-orange)'"></div>
+                    <div class="checklist-text">Created AWS Free Tier account and explored the console</div>
+                </div>
+                <div class="checklist-item">
+                    <div class="checkbox" onclick="this.style.background = this.style.background ? '' : 'var(--accent-orange)'"></div>
+                    <div class="checklist-text">Can explain cloud computing benefits and AWS value proposition</div>
+                </div>
+                <div class="checklist-item">
+                    <div class="checkbox" onclick="this.style.background = this.style.background ? '' : 'var(--accent-orange)'"></div>
+                    <div class="checklist-text">Understand AWS Global Infrastructure (Regions, AZs, Edge Locations)</div>
+                </div>
+                <div class="checklist-item">
+                    <div class="checkbox" onclick="this.style.background = this.style.background ? '' : 'var(--accent-orange)'"></div>
+                    <div class="checklist-text">Can explain the Shared Responsibility Model in detail</div>
+                </div>
+                <div class="checklist-item">
+                    <div class="checkbox" onclick="this.style.background = this.style.background ? '' : 'var(--accent-orange)'"></div>
+                    <div class="checklist-text">Know IAM fundamentals: Users, Groups, Roles, Policies, MFA</div>
+                </div>
+                <div class="checklist-item">
+                    <div class="checkbox" onclick="this.style.background = this.style.background ? '' : 'var(--accent-orange)'"></div>
+                    <div class="checklist-text">Understand core compute services: EC2, Lambda, ECS</div>
+                </div>
+                <div class="checklist-item">
+                    <div class="checkbox" onclick="this.style.background = this.style.background ? '' : 'var(--accent-orange)'"></div>
+                    <div class="checklist-text">Know S3 storage classes and when to use each</div>
+                </div>
+                <div class="checklist-item">
+                    <div class="checkbox" onclick="this.style.background = this.style.background ? '' : 'var(--accent-orange)'"></div>
+                    <div class="checklist-text">Understand database options: RDS vs DynamoDB vs Redshift</div>
+                </div>
+                <div class="checklist-item">
+                    <div class="checkbox" onclick="this.style.background = this.style.background ? '' : 'var(--accent-orange)'"></div>
+                    <div class="checklist-text">Know VPC basics: Subnets, Security Groups, NACLs</div>
+                </div>
+                <div class="checklist-item">
+                    <div class="checkbox" onclick="this.style.background = this.style.background ? '' : 'var(--accent-orange)'"></div>
+                    <div class="checklist-text">Understand EC2 pricing models and when to use each</div>
+                </div>
+                <div class="checklist-item">
+                    <div class="checkbox" onclick="this.style.background = this.style.background ? '' : 'var(--accent-orange)'"></div>
+                    <div class="checklist-text">Know AWS Support Plans and their features</div>
+                </div>
+                <div class="checklist-item">
+                    <div class="checkbox" onclick="this.style.background = this.style.background ? '' : 'var(--accent-orange)'"></div>
+                    <div class="checklist-text">Understand billing tools: Cost Explorer, Budgets, Trusted Advisor</div>
+                </div>
+                <div class="checklist-item">
+                    <div class="checkbox" onclick="this.style.background = this.style.background ? '' : 'var(--accent-orange)'"></div>
+                    <div class="checklist-text">Scoring 80%+ consistently on practice exams</div>
+                </div>
+                <div class="checklist-item">
+                    <div class="checkbox" onclick="this.style.background = this.style.background ? '' : 'var(--accent-orange)'"></div>
+                    <div class="checklist-text">Scheduled the exam and reviewed exam policies</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- What's Next -->
+        <section>
+            <div class="section-header">
+                <div class="section-icon">🚀</div>
+                <h2>After Cloud Practitioner</h2>
+            </div>
+
+            <p style="color: var(--text-secondary); margin-bottom: 24px;">
+                Cloud Practitioner opens the door to specialty certifications. Here's your path forward:
+            </p>
+
+            <div class="resources-grid">
+                <div class="resource-card">
+                    <div class="resource-type">Associate Level</div>
+                    <h4>Solutions Architect Associate</h4>
+                    <p>Most popular next step. Deep dive into architecting solutions on AWS.</p>
+                    <a href="https://aws.amazon.com/certification/certified-solutions-architect-associate/" class="resource-link" target="_blank">Learn More</a>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-type">Associate Level</div>
+                    <h4>Developer Associate</h4>
+                    <p>Perfect for developers. Focus on building and deploying applications.</p>
+                    <a href="https://aws.amazon.com/certification/certified-developer-associate/" class="resource-link" target="_blank">Learn More</a>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-type">Associate Level</div>
+                    <h4>SysOps Administrator</h4>
+                    <p>For operations-focused roles. Deployment, management, and operations.</p>
+                    <a href="https://aws.amazon.com/certification/certified-sysops-admin-associate/" class="resource-link" target="_blank">Learn More</a>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-type">Specialty</div>
+                    <h4>Security Specialty</h4>
+                    <p>Deep security knowledge for securing AWS workloads.</p>
+                    <a href="https://aws.amazon.com/certification/certified-security-specialty/" class="resource-link" target="_blank">Learn More</a>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p class="footer-quote">"The cloud is not just someone else's computer — it's a new way of thinking about technology." ☁️</p>
+            <p>Good luck on your AWS Cloud Practitioner journey! You've got this! 🎯</p>
+            <p style="margin-top: 16px; font-size: 0.85rem;">CLF-C02 | AWS Foundational Certification</p>
+        </footer>
+    </div>
+
+    <script>
+        // Animate progress bar on scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            // Intersection Observer for week blocks
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.week-block').forEach(block => {
+                observer.observe(block);
+            });
+
+            // Checkbox interactivity
+            document.querySelectorAll('.checkbox').forEach(checkbox => {
+                checkbox.addEventListener('click', function() {
+                    this.classList.toggle('checked');
+                    if (this.classList.contains('checked')) {
+                        this.innerHTML = '✓';
+                        this.style.background = 'var(--accent-orange)';
+                        this.style.color = 'var(--bg-primary)';
+                    } else {
+                        this.innerHTML = '';
+                        this.style.background = '';
+                        this.style.color = '';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+
