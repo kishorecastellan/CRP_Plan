@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LPPM Rentals - Technical Documentation</title>
+    <title>LPPM Rentals - Complete Technical Documentation</title>
     <style>
         * {
             margin: 0;
@@ -21,7 +21,7 @@
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             background: white;
             padding: 3rem;
@@ -44,6 +44,7 @@
             color: #1e40af;
             border-left: 4px solid #3b82f6;
             padding-left: 1rem;
+            page-break-before: always;
         }
 
         h3 {
@@ -111,7 +112,7 @@
             background: #f3f4f6;
             padding: 0.2rem 0.4rem;
             border-radius: 3px;
-            font-family: 'Courier New', monospace;
+            font-family: 'Monaco', 'Courier New', monospace;
             font-size: 0.9em;
             color: #dc2626;
         }
@@ -123,12 +124,65 @@
             border-radius: 6px;
             overflow-x: auto;
             margin: 1rem 0;
+            font-family: 'Monaco', 'Courier New', monospace;
+            font-size: 0.875rem;
+            line-height: 1.5;
         }
 
         pre code {
             background: transparent;
             color: inherit;
             padding: 0;
+        }
+
+        .schema-section {
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .schema-section h4 {
+            margin-top: 0;
+            color: #1e40af;
+            border-bottom: 2px solid #3b82f6;
+            padding-bottom: 0.5rem;
+        }
+
+        .field-group {
+            margin: 1rem 0;
+        }
+
+        .field-group h5 {
+            color: #4b5563;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .field-list {
+            background: white;
+            border-left: 3px solid #3b82f6;
+            padding: 0.75rem 1rem;
+            margin: 0.5rem 0;
+        }
+
+        .field-list ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .field-list li {
+            padding: 0.25rem 0;
+            color: #374151;
+            font-family: 'Monaco', 'Courier New', monospace;
+            font-size: 0.875rem;
+        }
+
+        .field-list li strong {
+            color: #1f2937;
         }
 
         .note-box {
@@ -204,26 +258,6 @@
             text-decoration: underline;
         }
 
-        @media print {
-            body {
-                background: white;
-                padding: 0;
-            }
-
-            .container {
-                box-shadow: none;
-                padding: 1rem;
-            }
-
-            h2 {
-                page-break-before: always;
-            }
-
-            table {
-                page-break-inside: avoid;
-            }
-        }
-
         .badge {
             display: inline-block;
             padding: 0.25rem 0.75rem;
@@ -247,6 +281,27 @@
             background: #fef3c7;
             color: #92400e;
         }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+
+            .container {
+                box-shadow: none;
+                padding: 1rem;
+            }
+
+            h2 {
+                page-break-before: always;
+            }
+
+            table,
+            .schema-section {
+                page-break-inside: avoid;
+            }
+        }
     </style>
 </head>
 
@@ -254,7 +309,7 @@
     <div class="container">
         <div class="header">
             <h1>LPPM Rentals SaaS</h1>
-            <p class="subtitle">Technical Documentation</p>
+            <p class="subtitle">Complete Technical Documentation</p>
             <p style="color: #9ca3af; font-size: 0.875rem;">Version 1.0 | Last Updated: February 3, 2026</p>
         </div>
 
@@ -262,10 +317,11 @@
             <h3>Table of Contents</h3>
             <ul>
                 <li><a href="#roles">1. Role/Permission Matrix</a></li>
-                <li><a href="#api">2. API Documentation</a></li>
-                <li><a href="#build">3. Build & Deployment Configuration</a></li>
-                <li><a href="#services">4. Third-Party Services & Scripts</a></li>
-                <li><a href="#assessments">5. Prior Assessment Reports</a></li>
+                <li><a href="#schemas">2. Database Schemas (DynamoDB)</a></li>
+                <li><a href="#api">3. API Documentation</a></li>
+                <li><a href="#build">4. Build & Deployment Configuration</a></li>
+                <li><a href="#services">5. Third-Party Services & Scripts</a></li>
+                <li><a href="#assessments">6. Prior Assessment Reports</a></li>
             </ul>
         </div>
 
@@ -515,41 +571,276 @@
             </tbody>
         </table>
 
-        <h2 id="api">2. API Documentation</h2>
+        <h2 id="schemas">2. Database Schemas (DynamoDB)</h2>
+        <p>All data models are defined in <code>amplify/data/resource.ts</code> using AWS Amplify Gen 2 schema
+            definition.</p>
+
+        <div class="note-box">
+            <strong>Authorization:</strong> All models use a combination of authenticated user access and public API key
+            for flexibility. Each model has specific permissions for create, read, update, and delete operations.
+        </div>
+
+        <!-- APPLICATION SCHEMA -->
+        <div class="schema-section" id="application">
+            <h4>2.1 Application Schema</h4>
+            <p><strong>Table Name:</strong> <code>Application</code></p>
+            <p><strong>Primary Key:</strong> <code>userId</code> (Partition Key) + <code>application_id</code> (Sort
+                Key)</p>
+            <p><strong>Purpose:</strong> Stores primary applicant rental application data</p>
+
+            <div class="field-group">
+                <h5>Identifiers</h5>
+                <div class="field-list">
+                    <ul>
+                        <li><strong>userId:</strong> string (required) - User ID from Cognito</li>
+                        <li><strong>application_id:</strong> string (required) - Unique application identifier</li>
+                        <li><strong>role:</strong> string - User role (backward compatibility)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="field-group">
+                <h5>Application Details</h5>
+                <div class="field-list">
+                    <ul>
+                        <li><strong>apartmentNumber:</strong> string</li>
+                        <li><strong>apartmentType:</strong> string</li>
+                        <li><strong>buildingAddress:</strong> string</li>
+                        <li><strong>monthlyRent:</strong> integer</li>
+                        <li><strong>moveInDate:</strong> string</li>
+                        <li><strong>howDidYouHear:</strong> string</li>
+                        <li><strong>howDidYouHearOther:</strong> string</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="field-group">
+                <h5>Applicant Personal Information</h5>
+                <div class="field-list">
+                    <ul>
+                        <li><strong>applicantName:</strong> string</li>
+                        <li><strong>applicantDob:</strong> string</li>
+                        <li><strong>applicantAge:</strong> integer</li>
+                        <li><strong>applicantSsn:</strong> string</li>
+                        <li><strong>applicantPhone:</strong> string</li>
+                        <li><strong>applicantEmail:</strong> string</li>
+                        <li><strong>applicantAddress:</strong> string</li>
+                        <li><strong>applicantCity:</strong> string</li>
+                        <li><strong>applicantState:</strong> string</li>
+                        <li><strong>applicantZip:</strong> string</li>
+                        <li><strong>applicantLicense:</strong> string</li>
+                        <li><strong>applicantLicenseState:</strong> string</li>
+                        <li><strong>lengthAtAddressYears:</strong> integer</li>
+                        <li><strong>lengthAtAddressMonths:</strong> integer</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="field-group">
+                <h5>Landlord Information</h5>
+                <div class="field-list">
+                    <ul>
+                        <li><strong>landlordName:</strong> string</li>
+                        <li><strong>landlordAddressLine1:</strong> string</li>
+                        <li><strong>landlordAddressLine2:</strong> string</li>
+                        <li><strong>landlordCity:</strong> string</li>
+                        <li><strong>landlordState:</strong> string</li>
+                        <li><strong>landlordZipCode:</strong> string</li>
+                        <li><strong>landlordPhone:</strong> string</li>
+                        <li><strong>landlordEmail:</strong> string</li>
+                        <li><strong>currentRent:</strong> integer</li>
+                        <li><strong>reasonForMoving:</strong> string</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="field-group">
+                <h5>Employment & Income</h5>
+                <div class="field-list">
+                    <ul>
+                        <li><strong>employmentType:</strong> string</li>
+                        <li><strong>employer:</strong> string</li>
+                        <li><strong>position:</strong> string</li>
+                        <li><strong>employmentStart:</strong> string</li>
+                        <li><strong>businessName:</strong> string</li>
+                        <li><strong>businessType:</strong> string</li>
+                        <li><strong>yearsInBusiness:</strong> string</li>
+                        <li><strong>income:</strong> string</li>
+                        <li><strong>incomeFrequency:</strong> string</li>
+                        <li><strong>otherIncome:</strong> string</li>
+                        <li><strong>otherIncomeFrequency:</strong> string</li>
+                        <li><strong>otherIncomeSource:</strong> string</li>
+                        <li><strong>creditScore:</strong> string</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="field-group">
+                <h5>Truv Integration (Income)</h5>
+                <div class="field-list">
+                    <ul>
+                        <li><strong>truvIncomeShareUrl:</strong> string</li>
+                        <li><strong>truvIncomeBridgeToken:</strong> string</li>
+                        <li><strong>truvIncomeAccountId:</strong> string</li>
+                        <li><strong>truvIncomeCreatedAt:</strong> string</li>
+                        <li><strong>truvIncomePdfUrl:</strong> string</li>
+                        <li><strong>truvIncomeOrderId:</strong> string</li>
+                        <li><strong>truvIncomeUserId:</strong> string</li>
+                        <li><strong>truvIncomeLinkId:</strong> string</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="field-group">
+                <h5>Truv Integration (Assets)</h5>
+                <div class="field-list">
+                    <ul>
+                        <li><strong>truvAssetsShareUrl:</strong> string</li>
+                        <li><strong>truvAssetsBridgeToken:</strong> string</li>
+                        <li><strong>truvAssetsAccountId:</strong> string</li>
+                        <li><strong>truvAssetsCreatedAt:</strong> string</li>
+                        <li><strong>truvAssetsPdfUrl:</strong> string</li>
+                        <li><strong>truvAssetsOrderId:</strong> string</li>
+                        <li><strong>truvAssetsUserId:</strong> string</li>
+                        <li><strong>truvAssetsLinkId:</strong> string</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="field-group">
+                <h5>Complex Data (JSON)</h5>
+                <div class="field-list">
+                    <ul>
+                        <li><strong>bankRecords:</strong> json - Bank account information</li>
+                        <li><strong>documents:</strong> json - Uploaded document references</li>
+                        <li><strong>occupants:</strong> json - Additional occupants</li>
+                        <li><strong>additionalPeople:</strong> json - Other people in application</li>
+                        <li><strong>signatures:</strong> json - Digital signatures</li>
+                        <li><strong>payment:</strong> json - Payment information (Stripe)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="field-group">
+                <h5>Application Flags</h5>
+                <div class="field-list">
+                    <ul>
+                        <li><strong>hasCoApplicant:</strong> boolean</li>
+                        <li><strong>hasGuarantor:</strong> boolean</li>
+                        <li><strong>numberOfCoApplicants:</strong> integer</li>
+                        <li><strong>numberOfGuarantors:</strong> integer</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="field-group">
+                <h5>Status & Tracking</h5>
+                <div class="field-list">
+                    <ul>
+                        <li><strong>currentStep:</strong> string - Current step in application flow</li>
+                        <li><strong>status:</strong> string - Application status</li>
+                        <li><strong>leasePdfUrl:</strong> string - Generated lease PDF URL</li>
+                        <li><strong>leasePdfS3Key:</strong> string - S3 key for lease PDF</li>
+                        <li><strong>createdAt:</strong> datetime</li>
+                        <li><strong>updatedAt:</strong> datetime</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- CO-APPLICANT SCHEMA -->
+        <div class="schema-section" id="coapplicant">
+            <h4>2.2 Co-Applicant Schema</h4>
+            <p><strong>Table Name:</strong> <code>CoApplicant</code></p>
+            <p><strong>Primary Key:</strong> <code>userId</code> (Partition Key) + <code>coApplicantId</code> (Sort Key)
+            </p>
+            <p><strong>Purpose:</strong> Stores co-applicant data linked to main application</p>
+            <p><em>Contains similar fields to Application schema for personal info, employment, income, Truv
+                    integration, and status tracking.</em></p>
+        </div>
+
+        <!-- GUARANTOR SCHEMA -->
+        <div class="schema-section" id="guarantor">
+            <h4>2.3 Guarantor Schema</h4>
+            <p><strong>Table Name:</strong> <code>Guarantor</code></p>
+            <p><strong>Primary Key:</strong> <code>userId</code> (Partition Key) + <code>guarantorId</code> (Sort Key)
+            </p>
+            <p><strong>Purpose:</strong> Stores guarantor data for applications requiring financial backing</p>
+            <p><em>Contains similar fields to Application schema for personal info, employment, income, Truv
+                    integration, and status tracking.</em></p>
+        </div>
+
+        <!-- TRUV TRACKING SCHEMA -->
+        <div class="schema-section" id="truv">
+            <h4>2.4 Truv Tracking Schema</h4>
+            <p><strong>Table Name:</strong> <code>Truv</code></p>
+            <p><strong>Primary Key:</strong> <code>product</code> (Partition Key) + <code>order_id</code> (Sort Key)</p>
+            <p><strong>Purpose:</strong> Maps Truv order IDs to link IDs for webhook tracking</p>
+
+            <div class="field-group">
+                <h5>Key Fields</h5>
+                <div class="field-list">
+                    <ul>
+                        <li><strong>product:</strong> string (required) - 'income' or 'asset'</li>
+                        <li><strong>order_id:</strong> string (required) - Truv order ID</li>
+                        <li><strong>link_id:</strong> string - Truv link ID (from webhook)</li>
+                        <li><strong>userId:</strong> string - Application owner</li>
+                        <li><strong>application_id:</strong> string - Associated application</li>
+                        <li><strong>user_type:</strong> string - 'applicant', 'co-applicant', 'guarantor'</li>
+                        <li><strong>status:</strong> string - 'pending', 'completed', 'failed'</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- INVITE SCHEMA -->
+        <div class="schema-section" id="invite">
+            <h4>2.5 Invite Schema</h4>
+            <p><strong>Table Name:</strong> <code>Invite</code></p>
+            <p><strong>Purpose:</strong> Tracks agent referral invitations</p>
+
+            <div class="field-group">
+                <h5>Fields</h5>
+                <div class="field-list">
+                    <ul>
+                        <li><strong>email:</strong> string (required) - Invitee email</li>
+                        <li><strong>agentEmail:</strong> string - Referring agent email</li>
+                        <li><strong>agentName:</strong> string - Referring agent name</li>
+                        <li><strong>listingId:</strong> string - Associated listing</li>
+                        <li><strong>status:</strong> string - Invite status</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- PAYMENT SCHEMA -->
+        <div class="schema-section" id="payment">
+            <h4>2.6 Payment Schema</h4>
+            <p><strong>Table Name:</strong> <code>Payment</code></p>
+            <p><strong>Primary Key:</strong> <code>userId</code> (Partition Key) + <code>applicationId</code> (Sort Key)
+            </p>
+            <p><strong>Purpose:</strong> Tracks Stripe payment transactions</p>
+
+            <div class="field-group">
+                <h5>Fields</h5>
+                <div class="field-list">
+                    <ul>
+                        <li><strong>userId:</strong> string (required)</li>
+                        <li><strong>applicationId:</strong> string (required)</li>
+                        <li><strong>stripeEventType:</strong> string - Stripe webhook event type</li>
+                        <li><strong>amount:</strong> integer - Payment amount in cents</li>
+                        <li><strong>currency:</strong> string - Currency code (e.g., 'usd')</li>
+                        <li><strong>status:</strong> string - Payment status</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <h2 id="api">3. API Documentation</h2>
 
         <h3>GraphQL Schema (AWS AppSync)</h3>
-        <p>The application uses AWS Amplify Gen 2 with GraphQL API via AppSync.</p>
-
-        <h4>Application Model</h4>
-        <pre><code>type Application {
-  userId: String!
-  application_id: String!
-  role: String
-  
-  # Application Details
-  apartmentNumber: String
-  buildingAddress: String
-  monthlyRent: Int
-  moveInDate: String
-  
-  # Applicant Details
-  applicantName: String
-  applicantEmail: String
-  applicantPhone: String
-  
-  # Truv Integration
-  truvIncomeShareUrl: String
-  truvIncomePdfUrl: String
-  
-  # Complex Data (JSON)
-  documents: AWSJSON
-  signatures: AWSJSON
-  payment: AWSJSON
-  
-  status: String
-  createdAt: AWSDateTime
-  updatedAt: AWSDateTime
-}</code></pre>
+        <p>The application uses AWS Amplify Gen 2 with GraphQL API via AppSync. All schemas are auto-generated from the
+            models defined in <code>amplify/data/resource.ts</code>.</p>
 
         <h3>REST API Endpoints</h3>
         <p>All API routes are located in <code>/app/api/</code></p>
@@ -615,6 +906,34 @@
             </tbody>
         </table>
 
+        <h4>Documents (S3)</h4>
+        <table>
+            <thead>
+                <tr>
+                    <th>Method</th>
+                    <th>Endpoint</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>POST</strong></td>
+                    <td><code>/api/s3/upload-url</code></td>
+                    <td>Get pre-signed upload URL</td>
+                </tr>
+                <tr>
+                    <td><strong>POST</strong></td>
+                    <td><code>/api/s3/download-url</code></td>
+                    <td>Get pre-signed download URL</td>
+                </tr>
+                <tr>
+                    <td><strong>DELETE</strong></td>
+                    <td><code>/api/s3/delete</code></td>
+                    <td>Delete document from S3</td>
+                </tr>
+            </tbody>
+        </table>
+
         <h4>Payments (Stripe)</h4>
         <table>
             <thead>
@@ -676,7 +995,40 @@
             </tbody>
         </table>
 
-        <h2 id="build">3. Build & Deployment Configuration</h2>
+        <h4>Admin Operations</h4>
+        <table>
+            <thead>
+                <tr>
+                    <th>Method</th>
+                    <th>Endpoint</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>GET</strong></td>
+                    <td><code>/api/admin/applications</code></td>
+                    <td>List all applications</td>
+                </tr>
+                <tr>
+                    <td><strong>GET</strong></td>
+                    <td><code>/api/admin/properties</code></td>
+                    <td>List all properties</td>
+                </tr>
+                <tr>
+                    <td><strong>GET</strong></td>
+                    <td><code>/api/admin/agents</code></td>
+                    <td>List all agents</td>
+                </tr>
+                <tr>
+                    <td><strong>POST</strong></td>
+                    <td><code>/api/admin/create-agent</code></td>
+                    <td>Create new agent</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2 id="build">4. Build & Deployment Configuration</h2>
 
         <h3>Environment</h3>
         <table>
@@ -727,13 +1079,13 @@ npm run lint</code></pre>
 
         <h3>Required Environment Variables</h3>
         <pre><code># AWS Amplify (Auto-configured)
-NEXT_PUBLIC_AMPLIFY_REGION
-NEXT_PUBLIC_USER_POOL_ID
-NEXT_PUBLIC_USER_POOL_CLIENT_ID
+AMPLIFY_REGION
+USER_POOL_ID
+USER_POOL_CLIENT_ID
 
 # Stripe
 STRIPE_SECRET_KEY
-NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
+STRIPE_PUBLISHABLE_KEY
 STRIPE_WEBHOOK_SECRET
 
 # Truv
@@ -743,7 +1095,7 @@ TRUV_ACCESS_SECRET
 # Encryption
 ENCRYPTION_KEY</code></pre>
 
-        <h2 id="services">4. Third-Party Services & Scripts</h2>
+        <h2 id="services">5. Third-Party Services & Scripts</h2>
 
         <h3>External Services</h3>
         <table>
@@ -845,7 +1197,7 @@ ENCRYPTION_KEY</code></pre>
             <li><strong>Data Encryption:</strong> Sensitive data encrypted at rest and in transit</li>
         </ul>
 
-        <h2 id="assessments">5. Prior Assessment Reports</h2>
+        <h2 id="assessments">6. Prior Assessment Reports</h2>
 
         <div class="warning-box">
             <strong>Status:</strong> No prior security or compliance assessments available.
