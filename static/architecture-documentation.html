@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LPPM Rentals - System Architecture Documentation</title>
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true, theme: 'default' });
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #fff;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            color: #1a1a1a;
+            border-bottom: 3px solid #000;
+            padding-bottom: 1rem;
+        }
+        
+        h2 {
+            font-size: 2rem;
+            margin-top: 3rem;
+            margin-bottom: 1rem;
+            color: #2c3e50;
+            border-left: 4px solid #3498db;
+            padding-left: 1rem;
+        }
+        
+        h3 {
+            font-size: 1.5rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            color: #34495e;
+        }
+        
+        p {
+            margin-bottom: 1rem;
+            color: #555;
+        }
+        
+        .diagram-container {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 2rem;
+            margin: 2rem 0;
+            overflow-x: auto;
+        }
+        
+        .mermaid {
+            text-align: center;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            background: white;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        th {
+            background: #f8f9fa;
+            font-weight: 600;
+            color: #2c3e50;
+            text-transform: uppercase;
+            font-size: 0.875rem;
+            letter-spacing: 0.5px;
+        }
+        
+        tr:hover {
+            background: #f8f9fa;
+        }
+        
+        .note-box {
+            background: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 1rem 1.5rem;
+            margin: 2rem 0;
+            border-radius: 4px;
+        }
+        
+        .note-box h4 {
+            color: #1976d2;
+            margin-bottom: 0.5rem;
+        }
+        
+        ul {
+            margin: 1rem 0 1rem 2rem;
+        }
+        
+        li {
+            margin-bottom: 0.5rem;
+            color: #555;
+        }
+        
+        strong {
+            color: #2c3e50;
+        }
+        
+        @media print {
+            body {
+                padding: 0;
+            }
+            
+            h2 {
+                page-break-before: always;
+            }
+            
+            .diagram-container {
+                page-break-inside: avoid;
+            }
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 2px solid #e9ecef;
+        }
+        
+        .subtitle {
+            color: #6c757d;
+            font-size: 1.25rem;
+            margin-top: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>LPPM Rentals SaaS</h1>
+        <p class="subtitle">System Architecture & Technical Documentation</p>
+    </div>
+
+    <h2>1. System Architecture Diagram</h2>
+    <p>This diagram illustrates the high-level architecture of the LPPM Rentals application, built on AWS Amplify Gen 2 using Next.js.</p>
+    
+    <div class="diagram-container">
+        <div class="mermaid">
+graph TB
+    subgraph Client ["Client Side (Browser)"]
+        User["User / Applicant"]
+        Admin["Property Manager / Admin"]
+        NextJS["Next.js Frontend<br/>(React)"]
+    end
+
+    subgraph Amplify ["AWS Amplify Gen 2 Backend"]
+        Auth["Auth<br/>(Amazon Cognito)"]
+        
+        subgraph DataLayer ["Data Layer"]
+            AppSync["API Access<br/>(AWS AppSync)"]
+            DDB[(Amazon DynamoDB)]
+        end
+        
+        subgraph StorageLayer ["Storage Layer"]
+            S3["File Storage<br/>(Amazon S3)"]
+        end
+        
+        subgraph Compute ["Compute / Logic"]
+            Lambda["Function Handlers<br/>(Next.js API Routes / Lambda)"]
+        end
+    end
+
+    subgraph External ["External Services"]
+        Stripe["Stripe<br/>(Payments)"]
+        Truv["Truv<br/>(Income/Asset Verification)"]
+        Monday["Monday.com<br/>(CRM/Workflow)"]
+        Make["Make.com<br/>(Automation)"]
+    end
+
+    User -->|HTTPS| NextJS
+    Admin -->|HTTPS| NextJS
+    
+    NextJS <-->|Auth Tokens| Auth
+    NextJS <-->|GraphQL| AppSync
+    AppSync <-->|CRUD| DDB
+    NextJS <-->|Upload/Download| S3
+    NextJS <-->|API Calls| Lambda
+    Lambda <-->|Update Status| DDB
+    NextJS <-->|Embedded Bridge| Truv
+    Lambda <-->|Webhooks/API| Truv
+    Lambda <-->|Payment Intent/Webhooks| Stripe
+    Lambda -->|Sync Data| Make
+    Make -->|Update CRM| Monday
+        </div>
+    </div>
+
+    <h3>System Components</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Component</th>
+                <th>Technology</th>
+                <th>Purpose</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Frontend Framework</strong></td>
+                <td>Next.js 14+</td>
+                <td>Server-side rendering, routing, API routes</td>
+            </tr>
+            <tr>
+                <td><strong>Hosting</strong></td>
+                <td>AWS Amplify Hosting</td>
+                <td>CI/CD, global CDN distribution</td>
+            </tr>
+            <tr>
+                <td><strong>Authentication</strong></td>
+                <td>Amazon Cognito</td>
+                <td>User management, secure authentication flows</td>
+            </tr>
+            <tr>
+                <td><strong>Database</strong></td>
+                <td>Amazon DynamoDB</td>
+                <td>NoSQL database for applications, users, and tracking</td>
+            </tr>
+            <tr>
+                <td><strong>API Layer</strong></td>
+                <td>AWS AppSync</td>
+                <td>GraphQL API for typed, real-time data access</td>
+            </tr>
+            <tr>
+                <td><strong>File Storage</strong></td>
+                <td>Amazon S3</td>
+                <td>Storing leases, identification docs, and user uploads</td>
+            </tr>
+            <tr>
+                <td><strong>External Auth</strong></td>
+                <td>Truv</td>
+                <td>Payroll integration for income verification</td>
+            </tr>
+            <tr>
+                <td><strong>Payments</strong></td>
+                <td>Stripe</td>
+                <td>Handling application fee payments securely</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>2. Data Flow Diagrams</h2>
+
+    <h3>2.1 Application Submission Flow</h3>
+    <p>This sequence diagram shows how users fill out rental applications, upload documents, and submit their data.</p>
+    
+    <div class="diagram-container">
+        <div class="mermaid">
+sequenceDiagram
+    participant User
+    participant FE as Next.js Frontend
+    participant API as AppSync/API
+    participant DB as DynamoDB
+    participant S3 as Amazon S3
+
+    User->>FE: Fills Application Form
+    activate FE
+    
+    rect rgb(240, 248, 255)
+        note right of User: Document Uploads
+        FE->>S3: Upload Documents/Images
+        S3-->>FE: Return File Key/URL
+    end
+
+    FE->>API: Submit Application Data (inc. S3 Keys)
+    activate API
+    API->>DB: Save Application Record
+    DB-->>API: Confirm Save
+    API-->>FE: Success Response
+    deactivate API
+    
+    FE-->>User: Show Success/Next Steps
+    deactivate FE
+        </div>
+    </div>
+
+    <h3>2.2 Income Verification Flow (Truv)</h3>
+    <p>Integration with Truv for automated income and asset verification through payroll providers.</p>
+    
+    <div class="diagram-container">
+        <div class="mermaid">
+sequenceDiagram
+    participant User
+    participant FE as Next.js Frontend
+    participant TruvBridge as Truv Widget
+    participant TruvAPI as Truv Backend
+    participant Backend as Next.js API/Lambda
+    participant DB as DynamoDB
+
+    User->>FE: Select Verification Method
+    FE->>TruvBridge: Open Truv Bridge
+    
+    User->>TruvBridge: Login to Payroll Provider
+    TruvBridge->>TruvAPI: Authenticate & Fetch Data
+    
+    TruvAPI-->>TruvBridge: Success (public_token)
+    TruvBridge-->>FE: onEvent (success)
+    
+    par Async Processing
+        FE->>Backend: Send public_token / verification info
+        Backend->>DB: Update Application with Truv Tokens
+    and Webhook Update
+        TruvAPI->>Backend: Webhook (Order Completed)
+        Backend->>DB: Update Status to 'Verified'
+    end
+        </div>
+    </div>
+
+    <h3>2.3 Payment Flow (Stripe)</h3>
+    <p>Processing application fees through Stripe Payment Intents.</p>
+    
+    <div class="diagram-container">
+        <div class="mermaid">
+sequenceDiagram
+    participant User
+    participant FE as Next.js Frontend
+    participant Backend as Next.js API
+    participant Stripe as Stripe API
+    participant DB as DynamoDB
+
+    User->>FE: Click Pay Application Fee
+    FE->>Backend: POST /api/stripe/create-checkout
+    activate Backend
+    Backend->>Stripe: Create Payment Intent
+    Stripe-->>Backend: Client Secret
+    Backend-->>FE: Return Client Secret
+    deactivate Backend
+
+    User->>FE: Enter Card Details
+    FE->>Stripe: Confirm Payment
+    activate Stripe
+    Stripe-->>FE: Payment Success
+    deactivate Stripe
+
+    par Webhook Confirmation
+        Stripe->>Backend: Webhook (payment_intent.succeeded)
+        Backend->>DB: Update Payment Status = 'PAID'
+    end
+    
+    FE-->>User: Show Submission Confirmation
+        </div>
+    </div>
+
+    <h2>3. User Workflow (Use Cases)</h2>
+    <p>This flowchart illustrates the complete application workflow for Primary Applicants, Co-Applicants, and Guarantors.</p>
+    
+    <div class="diagram-container">
+        <div class="mermaid">
+flowchart TD
+    PA[Primary Applicant]
+    CA[Co-Applicant]
+    GU[Guarantor]
+
+    subgraph "Phase 1: Initiation & Data Collection"
+        Start([Start Application])
+        Login[Create Account / Login]
+        PersInfo[Fill Personal Information]
+        EmpInfo[Fill Employment & Income]
+        TruvVer[Verify Income via Truv]
+        Docs[Upload Supporting Documents]
+    end
+
+    subgraph "Phase 2: Collaboration"
+        InviteCA[Invite Co-Applicant]
+        InviteGU[Invite Guarantor]
+        ReceiveInvite[Receive Invitation Email]
+        LinkApp[Link to Main Application]
+    end
+
+    subgraph "Phase 3: Submission & Fees"
+        PayFee[Pay Application Fee]
+        Submit[Submit Application]
+    end
+
+    subgraph "Phase 4: Lease Execution"
+        ReviewLease[Review Lease/Agreement]
+        Sign[Sign Documents]
+    end
+
+    PA --> Start
+    Start --> Login
+    Login --> PersInfo
+    PersInfo --> EmpInfo
+    EmpInfo --> TruvVer
+    TruvVer --> Docs
+    Docs --> InviteCA
+    Docs --> InviteGU
+    InviteCA --> PayFee
+    InviteGU --> PayFee
+    Docs --> PayFee
+    PayFee --> Submit
+    Submit --> ReviewLease
+    ReviewLease --> Sign
+
+    InviteCA -.->|Email| ReceiveInvite
+    CA --> ReceiveInvite
+    ReceiveInvite --> LinkApp
+    LinkApp --> Login
+    EmpInfo -->|Co-App Data| TruvVer
+    Docs -->|Co-App Docs| Submit
+
+    InviteGU -.->|Email| ReceiveInvite
+    GU --> ReceiveInvite
+    PersInfo -->|Guarantor Data| EmpInfo
+    EmpInfo -->|Guarantor Assets| TruvVer
+    Docs -->|Guarantor Docs| Submit
+
+    classDef applicant fill:#e0f2fe,stroke:#0284c7,stroke-width:2px
+    classDef coapp fill:#f0fdf4,stroke:#16a34a,stroke-width:2px
+    classDef guarantor fill:#fef3c7,stroke:#d97706,stroke-width:2px
+    classDef process fill:#fff,stroke:#94a3b8,stroke-width:1px
+
+    class PA applicant
+    class CA coapp
+    class GU guarantor
+    class Start,Login,PersInfo,EmpInfo,TruvVer,Docs,PayFee,Submit,ReviewLease,Sign,InviteCA,InviteGU,ReceiveInvite,LinkApp process
+        </div>
+    </div>
+
+    <h3>User Role Descriptions</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Role</th>
+                <th>Responsibilities</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Primary Applicant</strong></td>
+                <td>
+                    <ul>
+                        <li>Initiates the rental application</li>
+                        <li>Invites other parties (Co-applicants/Guarantors)</li>
+                        <li>Pays the processing fee</li>
+                        <li>Signs the primary lease agreement</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>Co-Applicant</strong></td>
+                <td>
+                    <ul>
+                        <li>Joins via email invitation</li>
+                        <li>Provides independent income/employment data</li>
+                        <li>Uploads personal identification</li>
+                        <li>Signs the lease as a joint tenant</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>Guarantor</strong></td>
+                <td>
+                    <ul>
+                        <li>Joins via email invitation</li>
+                        <li>Verifies assets and financial standing</li>
+                        <li>Does not reside in the property</li>
+                        <li>Signs the guaranty agreement</li>
+                    </ul>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>4. Important Notes & Explanations</h2>
+
+    <div class="note-box">
+        <h4>Security & Authentication</h4>
+        <p>The application uses Amazon Cognito for user authentication with JWT tokens. All API requests are authenticated and authorized at the AppSync layer before reaching DynamoDB.</p>
+    </div>
+
+    <div class="note-box">
+        <h4>Data Flow Architecture</h4>
+        <p>The system follows a serverless architecture pattern where Next.js API routes act as Lambda functions. This ensures automatic scaling and cost optimization based on actual usage.</p>
+    </div>
+
+    <div class="note-box">
+        <h4>File Storage Strategy</h4>
+        <p>All user-uploaded documents (IDs, pay stubs, bank statements) are stored in S3 with pre-signed URLs for secure, time-limited access. Files are organized by user ID and application ID for easy retrieval.</p>
+    </div>
+
+    <div class="note-box">
+        <h4>Third-Party Integrations</h4>
+        <ul>
+            <li><strong>Truv:</strong> Provides instant income and employment verification by connecting directly to payroll providers</li>
+            <li><strong>Stripe:</strong> Handles all payment processing with PCI compliance built-in</li>
+            <li><strong>Monday.com:</strong> CRM integration for property managers to track applications</li>
+            <li><strong>Make.com:</strong> Automation platform that syncs data between systems</li>
+        </ul>
+    </div>
+
+    <div class="note-box">
+        <h4>Deployment & CI/CD</h4>
+        <p>The application is deployed on AWS Amplify Hosting with automatic deployments triggered by Git commits. CloudFormation manages all AWS resources as Infrastructure as Code (IaC).</p>
+    </div>
+
+    <div class="note-box">
+        <h4>Scalability Considerations</h4>
+        <ul>
+            <li>DynamoDB on-demand capacity automatically scales with traffic</li>
+            <li>S3 provides unlimited storage with automatic replication</li>
+            <li>CloudFront CDN ensures fast global content delivery</li>
+            <li>Lambda functions scale horizontally without manual intervention</li>
+        </ul>
+    </div>
+
+</body>
+</html>

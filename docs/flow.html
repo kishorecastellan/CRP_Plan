@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Login Flow Test Cases – Applicant, Co-Applicant, Guarantor</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            line-height: 1.6;
+            margin: 24px;
+            background: #fafafa;
+            color: #222;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4 {
+            color: #1f2937;
+            margin-top: 32px;
+        }
+
+        h1 {
+            border-bottom: 3px solid #111827;
+            padding-bottom: 8px;
+        }
+
+        h2 {
+            border-bottom: 2px solid #d1d5db;
+            padding-bottom: 6px;
+        }
+
+        h3 {
+            margin-top: 24px;
+            color: #111827;
+        }
+
+        hr {
+            margin: 32px 0;
+            border: none;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        pre {
+            background: #111827;
+            color: #f9fafb;
+            padding: 16px;
+            overflow-x: auto;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        code {
+            background: #e5e7eb;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 90%;
+        }
+
+        ul {
+            margin-left: 24px;
+        }
+
+        li {
+            margin: 6px 0;
+        }
+
+        .meta {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 16px;
+            margin: 16px 0;
+        }
+
+        .status {
+            font-weight: bold;
+        }
+
+        .not-run {
+            color: #6b7280;
+        }
+
+        .pass {
+            color: #16a34a;
+        }
+
+        .fail {
+            color: #dc2626;
+        }
+
+        .in-progress {
+            color: #ca8a04;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 16px 0;
+            background: #ffffff;
+        }
+
+        th,
+        td {
+            border: 1px solid #e5e7eb;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background: #f3f4f6;
+        }
+
+        footer {
+            margin-top: 48px;
+            font-size: 14px;
+            color: #6b7280;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>🧪 Login Flow Test Cases – All User Types</h1>
+
+    <h2>Overview</h2>
+    <p>
+        Comprehensive test cases for <strong>Applicant</strong>,
+        <strong>Co-applicant</strong>, and <strong>Guarantor</strong>
+        authentication, authorization, and workflow testing.
+    </p>
+
+    <hr />
+
+    <h2>📋 Test Environment Setup</h2>
+
+    <h3>Prerequisites</h3>
+    <ul>
+        <li>✅ Cognito User Pool configured</li>
+        <li>✅ DynamoDB tables created (Application, CoApplicant, Guarantor, Payment)</li>
+        <li>✅ Stripe test keys configured</li>
+        <li>✅ S3 bucket for document uploads</li>
+        <li>✅ Email service for OTP delivery</li>
+    </ul>
+
+    <h3>Test Accounts</h3>
+    <pre><code>// Test credentials format
+APPLICANT_EMAIL = "test.applicant@example.com"
+COAPPLICANT_EMAIL = "test.coapplicant@example.com"
+GUARANTOR_EMAIL = "test.guarantor@example.com"
+TEST_PASSWORD = "TestPass123!"
+
+// Stripe Test Cards
+STRIPE_SUCCESS_CARD = "4242 4242 4242 4242"
+STRIPE_DECLINE_CARD = "4000 0000 0000 0002"
+STRIPE_3D_SECURE = "4000 0025 0000 3155"</code></pre>
+
+    <hr />
+
+    <h2>🎯 APPLICANT TEST CASES</h2>
+
+    <h3>TC-APP-001: New Applicant Signup (Happy Path)</h3>
+    <div class="meta">
+        <p><strong>Priority:</strong> P0 (Critical)</p>
+        <p><strong>Type:</strong> Functional</p>
+    </div>
+
+    <h4>Preconditions</h4>
+    <ul>
+        <li>User does not have an existing account</li>
+        <li>Email is valid and accessible</li>
+    </ul>
+
+    <h4>Expected Results</h4>
+    <ul>
+        <li>✅ User account created in Cognito</li>
+        <li>✅ <code>custom:role = applicant</code></li>
+        <li>✅ <code>zoneinfo</code> generated</li>
+        <li>✅ Redirected to <code>/applications</code></li>
+    </ul>
+
+    <p class="status not-run">Status: ⬜ Not Run</p>
+
+    <hr />
+
+    <h2>🛡️ GUARANTOR TEST CASES</h2>
+    <p>
+        Guarantor flow mirrors Co-Applicant with additional landlord and rent details.
+        All authorization, payment, and data isolation rules apply identically.
+    </p>
+
+    <hr />
+
+    <h2>🔄 CROSS-ROLE TEST CASES</h2>
+    <ul>
+        <li>Role switching prevention</li>
+        <li>End-to-end application completion</li>
+        <li>Webhook reliability</li>
+        <li>Admin dashboard visibility</li>
+        <li>Session timeout handling</li>
+    </ul>
+
+    <hr />
+
+    <h2>🔒 SECURITY TEST CASES</h2>
+    <ul>
+        <li>SQL Injection prevention</li>
+        <li>XSS prevention</li>
+        <li>JWT token manipulation</li>
+        <li>CSRF protection</li>
+        <li>Data access scoping</li>
+    </ul>
+
+    <hr />
+
+    <h2>📊 TEST EXECUTION SUMMARY</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Category</th>
+                <th>Count</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>P0 (Critical)</td>
+                <td>27</td>
+            </tr>
+            <tr>
+                <td>P1 (High)</td>
+                <td>12</td>
+            </tr>
+            <tr>
+                <td>P2 (Medium)</td>
+                <td>1</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <hr />
+
+    <h2>🐛 BUG REPORTING TEMPLATE</h2>
+    <pre><code>Bug ID: BUG-YYYY-MM-DD-XXX
+Test Case: TC-XXX-YYY
+Priority: P0 / P1 / P2
+Severity: Critical / High / Medium / Low</code></pre>
+
+    <hr />
+
+    <h2>✅ TEST SIGN-OFF</h2>
+    <ul>
+        <li>All critical test cases passed</li>
+        <li>All known bugs documented</li>
+        <li>Regression testing complete</li>
+        <li>Ready for production deployment</li>
+    </ul>
+
+    <footer>
+        Generated: January 19, 2026 • Version 1.0
+    </footer>
+
+</body>
+
+</html>

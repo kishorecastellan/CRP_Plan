@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LPPM Rentals - Technical Documentation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 3rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            color: #1a1a1a;
+            border-bottom: 3px solid #2563eb;
+            padding-bottom: 1rem;
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-top: 3rem;
+            margin-bottom: 1rem;
+            color: #1e40af;
+            border-left: 4px solid #3b82f6;
+            padding-left: 1rem;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            color: #1e3a8a;
+        }
+
+        h4 {
+            font-size: 1.25rem;
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+            color: #1e40af;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: #4b5563;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            background: white;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        th,
+        td {
+            padding: 0.75rem 1rem;
+            text-align: left;
+            border: 1px solid #e5e7eb;
+        }
+
+        th {
+            background: #f3f4f6;
+            font-weight: 600;
+            color: #1f2937;
+            text-transform: uppercase;
+            font-size: 0.875rem;
+            letter-spacing: 0.5px;
+        }
+
+        tr:nth-child(even) {
+            background: #f9fafb;
+        }
+
+        tr:hover {
+            background: #f3f4f6;
+        }
+
+        .check {
+            color: #10b981;
+            font-weight: bold;
+        }
+
+        .cross {
+            color: #ef4444;
+            font-weight: bold;
+        }
+
+        code {
+            background: #f3f4f6;
+            padding: 0.2rem 0.4rem;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            color: #dc2626;
+        }
+
+        pre {
+            background: #1f2937;
+            color: #f9fafb;
+            padding: 1.5rem;
+            border-radius: 6px;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+
+        pre code {
+            background: transparent;
+            color: inherit;
+            padding: 0;
+        }
+
+        .note-box {
+            background: #dbeafe;
+            border-left: 4px solid #3b82f6;
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 4px;
+        }
+
+        .warning-box {
+            background: #fef3c7;
+            border-left: 4px solid #f59e0b;
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 4px;
+        }
+
+        ul,
+        ol {
+            margin: 1rem 0 1rem 2rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+            color: #4b5563;
+        }
+
+        strong {
+            color: #1f2937;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 2px solid #e5e7eb;
+        }
+
+        .subtitle {
+            color: #6b7280;
+            font-size: 1.25rem;
+            margin-top: 0.5rem;
+        }
+
+        .toc {
+            background: #f9fafb;
+            padding: 1.5rem;
+            border-radius: 6px;
+            margin: 2rem 0;
+        }
+
+        .toc h3 {
+            margin-top: 0;
+            color: #1f2937;
+        }
+
+        .toc ul {
+            list-style: none;
+            margin-left: 0;
+        }
+
+        .toc li {
+            margin-bottom: 0.5rem;
+        }
+
+        .toc a {
+            color: #2563eb;
+            text-decoration: none;
+        }
+
+        .toc a:hover {
+            text-decoration: underline;
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+
+            .container {
+                box-shadow: none;
+                padding: 1rem;
+            }
+
+            h2 {
+                page-break-before: always;
+            }
+
+            table {
+                page-break-inside: avoid;
+            }
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-right: 0.5rem;
+        }
+
+        .badge-admin {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+
+        .badge-agent {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .badge-applicant {
+            background: #fef3c7;
+            color: #92400e;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>LPPM Rentals SaaS</h1>
+            <p class="subtitle">Technical Documentation</p>
+            <p style="color: #9ca3af; font-size: 0.875rem;">Version 1.0 | Last Updated: February 3, 2026</p>
+        </div>
+
+        <div class="toc">
+            <h3>Table of Contents</h3>
+            <ul>
+                <li><a href="#roles">1. Role/Permission Matrix</a></li>
+                <li><a href="#api">2. API Documentation</a></li>
+                <li><a href="#build">3. Build & Deployment Configuration</a></li>
+                <li><a href="#services">4. Third-Party Services & Scripts</a></li>
+                <li><a href="#assessments">5. Prior Assessment Reports</a></li>
+            </ul>
+        </div>
+
+        <h2 id="roles">1. Role/Permission Matrix</h2>
+
+        <h3>User Roles</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Role</th>
+                    <th>Description</th>
+                    <th>Access Level</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><span class="badge badge-admin">Admin</span></td>
+                    <td>Property managers and system administrators</td>
+                    <td>Full system access</td>
+                </tr>
+                <tr>
+                    <td><span class="badge badge-agent">Agent</span></td>
+                    <td>Real estate agents with referral capabilities</td>
+                    <td>Limited to referrals and active listings</td>
+                </tr>
+                <tr>
+                    <td><span class="badge badge-applicant">Applicant</span></td>
+                    <td>Primary rental applicants</td>
+                    <td>Own applications and documents</td>
+                </tr>
+                <tr>
+                    <td><strong>Co-Applicant</strong></td>
+                    <td>Joint applicants linked to primary application</td>
+                    <td>Linked application access only</td>
+                </tr>
+                <tr>
+                    <td><strong>Guarantor</strong></td>
+                    <td>Financial guarantors for applicants</td>
+                    <td>Linked application access only</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>Permission Matrix</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Feature/Route</th>
+                    <th>Admin</th>
+                    <th>Agent</th>
+                    <th>Applicant</th>
+                    <th>Co-Applicant</th>
+                    <th>Guarantor</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="6" style="background: #f3f4f6; font-weight: bold;">Dashboard</td>
+                </tr>
+                <tr>
+                    <td><code>/admin</code></td>
+                    <td class="check">✅</td>
+                    <td class="cross">❌</td>
+                    <td class="cross">❌</td>
+                    <td class="cross">❌</td>
+                    <td class="cross">❌</td>
+                </tr>
+                <tr>
+                    <td><code>/dashboard</code></td>
+                    <td class="check">✅</td>
+                    <td class="check">✅</td>
+                    <td class="check">✅</td>
+                    <td class="check">✅</td>
+                    <td class="check">✅</td>
+                </tr>
+                <tr>
+                    <td colspan="6" style="background: #f3f4f6; font-weight: bold;">Applications</td>
+                </tr>
+                <tr>
+                    <td>View All Applications</td>
+                    <td class="check">✅</td>
+                    <td class="cross">❌</td>
+                    <td class="cross">❌</td>
+                    <td class="cross">❌</td>
+                    <td class="cross">❌</td>
+                </tr>
+                <tr>
+                    <td>View Own Application</td>
+                    <td class="check">✅</td>
+                    <td class="cross">❌</td>
+                    <td class="check">✅</td>
+                    <td class="check">✅</td>
+                    <td class="check">✅</td>
+                </tr>
+                <tr>
+                    <td>Create Application</td>
+                    <td class="check">✅</td>
+                    <td class="cross">❌</td>
+                    <td class="check">✅</td>
+                    <td class="cross">❌</td>
+                    <td class="cross">❌</td>
+                </tr>
+                <tr>
+                    <td>Edit Application</td>
+                    <td class="check">✅</td>
+                    <td class="cross">❌</td>
+                    <td class="check">✅</td>
+                    <td class="check">✅</td>
+                    <td class="check">✅</td>
+                </tr>
+                <tr>
+                    <td>Approve Application</td>
+                    <td class="check">✅</td>
+                    <td class="cross">❌</td>
+                    <td class="cross">❌</td>
+                    <td class="cross">❌</td>
+                    <td class="cross">❌</td>
+                </tr>
+                <tr>
+                    <td colspan="6" style="background: #f3f4f6; font-weight: bold;">Documents</td>
+                </tr>
+                <tr>
+                    <td>Upload Documents</td>
+                    <td class="check">✅</td>
+                    <td class="cross">❌</td>
+                    <td class="check">✅</td>
+                    <td class="check">✅</td>
+                    <td class="check">✅</td>
+                </tr>
+                <tr>
+                    <td>View Own Documents</td>
+                    <td class="check">✅</td>
+                    <td class="cross">❌</td>
+                    <td class="check">✅</td>
+                    <td class="check">✅</td>
+                    <td class="check">✅</td>
+                </tr>
+                <tr>
+                    <td>View All Documents</td>
+                    <td class="check">✅</td>
+                    <td class="cross">❌</td>
+                    <td class="cross">❌</td>
+                    <td class="cross">❌</td>
+                    <td class="cross">❌</td>
+                </tr>
+                <tr>
+                    <td colspan="6" style="background: #f3f4f6; font-weight: bold;">Payments</td>
+                </tr>
+                <tr>
+                    <td>Pay Application Fee</td>
+                    <td class="check">✅</td>
+                    <td class="cross">❌</td>
+                    <td class="check">✅</td>
+                    <td class="cross">❌</td>
+                    <td class="cross">❌</td>
+                </tr>
+                <tr>
+                    <td colspan="6" style="background: #f3f4f6; font-weight: bold;">Verification</td>
+                </tr>
+                <tr>
+                    <td>Truv Income Verification</td>
+                    <td class="check">✅</td>
+                    <td class="cross">❌</td>
+                    <td class="check">✅</td>
+                    <td class="check">✅</td>
+                    <td class="check">✅</td>
+                </tr>
+                <tr>
+                    <td>Truv Asset Verification</td>
+                    <td class="check">✅</td>
+                    <td class="cross">❌</td>
+                    <td class="check">✅</td>
+                    <td class="check">✅</td>
+                    <td class="check">✅</td>
+                </tr>
+                <tr>
+                    <td colspan="6" style="background: #f3f4f6; font-weight: bold;">Properties</td>
+                </tr>
+                <tr>
+                    <td>View Active Listings</td>
+                    <td class="check">✅</td>
+                    <td class="check">✅</td>
+                    <td class="check">✅</td>
+                    <td class="check">✅</td>
+                    <td class="check">✅</td>
+                </tr>
+                <tr>
+                    <td>Manage Properties</td>
+                    <td class="check">✅</td>
+                    <td class="cross">❌</td>
+                    <td class="cross">❌</td>
+                    <td class="cross">❌</td>
+                    <td class="cross">❌</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>Role-Based Routes</h3>
+        <pre><code>const DEFAULT_ROLE_ROUTES = {
+  admin: '/admin',
+  agent: '/listings/active',
+  applicant: '/applications',
+  coapplicant: '/playground/co-applicant',
+  guarantor: '/playground/guarantor',
+  default: '/dashboard'
+}</code></pre>
+
+        <h3>Test Accounts</h3>
+        <div class="warning-box">
+            <strong>⚠️ Note:</strong> Test accounts should be created in your development/staging environment only.
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Role</th>
+                    <th>Email</th>
+                    <th>Purpose</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><span class="badge badge-admin">Admin</span></td>
+                    <td><code>admin@lppmrentals.test</code></td>
+                    <td>Full system testing</td>
+                </tr>
+                <tr>
+                    <td><span class="badge badge-agent">Agent</span></td>
+                    <td><code>agent@lppmrentals.test</code></td>
+                    <td>Referral and listing testing</td>
+                </tr>
+                <tr>
+                    <td><span class="badge badge-applicant">Applicant</span></td>
+                    <td><code>applicant@lppmrentals.test</code></td>
+                    <td>Application flow testing</td>
+                </tr>
+                <tr>
+                    <td><strong>Co-Applicant</strong></td>
+                    <td><code>coapplicant@lppmrentals.test</code></td>
+                    <td>Joint application testing</td>
+                </tr>
+                <tr>
+                    <td><strong>Guarantor</strong></td>
+                    <td><code>guarantor@lppmrentals.test</code></td>
+                    <td>Guarantor flow testing</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2 id="api">2. API Documentation</h2>
+
+        <h3>GraphQL Schema (AWS AppSync)</h3>
+        <p>The application uses AWS Amplify Gen 2 with GraphQL API via AppSync.</p>
+
+        <h4>Application Model</h4>
+        <pre><code>type Application {
+  userId: String!
+  application_id: String!
+  role: String
+  
+  # Application Details
+  apartmentNumber: String
+  buildingAddress: String
+  monthlyRent: Int
+  moveInDate: String
+  
+  # Applicant Details
+  applicantName: String
+  applicantEmail: String
+  applicantPhone: String
+  
+  # Truv Integration
+  truvIncomeShareUrl: String
+  truvIncomePdfUrl: String
+  
+  # Complex Data (JSON)
+  documents: AWSJSON
+  signatures: AWSJSON
+  payment: AWSJSON
+  
+  status: String
+  createdAt: AWSDateTime
+  updatedAt: AWSDateTime
+}</code></pre>
+
+        <h3>REST API Endpoints</h3>
+        <p>All API routes are located in <code>/app/api/</code></p>
+
+        <h4>Authentication</h4>
+        <table>
+            <thead>
+                <tr>
+                    <th>Method</th>
+                    <th>Endpoint</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>POST</strong></td>
+                    <td><code>/api/auth/signin</code></td>
+                    <td>User login</td>
+                </tr>
+                <tr>
+                    <td><strong>POST</strong></td>
+                    <td><code>/api/auth/signup</code></td>
+                    <td>User registration</td>
+                </tr>
+                <tr>
+                    <td><strong>POST</strong></td>
+                    <td><code>/api/auth/signout</code></td>
+                    <td>User logout</td>
+                </tr>
+                <tr>
+                    <td><strong>POST</strong></td>
+                    <td><code>/api/auth/refresh</code></td>
+                    <td>Refresh auth tokens</td>
+                </tr>
+                <tr>
+                    <td><strong>GET</strong></td>
+                    <td><code>/api/auth/me</code></td>
+                    <td>Get current user info</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4>Applications</h4>
+        <table>
+            <thead>
+                <tr>
+                    <th>Method</th>
+                    <th>Endpoint</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>POST</strong></td>
+                    <td><code>/api/applications/save</code></td>
+                    <td>Save/update application</td>
+                </tr>
+                <tr>
+                    <td><strong>POST</strong></td>
+                    <td><code>/api/approve-application</code></td>
+                    <td>Approve application (admin only)</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4>Payments (Stripe)</h4>
+        <table>
+            <thead>
+                <tr>
+                    <th>Method</th>
+                    <th>Endpoint</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>POST</strong></td>
+                    <td><code>/api/stripe/create-checkout-session</code></td>
+                    <td>Create payment session</td>
+                </tr>
+                <tr>
+                    <td><strong>POST</strong></td>
+                    <td><code>/api/stripe/verify-payment</code></td>
+                    <td>Verify payment status</td>
+                </tr>
+                <tr>
+                    <td><strong>POST</strong></td>
+                    <td><code>/api/stripe/webhook</code></td>
+                    <td>Stripe webhook handler</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4>Verification (Truv)</h4>
+        <table>
+            <thead>
+                <tr>
+                    <th>Method</th>
+                    <th>Endpoint</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>POST</strong></td>
+                    <td><code>/api/truv/income-verification</code></td>
+                    <td>Initiate income verification</td>
+                </tr>
+                <tr>
+                    <td><strong>GET</strong></td>
+                    <td><code>/api/truv/income-report</code></td>
+                    <td>Get income report</td>
+                </tr>
+                <tr>
+                    <td><strong>GET</strong></td>
+                    <td><code>/api/truv/assets-report</code></td>
+                    <td>Get assets report</td>
+                </tr>
+                <tr>
+                    <td><strong>POST</strong></td>
+                    <td><code>/api/webhooks/truv-orders</code></td>
+                    <td>Truv webhook handler</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2 id="build">3. Build & Deployment Configuration</h2>
+
+        <h3>Environment</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Component</th>
+                    <th>Version/Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Node.js</strong></td>
+                    <td><code>v24.10.0</code></td>
+                </tr>
+                <tr>
+                    <td><strong>Package Manager</strong></td>
+                    <td><code>npm</code></td>
+                </tr>
+                <tr>
+                    <td><strong>Lockfile</strong></td>
+                    <td><code>package-lock.json</code></td>
+                </tr>
+                <tr>
+                    <td><strong>Framework</strong></td>
+                    <td>Next.js 14.2.10</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>Build Commands</h3>
+        <pre><code># Development
+npm run dev
+
+# Production Build
+npm run build
+
+# Start Production Server
+npm run start
+
+# Linting
+npm run lint</code></pre>
+
+        <h3>Deployment Target</h3>
+        <div class="note-box">
+            <strong>Platform:</strong> AWS Amplify Hosting<br>
+            <strong>Method:</strong> Git-based CI/CD
+        </div>
+
+        <h3>Required Environment Variables</h3>
+        <pre><code># AWS Amplify (Auto-configured)
+NEXT_PUBLIC_AMPLIFY_REGION
+NEXT_PUBLIC_USER_POOL_ID
+NEXT_PUBLIC_USER_POOL_CLIENT_ID
+
+# Stripe
+STRIPE_SECRET_KEY
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
+STRIPE_WEBHOOK_SECRET
+
+# Truv
+TRUV_CLIENT_ID
+TRUV_ACCESS_SECRET
+
+# Encryption
+ENCRYPTION_KEY</code></pre>
+
+        <h2 id="services">4. Third-Party Services & Scripts</h2>
+
+        <h3>External Services</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Service</th>
+                    <th>Purpose</th>
+                    <th>Integration Type</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>AWS Amplify</strong></td>
+                    <td>Backend infrastructure, hosting, CI/CD</td>
+                    <td>Native</td>
+                </tr>
+                <tr>
+                    <td><strong>AWS Cognito</strong></td>
+                    <td>User authentication & authorization</td>
+                    <td>AWS SDK</td>
+                </tr>
+                <tr>
+                    <td><strong>AWS AppSync</strong></td>
+                    <td>GraphQL API layer</td>
+                    <td>Amplify Gen 2</td>
+                </tr>
+                <tr>
+                    <td><strong>AWS DynamoDB</strong></td>
+                    <td>NoSQL database</td>
+                    <td>AWS SDK</td>
+                </tr>
+                <tr>
+                    <td><strong>AWS S3</strong></td>
+                    <td>File storage</td>
+                    <td>AWS SDK</td>
+                </tr>
+                <tr>
+                    <td><strong>Stripe</strong></td>
+                    <td>Payment processing</td>
+                    <td>REST API + Webhooks</td>
+                </tr>
+                <tr>
+                    <td><strong>Truv</strong></td>
+                    <td>Income/asset verification</td>
+                    <td>REST API + Webhooks</td>
+                </tr>
+                <tr>
+                    <td><strong>Monday.com</strong></td>
+                    <td>CRM & workflow management</td>
+                    <td>REST API</td>
+                </tr>
+                <tr>
+                    <td><strong>Make.com</strong></td>
+                    <td>Automation & data sync</td>
+                    <td>Webhooks</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>Webhook Endpoints</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Webhook</th>
+                    <th>Provider</th>
+                    <th>Purpose</th>
+                    <th>Route</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Stripe Webhook</td>
+                    <td>Stripe</td>
+                    <td>Payment confirmations</td>
+                    <td><code>/api/stripe/webhook</code></td>
+                </tr>
+                <tr>
+                    <td>Truv Orders</td>
+                    <td>Truv</td>
+                    <td>Verification status updates</td>
+                    <td><code>/api/webhooks/truv-orders</code></td>
+                </tr>
+                <tr>
+                    <td>Make.com</td>
+                    <td>Make.com</td>
+                    <td>Data synchronization</td>
+                    <td><code>/api/webhooks/make</code></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>Security Considerations</h3>
+        <ul>
+            <li><strong>API Keys:</strong> All sensitive keys stored in AWS Secrets Manager or Amplify environment
+                variables</li>
+            <li><strong>Webhooks:</strong> Validated using signature verification (Stripe) or JWT tokens (Truv)</li>
+            <li><strong>CORS:</strong> Configured for specific domains only</li>
+            <li><strong>Rate Limiting:</strong> Implemented at API Gateway level</li>
+            <li><strong>Data Encryption:</strong> Sensitive data encrypted at rest and in transit</li>
+        </ul>
+
+        <h2 id="assessments">5. Prior Assessment Reports</h2>
+
+        <div class="warning-box">
+            <strong>Status:</strong> No prior security or compliance assessments available.
+        </div>
+
+        <h3>Recommended Assessments</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Assessment Type</th>
+                    <th>Components</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Security Audit</strong></td>
+                    <td>
+                        <ul>
+                            <li>Penetration testing</li>
+                            <li>Vulnerability scanning</li>
+                            <li>Code security review</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>Compliance Review</strong></td>
+                    <td>
+                        <ul>
+                            <li>GDPR compliance (if applicable)</li>
+                            <li>PCI DSS compliance (payment handling)</li>
+                            <li>SOC 2 Type II (if required)</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>Performance Testing</strong></td>
+                    <td>
+                        <ul>
+                            <li>Load testing</li>
+                            <li>Stress testing</li>
+                            <li>Scalability assessment</li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <hr style="margin: 3rem 0; border: none; border-top: 2px solid #e5e7eb;">
+
+        <div style="text-align: center; color: #6b7280; font-size: 0.875rem;">
+            <p><strong>Document Version:</strong> 1.0</p>
+            <p><strong>Last Updated:</strong> February 3, 2026</p>
+            <p><strong>Maintained By:</strong> Development Team</p>
+        </div>
+    </div>
+</body>
+
+</html>
