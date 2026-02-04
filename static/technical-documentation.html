@@ -321,6 +321,7 @@
                 <li><a href="#api">3. API Documentation</a></li>
                 <li><a href="#build">4. Build & Deployment Configuration</a></li>
                 <li><a href="#services">5. Third-Party Services & Scripts</a></li>
+                <li><a href="#aws-resources">6. AWS Resources</a></li>
 
             </ul>
         </div>
@@ -559,13 +560,13 @@
                 <tr>
                     <td><span class="badge badge-applicant">Applicant</span></td>
                     <td><code>applicant@lppm.com</code></td>
-                    <td><code>Applicant@2026</code></td>
+                    <td><code>Test@2026</code></td>
                     <td>Application flow testing</td>
                 </tr>
                 <tr>
                     <td><strong>Co-Applicant</strong></td>
                     <td><code>coapplicant@lppm.com</code></td>
-                    <td><code>Coapplicant@2026</code></td>
+                    <td><code>Coapplicant@2023</code></td>
                     <td>Joint application testing</td>
                 </tr>
                 <tr>
@@ -1288,11 +1289,6 @@ ENCRYPTION_KEY</code></pre>
                     <td>REST API + Webhooks</td>
                 </tr>
                 <tr>
-                    <td><strong>Monday.com</strong></td>
-                    <td>CRM & workflow management</td>
-                    <td>REST API</td>
-                </tr>
-                <tr>
                     <td><strong>Make.com</strong></td>
                     <td>Automation & data sync</td>
                     <td>Webhooks</td>
@@ -1340,6 +1336,171 @@ ENCRYPTION_KEY</code></pre>
             <li><strong>Data Encryption:</strong> Sensitive data encrypted at rest and in transit</li>
         </ul>
 
+
+        <h2 id="aws-resources">6. AWS Resources</h2>
+
+        <h3>AWS Amplify</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Property</th>
+                    <th>Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>App ID</strong></td>
+                    <td><code>d20k3uouyfdxor</code></td>
+                </tr>
+                <tr>
+                    <td><strong>App Name</strong></td>
+                    <td><code>lppm_rentals_saas</code></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>Amazon S3</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Property</th>
+                    <th>Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Bucket Name</strong></td>
+                    <td><code>supportingdocuments-storage-2025</code></td>
+                </tr>
+                <tr>
+                    <td><strong>ARN</strong></td>
+                    <td><code>arn:aws:s3:::supportingdocuments-storage-2025</code></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>Amazon Cognito</h3>
+
+        <h4>User Pool</h4>
+        <table>
+            <thead>
+                <tr>
+                    <th>Property</th>
+                    <th>Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>User Pool Name</strong></td>
+                    <td><code>lppm</code></td>
+                </tr>
+                <tr>
+                    <td><strong>User Pool ID</strong></td>
+                    <td><code>us-east-1_d07c780Tz</code></td>
+                </tr>
+                <tr>
+                    <td><strong>ARN</strong></td>
+                    <td><code>arn:aws:cognito-idp:us-east-1:818263291471:userpool/us-east-1_d07c780Tz</code></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4>Identity Pool</h4>
+        <table>
+            <thead>
+                <tr>
+                    <th>Property</th>
+                    <th>Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Identity Pool Name</strong></td>
+                    <td><code>amplifyAuthIdentityPool3FDE84CC_zgdCNvWW0VxI</code></td>
+                </tr>
+                <tr>
+                    <td><strong>Identity Pool ID</strong></td>
+                    <td><code>us-east-1:ee14f1fa-d470-4cf3-a928-9891cf949052</code></td>
+                </tr>
+                <tr>
+                    <td><strong>ARN</strong></td>
+                    <td><code>arn:aws:cognito-identity:us-east-1:818263291471:identitypool/us-east-1:ee14f1fa-d470-4cf3-a928-9891cf949052</code>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>AWS Lambda Functions</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Function Name</th>
+                    <th>ARN</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>payment-Stripe</strong></td>
+                    <td><code>arn:aws:lambda:us-east-1:818263291471:function:payment-Stripe</code></td>
+                </tr>
+                <tr>
+                    <td><strong>payment-Stripe-get</strong></td>
+                    <td><code>arn:aws:lambda:us-east-1:818263291471:function:payment-Stripe-get</code></td>
+                </tr>
+                <tr>
+                    <td><strong>nycbulcklisting</strong></td>
+                    <td><code>arn:aws:lambda:us-east-1:818263291471:function:nycbulcklisting</code></td>
+                </tr>
+                <tr>
+                    <td><strong>nyc_dynamodb_document_list_update</strong></td>
+                    <td><code>arn:aws:lambda:us-east-1:818263291471:function:nyc_dynamodb_document_list_update</code>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>gettruv</strong></td>
+                    <td><code>arn:aws:lambda:us-east-1:818263291471:function:gettruv</code></td>
+                </tr>
+                <tr>
+                    <td><strong>truv</strong></td>
+                    <td><code>arn:aws:lambda:us-east-1:818263291471:function:truv</code></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>Amazon DynamoDB Tables</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Table Name</th>
+                    <th>ARN</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Application-rvduj4wjsregplss3o6dmurssy-NONE</strong></td>
+                    <td><code>arn:aws:dynamodb:us-east-1:818263291471:table/Application-rvduj4wjsregplss3o6dmurssy-NONE</code>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>CoApplicant-rvduj4wjsregplss3o6dmurssy-NONE</strong></td>
+                    <td><code>arn:aws:dynamodb:us-east-1:818263291471:table/CoApplicant-rvduj4wjsregplss3o6dmurssy-NONE</code>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>Guarantor-rvduj4wjsregplss3o6dmurssy-NONE</strong></td>
+                    <td><code>arn:aws:dynamodb:us-east-1:818263291471:table/Guarantor-rvduj4wjsregplss3o6dmurssy-NONE</code>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>NYC_Listing</strong></td>
+                    <td><code>arn:aws:dynamodb:us-east-1:818263291471:table/NYC_Listing</code></td>
+                </tr>
+                <tr>
+                    <td><strong>payments</strong></td>
+                    <td><code>arn:aws:dynamodb:us-east-1:818263291471:table/payments</code></td>
+                </tr>
+            </tbody>
+        </table>
 
 
         <hr style="margin: 3rem 0; border: none; border-top: 2px solid #e5e7eb;">
