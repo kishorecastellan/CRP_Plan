@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,7 +15,7 @@
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
             line-height: 1.6;
@@ -24,7 +25,7 @@
             max-width: 1200px;
             margin: 0 auto;
         }
-        
+
         h1 {
             font-size: 2.5rem;
             margin-bottom: 0.5rem;
@@ -32,7 +33,7 @@
             border-bottom: 3px solid #000;
             padding-bottom: 1rem;
         }
-        
+
         h2 {
             font-size: 2rem;
             margin-top: 3rem;
@@ -41,19 +42,19 @@
             border-left: 4px solid #3498db;
             padding-left: 1rem;
         }
-        
+
         h3 {
             font-size: 1.5rem;
             margin-top: 2rem;
             margin-bottom: 1rem;
             color: #34495e;
         }
-        
+
         p {
             margin-bottom: 1rem;
             color: #555;
         }
-        
+
         .diagram-container {
             background: #f8f9fa;
             border: 1px solid #dee2e6;
@@ -62,25 +63,26 @@
             margin: 2rem 0;
             overflow-x: auto;
         }
-        
+
         .mermaid {
             text-align: center;
         }
-        
+
         table {
             width: 100%;
             border-collapse: collapse;
             margin: 2rem 0;
             background: white;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
         }
-        
-        th, td {
+
+        th,
+        td {
             padding: 1rem;
             text-align: left;
             border-bottom: 1px solid #e9ecef;
         }
-        
+
         th {
             background: #f8f9fa;
             font-weight: 600;
@@ -89,11 +91,11 @@
             font-size: 0.875rem;
             letter-spacing: 0.5px;
         }
-        
+
         tr:hover {
             background: #f8f9fa;
         }
-        
+
         .note-box {
             background: #e3f2fd;
             border-left: 4px solid #2196f3;
@@ -101,46 +103,46 @@
             margin: 2rem 0;
             border-radius: 4px;
         }
-        
+
         .note-box h4 {
             color: #1976d2;
             margin-bottom: 0.5rem;
         }
-        
+
         ul {
             margin: 1rem 0 1rem 2rem;
         }
-        
+
         li {
             margin-bottom: 0.5rem;
             color: #555;
         }
-        
+
         strong {
             color: #2c3e50;
         }
-        
+
         @media print {
             body {
                 padding: 0;
             }
-            
+
             h2 {
                 page-break-before: always;
             }
-            
+
             .diagram-container {
                 page-break-inside: avoid;
             }
         }
-        
+
         .header {
             text-align: center;
             margin-bottom: 3rem;
             padding-bottom: 2rem;
             border-bottom: 2px solid #e9ecef;
         }
-        
+
         .subtitle {
             color: #6c757d;
             font-size: 1.25rem;
@@ -148,6 +150,7 @@
         }
     </style>
 </head>
+
 <body>
     <div class="header">
         <h1>LPPM Rentals SaaS</h1>
@@ -155,55 +158,56 @@
     </div>
 
     <h2>1. System Architecture Diagram</h2>
-    <p>This diagram illustrates the high-level architecture of the LPPM Rentals application, built on AWS Amplify Gen 2 using Next.js.</p>
-    
+    <p>This diagram illustrates the high-level architecture of the LPPM Rentals application, built on AWS Amplify Gen 2
+        using Next.js.</p>
+
     <div class="diagram-container">
         <div class="mermaid">
-graph TB
-    subgraph Client ["Client Side (Browser)"]
-        User["User / Applicant"]
-        Admin["Property Manager / Admin"]
-        NextJS["Next.js Frontend<br/>(React)"]
-    end
+            graph TB
+            subgraph Client ["Client Side (Browser)"]
+            User["User / Applicant"]
+            Admin["Property Manager / Admin"]
+            NextJS["Next.js Frontend<br />(React)"]
+            end
 
-    subgraph Amplify ["AWS Amplify Gen 2 Backend"]
-        Auth["Auth<br/>(Amazon Cognito)"]
-        
-        subgraph DataLayer ["Data Layer"]
-            AppSync["API Access<br/>(AWS AppSync)"]
+            subgraph Amplify ["AWS Amplify Gen 2 Backend"]
+            Auth["Auth<br />(Amazon Cognito)"]
+
+            subgraph DataLayer ["Data Layer"]
+            AppSync["API Access<br />(AWS AppSync)"]
             DDB[(Amazon DynamoDB)]
-        end
-        
-        subgraph StorageLayer ["Storage Layer"]
-            S3["File Storage<br/>(Amazon S3)"]
-        end
-        
-        subgraph Compute ["Compute / Logic"]
-            Lambda["Function Handlers<br/>(Next.js API Routes / Lambda)"]
-        end
-    end
+            end
 
-    subgraph External ["External Services"]
-        Stripe["Stripe<br/>(Payments)"]
-        Truv["Truv<br/>(Income/Asset Verification)"]
-        Monday["Monday.com<br/>(CRM/Workflow)"]
-        Make["Make.com<br/>(Automation)"]
-    end
+            subgraph StorageLayer ["Storage Layer"]
+            S3["File Storage<br />(Amazon S3)"]
+            end
 
-    User -->|HTTPS| NextJS
-    Admin -->|HTTPS| NextJS
-    
-    NextJS <-->|Auth Tokens| Auth
-    NextJS <-->|GraphQL| AppSync
-    AppSync <-->|CRUD| DDB
-    NextJS <-->|Upload/Download| S3
-    NextJS <-->|API Calls| Lambda
-    Lambda <-->|Update Status| DDB
-    NextJS <-->|Embedded Bridge| Truv
-    Lambda <-->|Webhooks/API| Truv
-    Lambda <-->|Payment Intent/Webhooks| Stripe
-    Lambda -->|Sync Data| Make
-    Make -->|Update CRM| Monday
+            subgraph Compute ["Compute / Logic"]
+            Lambda["Function Handlers<br />(Next.js API Routes / Lambda)"]
+            end
+            end
+
+            subgraph External ["External Services"]
+            Stripe["Stripe<br />(Payments)"]
+            Truv["Truv<br />(Income/Asset Verification)"]
+            Monday["Monday.com<br />(CRM/Workflow)"]
+            Make["Make.com<br />(Automation)"]
+            end
+
+            User -->|HTTPS| NextJS
+            Admin -->|HTTPS| NextJS
+
+            NextJS <-->|Auth Tokens| Auth
+                NextJS <-->|GraphQL| AppSync
+                    AppSync <-->|CRUD| DDB
+                        NextJS <-->|Upload/Download| S3
+                            NextJS <-->|API Calls| Lambda
+                                Lambda <-->|Update Status| DDB
+                                    NextJS <-->|Embedded Bridge| Truv
+                                        Lambda <-->|Webhooks/API| Truv
+                                            Lambda <-->|Payment Intent/Webhooks| Stripe
+                                                Lambda -->|Sync Data| Make
+                                                Make -->|Update CRM| Monday
         </div>
     </div>
 
@@ -264,177 +268,248 @@ graph TB
 
     <h3>2.1 Application Submission Flow</h3>
     <p>This sequence diagram shows how users fill out rental applications, upload documents, and submit their data.</p>
-    
+
     <div class="diagram-container">
         <div class="mermaid">
-sequenceDiagram
-    participant User
-    participant FE as Next.js Frontend
-    participant API as AppSync/API
-    participant DB as DynamoDB
-    participant S3 as Amazon S3
+            sequenceDiagram
+            participant User
+            participant FE as Next.js Frontend
+            participant API as AppSync/API
+            participant DB as DynamoDB
+            participant S3 as Amazon S3
 
-    User->>FE: Fills Application Form
-    activate FE
-    
-    rect rgb(240, 248, 255)
-        note right of User: Document Uploads
-        FE->>S3: Upload Documents/Images
-        S3-->>FE: Return File Key/URL
-    end
+            User->>FE: Fills Application Form
+            activate FE
 
-    FE->>API: Submit Application Data (inc. S3 Keys)
-    activate API
-    API->>DB: Save Application Record
-    DB-->>API: Confirm Save
-    API-->>FE: Success Response
-    deactivate API
-    
-    FE-->>User: Show Success/Next Steps
-    deactivate FE
+            rect rgb(240, 248, 255)
+            note right of User: Document Uploads
+            FE->>S3: Upload Documents/Images
+            S3-->>FE: Return File Key/URL
+            end
+
+            FE->>API: Submit Application Data (inc. S3 Keys)
+            activate API
+            API->>DB: Save Application Record
+            DB-->>API: Confirm Save
+            API-->>FE: Success Response
+            deactivate API
+
+            FE-->>User: Show Success/Next Steps
+            deactivate FE
         </div>
     </div>
 
     <h3>2.2 Income Verification Flow (Truv)</h3>
     <p>Integration with Truv for automated income and asset verification through payroll providers.</p>
-    
+
     <div class="diagram-container">
         <div class="mermaid">
-sequenceDiagram
-    participant User
-    participant FE as Next.js Frontend
-    participant TruvBridge as Truv Widget
-    participant TruvAPI as Truv Backend
-    participant Backend as Next.js API/Lambda
-    participant DB as DynamoDB
+            sequenceDiagram
+            participant User
+            participant FE as Next.js Frontend
+            participant TruvBridge as Truv Widget
+            participant TruvAPI as Truv Backend
+            participant Backend as Next.js API/Lambda
+            participant DB as DynamoDB
 
-    User->>FE: Select Verification Method
-    FE->>TruvBridge: Open Truv Bridge
-    
-    User->>TruvBridge: Login to Payroll Provider
-    TruvBridge->>TruvAPI: Authenticate & Fetch Data
-    
-    TruvAPI-->>TruvBridge: Success (public_token)
-    TruvBridge-->>FE: onEvent (success)
-    
-    par Async Processing
-        FE->>Backend: Send public_token / verification info
-        Backend->>DB: Update Application with Truv Tokens
-    and Webhook Update
-        TruvAPI->>Backend: Webhook (Order Completed)
-        Backend->>DB: Update Status to 'Verified'
-    end
+            User->>FE: Select Verification Method
+            FE->>TruvBridge: Open Truv Bridge
+
+            User->>TruvBridge: Login to Payroll Provider
+            TruvBridge->>TruvAPI: Authenticate & Fetch Data
+
+            TruvAPI-->>TruvBridge: Success (public_token)
+            TruvBridge-->>FE: onEvent (success)
+
+            par Async Processing
+            FE->>Backend: Send public_token / verification info
+            Backend->>DB: Update Application with Truv Tokens
+            and Webhook Update
+            TruvAPI->>Backend: Webhook (Order Completed)
+            Backend->>DB: Update Status to 'Verified'
+            end
         </div>
     </div>
 
     <h3>2.3 Payment Flow (Stripe)</h3>
     <p>Processing application fees through Stripe Payment Intents.</p>
-    
+
     <div class="diagram-container">
         <div class="mermaid">
-sequenceDiagram
-    participant User
-    participant FE as Next.js Frontend
-    participant Backend as Next.js API
-    participant Stripe as Stripe API
-    participant DB as DynamoDB
+            sequenceDiagram
+            participant User
+            participant FE as Next.js Frontend
+            participant Backend as Next.js API
+            participant Stripe as Stripe API
+            participant DB as DynamoDB
 
-    User->>FE: Click Pay Application Fee
-    FE->>Backend: POST /api/stripe/create-checkout
-    activate Backend
-    Backend->>Stripe: Create Payment Intent
-    Stripe-->>Backend: Client Secret
-    Backend-->>FE: Return Client Secret
-    deactivate Backend
+            User->>FE: Click Pay Application Fee
+            FE->>Backend: POST /api/stripe/create-checkout
+            activate Backend
+            Backend->>Stripe: Create Payment Intent
+            Stripe-->>Backend: Client Secret
+            Backend-->>FE: Return Client Secret
+            deactivate Backend
 
-    User->>FE: Enter Card Details
-    FE->>Stripe: Confirm Payment
-    activate Stripe
-    Stripe-->>FE: Payment Success
-    deactivate Stripe
+            User->>FE: Enter Card Details
+            FE->>Stripe: Confirm Payment
+            activate Stripe
+            Stripe-->>FE: Payment Success
+            deactivate Stripe
 
-    par Webhook Confirmation
-        Stripe->>Backend: Webhook (payment_intent.succeeded)
-        Backend->>DB: Update Payment Status = 'PAID'
-    end
-    
-    FE-->>User: Show Submission Confirmation
+            par Webhook Confirmation
+            Stripe->>Backend: Webhook (payment_intent.succeeded)
+            Backend->>DB: Update Payment Status = 'PAID'
+            end
+
+            FE-->>User: Show Submission Confirmation
         </div>
     </div>
 
     <h2>3. User Workflow (Use Cases)</h2>
-    <p>This flowchart illustrates the complete application workflow for Primary Applicants, Co-Applicants, and Guarantors.</p>
-    
+    <p>This flowchart illustrates the complete application workflow for Primary Applicants, Co-Applicants, and
+        Guarantors. Each user type follows a detailed process including signup, verification, form completion, payment
+        processing,
+        and data synchronization to Monday.com and DynamoDB.</p>
+
     <div class="diagram-container">
         <div class="mermaid">
-flowchart TD
-    PA[Primary Applicant]
-    CA[Co-Applicant]
-    GU[Guarantor]
+            graph LR
+            %% Actors on the left
+            PA[👤 Primary Applicant]
+            CA[👤 Co-Applicant]
+            GU[👤 Guarantor]
 
-    subgraph "Phase 1: Initiation & Data Collection"
-        Start([Start Application])
-        Login[Create Account / Login]
-        PersInfo[Fill Personal Information]
-        EmpInfo[Fill Employment & Income]
-        TruvVer[Verify Income via Truv]
-        Docs[Upload Supporting Documents]
-    end
+            %% Primary Applicant Use Cases
+            subgraph PA_UC["Primary Applicant Use Cases"]
+            direction TB
+            UC1((Signup))
+            UC2((Account<br />Verification))
+            UC3((Login))
+            UC4((Create New<br />Application))
+            UC5((View<br />Instructions))
+            UC6((Fill Application<br />Information))
+            UC7((Fill Applicant<br />Information))
+            UC8((Add Co-Applicants<br />& Guarantors))
+            UC9((Income & Assets<br />Verification))
+            UC10((Fill Financial<br />Information))
+            UC11((Upload<br />Documents))
+            UC12((Fill Occupant<br />Information))
+            UC13((Sign<br />Application))
+            UC14((Process<br />Payment))
+            UC15((Submit<br />Application))
+            end
 
-    subgraph "Phase 2: Collaboration"
-        InviteCA[Invite Co-Applicant]
-        InviteGU[Invite Guarantor]
-        ReceiveInvite[Receive Invitation Email]
-        LinkApp[Link to Main Application]
-    end
+            %% Co-Applicant Use Cases
+            subgraph CA_UC["Co-Applicant Use Cases"]
+            direction TB
+            UC16((Receive<br />Invite))
+            UC17((Signup via<br />Invite Link))
+            UC18((Join Existing<br />Application))
+            UC19((Fill Co-Applicant<br />Information))
+            UC2A((Account<br />Verification))
+            UC3A((Login))
+            UC5A((View<br />Instructions))
+            UC9A((Income & Assets<br />Verification))
+            UC10A((Fill Financial<br />Information))
+            UC11A((Upload<br />Documents))
+            UC13A((Sign<br />Application))
+            UC14A((Process<br />Payment))
+            UC15A((Submit<br />Application))
+            end
 
-    subgraph "Phase 3: Submission & Fees"
-        PayFee[Pay Application Fee]
-        Submit[Submit Application]
-    end
+            %% Guarantor Use Cases
+            subgraph GU_UC["Guarantor Use Cases"]
+            direction TB
+            UC16B((Receive<br />Invite))
+            UC17B((Signup via<br />Invite Link))
+            UC18B((Join Existing<br />Application))
+            UC20((Fill Guarantor<br />Information))
+            UC2B((Account<br />Verification))
+            UC3B((Login))
+            UC5B((View<br />Instructions))
+            UC9B((Income & Assets<br />Verification))
+            UC10B((Fill Financial<br />Information))
+            UC11B((Upload<br />Documents))
+            UC13B((Sign<br />Application))
+            UC14B((Process<br />Payment))
+            UC15B((Submit<br />Application))
+            end
 
-    subgraph "Phase 4: Lease Execution"
-        ReviewLease[Review Lease/Agreement]
-        Sign[Sign Documents]
-    end
+            %% System Backend Use Cases
+            subgraph SYS_UC["System Backend Processes"]
+            direction TB
+            UC21((Make Webhook<br />Calls))
+            UC22((Store to Monday<br />& DynamoDB))
+            UC23((Send Email<br />Invites))
+            end
 
-    PA --> Start
-    Start --> Login
-    Login --> PersInfo
-    PersInfo --> EmpInfo
-    EmpInfo --> TruvVer
-    TruvVer --> Docs
-    Docs --> InviteCA
-    Docs --> InviteGU
-    InviteCA --> PayFee
-    InviteGU --> PayFee
-    Docs --> PayFee
-    PayFee --> Submit
-    Submit --> ReviewLease
-    ReviewLease --> Sign
+            %% Primary Applicant Connections
+            PA -.-> UC1
+            PA -.-> UC2
+            PA -.-> UC3
+            PA -.-> UC4
+            PA -.-> UC5
+            PA -.-> UC6
+            PA -.-> UC7
+            PA -.-> UC8
+            PA -.-> UC9
+            PA -.-> UC10
+            PA -.-> UC11
+            PA -.-> UC12
+            PA -.-> UC13
+            PA -.-> UC14
+            PA -.-> UC15
 
-    InviteCA -.->|Email| ReceiveInvite
-    CA --> ReceiveInvite
-    ReceiveInvite --> LinkApp
-    LinkApp --> Login
-    EmpInfo -->|Co-App Data| TruvVer
-    Docs -->|Co-App Docs| Submit
+            %% Co-Applicant Connections
+            CA -.-> UC16
+            CA -.-> UC17
+            CA -.-> UC2A
+            CA -.-> UC3A
+            CA -.-> UC18
+            CA -.-> UC5A
+            CA -.-> UC19
+            CA -.-> UC9A
+            CA -.-> UC10A
+            CA -.-> UC11A
+            CA -.-> UC13A
+            CA -.-> UC14A
+            CA -.-> UC15A
 
-    InviteGU -.->|Email| ReceiveInvite
-    GU --> ReceiveInvite
-    PersInfo -->|Guarantor Data| EmpInfo
-    EmpInfo -->|Guarantor Assets| TruvVer
-    Docs -->|Guarantor Docs| Submit
+            %% Guarantor Connections
+            GU -.-> UC16B
+            GU -.-> UC17B
+            GU -.-> UC2B
+            GU -.-> UC3B
+            GU -.-> UC18B
+            GU -.-> UC5B
+            GU -.-> UC20
+            GU -.-> UC9B
+            GU -.-> UC10B
+            GU -.-> UC11B
+            GU -.-> UC13B
+            GU -.-> UC14B
+            GU -.-> UC15B
 
-    classDef applicant fill:#e0f2fe,stroke:#0284c7,stroke-width:2px
-    classDef coapp fill:#f0fdf4,stroke:#16a34a,stroke-width:2px
-    classDef guarantor fill:#fef3c7,stroke:#d97706,stroke-width:2px
-    classDef process fill:#fff,stroke:#94a3b8,stroke-width:1px
+            %% System Triggers
+            UC15 --> UC21
+            UC15A --> UC21
+            UC15B --> UC21
+            UC21 --> UC22
+            UC15 --> UC23
+            UC23 -.-> CA
+            UC23 -.-> GU
 
-    class PA applicant
-    class CA coapp
-    class GU guarantor
-    class Start,Login,PersInfo,EmpInfo,TruvVer,Docs,PayFee,Submit,ReviewLease,Sign,InviteCA,InviteGU,ReceiveInvite,LinkApp process
+            %% Styling
+            classDef actor fill:#4A90E2,stroke:#2E5C8A,stroke-width:3px,color:#fff,font-weight:bold
+            classDef usecase fill:#fff,stroke:#333,stroke-width:2px,font-size:11px
+            classDef backend fill:#E8F5E9,stroke:#4CAF50,stroke-width:3px
+
+            class PA,CA,GU actor
+            class UC1,UC2,UC3,UC4,UC5,UC6,UC7,UC8,UC9,UC10,UC11,UC12,UC13,UC14,UC15 usecase
+            class UC16,UC17,UC18,UC19,UC2A,UC3A,UC5A,UC9A,UC10A,UC11A,UC13A,UC14A,UC15A usecase
+            class UC16B,UC17B,UC18B,UC20,UC2B,UC3B,UC5B,UC9B,UC10B,UC11B,UC13B,UC14B,UC15B usecase
+            class UC21,UC22,UC23 backend
         </div>
     </div>
 
@@ -443,7 +518,7 @@ flowchart TD
         <thead>
             <tr>
                 <th>Role</th>
-                <th>Responsibilities</th>
+                <th>Workflow Steps</th>
             </tr>
         </thead>
         <tbody>
@@ -451,10 +526,24 @@ flowchart TD
                 <td><strong>Primary Applicant</strong></td>
                 <td>
                     <ul>
-                        <li>Initiates the rental application</li>
-                        <li>Invites other parties (Co-applicants/Guarantors)</li>
-                        <li>Pays the processing fee</li>
-                        <li>Signs the primary lease agreement</li>
+                        <li>Signup for new account</li>
+                        <li>Account verification/activation via email</li>
+                        <li>Login to the system</li>
+                        <li>Create New Application</li>
+                        <li>Review Instructions</li>
+                        <li>Fill Application Information</li>
+                        <li>Fill Applicant Information</li>
+                        <li>Add Co-Applicants & Guarantors details (name, email)</li>
+                        <li>Complete Income and Assets verification</li>
+                        <li>Provide Financial information</li>
+                        <li>Upload Supporting documents</li>
+                        <li>Fill Occupant Information</li>
+                        <li>Complete Signature</li>
+                        <li>Process Stripe Payment</li>
+                        <li>Submit Application</li>
+                        <li>System makes webhook calls</li>
+                        <li>Data stored to Monday.com and AWS DynamoDB</li>
+                        <li>Email invites sent to Co-Applicants and Guarantors</li>
                     </ul>
                 </td>
             </tr>
@@ -462,10 +551,21 @@ flowchart TD
                 <td><strong>Co-Applicant</strong></td>
                 <td>
                     <ul>
-                        <li>Joins via email invitation</li>
-                        <li>Provides independent income/employment data</li>
-                        <li>Uploads personal identification</li>
-                        <li>Signs the lease as a joint tenant</li>
+                        <li>Receive invite link via email</li>
+                        <li>Signup via invite link</li>
+                        <li>Account verification/activation via email</li>
+                        <li>Login to the system</li>
+                        <li>Join existing Application</li>
+                        <li>Review Instructions</li>
+                        <li>Fill Co-Applicant Information</li>
+                        <li>Complete Income and Assets verification</li>
+                        <li>Provide Financial information</li>
+                        <li>Upload Supporting documents</li>
+                        <li>Complete Signature</li>
+                        <li>Process Stripe Payment</li>
+                        <li>Submit Application</li>
+                        <li>System makes webhook calls</li>
+                        <li>Data stored to Monday.com and AWS DynamoDB</li>
                     </ul>
                 </td>
             </tr>
@@ -473,10 +573,21 @@ flowchart TD
                 <td><strong>Guarantor</strong></td>
                 <td>
                     <ul>
-                        <li>Joins via email invitation</li>
-                        <li>Verifies assets and financial standing</li>
-                        <li>Does not reside in the property</li>
-                        <li>Signs the guaranty agreement</li>
+                        <li>Receive invite link via email</li>
+                        <li>Signup via invite link</li>
+                        <li>Account verification/activation via email</li>
+                        <li>Login to the system</li>
+                        <li>Join existing Application</li>
+                        <li>Review Instructions</li>
+                        <li>Fill Guarantor Information</li>
+                        <li>Complete Income and Assets verification</li>
+                        <li>Provide Financial information</li>
+                        <li>Upload Supporting documents</li>
+                        <li>Complete Signature</li>
+                        <li>Process Stripe Payment</li>
+                        <li>Submit Application</li>
+                        <li>System makes webhook calls</li>
+                        <li>Data stored to Monday.com and AWS DynamoDB</li>
                     </ul>
                 </td>
             </tr>
@@ -487,23 +598,27 @@ flowchart TD
 
     <div class="note-box">
         <h4>Security & Authentication</h4>
-        <p>The application uses Amazon Cognito for user authentication with JWT tokens. All API requests are authenticated and authorized at the AppSync layer before reaching DynamoDB.</p>
+        <p>The application uses Amazon Cognito for user authentication with JWT tokens. All API requests are
+            authenticated and authorized at the AppSync layer before reaching DynamoDB.</p>
     </div>
 
     <div class="note-box">
         <h4>Data Flow Architecture</h4>
-        <p>The system follows a serverless architecture pattern where Next.js API routes act as Lambda functions. This ensures automatic scaling and cost optimization based on actual usage.</p>
+        <p>The system follows a serverless architecture pattern where Next.js API routes act as Lambda functions. This
+            ensures automatic scaling and cost optimization based on actual usage.</p>
     </div>
 
     <div class="note-box">
         <h4>File Storage Strategy</h4>
-        <p>All user-uploaded documents (IDs, pay stubs, bank statements) are stored in S3 with pre-signed URLs for secure, time-limited access. Files are organized by user ID and application ID for easy retrieval.</p>
+        <p>All user-uploaded documents (IDs, pay stubs, bank statements) are stored in S3 with pre-signed URLs for
+            secure, time-limited access. Files are organized by user ID and application ID for easy retrieval.</p>
     </div>
 
     <div class="note-box">
         <h4>Third-Party Integrations</h4>
         <ul>
-            <li><strong>Truv:</strong> Provides instant income and employment verification by connecting directly to payroll providers</li>
+            <li><strong>Truv:</strong> Provides instant income and employment verification by connecting directly to
+                payroll providers</li>
             <li><strong>Stripe:</strong> Handles all payment processing with PCI compliance built-in</li>
             <li><strong>Monday.com:</strong> CRM integration for property managers to track applications</li>
             <li><strong>Make.com:</strong> Automation platform that syncs data between systems</li>
@@ -512,7 +627,8 @@ flowchart TD
 
     <div class="note-box">
         <h4>Deployment & CI/CD</h4>
-        <p>The application is deployed on AWS Amplify Hosting with automatic deployments triggered by Git commits. CloudFormation manages all AWS resources as Infrastructure as Code (IaC).</p>
+        <p>The application is deployed on AWS Amplify Hosting with automatic deployments triggered by Git commits.
+            CloudFormation manages all AWS resources as Infrastructure as Code (IaC).</p>
     </div>
 
     <div class="note-box">
@@ -526,4 +642,5 @@ flowchart TD
     </div>
 
 </body>
+
 </html>

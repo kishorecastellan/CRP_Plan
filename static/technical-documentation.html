@@ -321,7 +321,7 @@
                 <li><a href="#api">3. API Documentation</a></li>
                 <li><a href="#build">4. Build & Deployment Configuration</a></li>
                 <li><a href="#services">5. Third-Party Services & Scripts</a></li>
-                <li><a href="#assessments">6. Prior Assessment Reports</a></li>
+
             </ul>
         </div>
 
@@ -475,8 +475,8 @@
                     <td class="check">✅</td>
                     <td class="cross">❌</td>
                     <td class="check">✅</td>
-                    <td class="cross">❌</td>
-                    <td class="cross">❌</td>
+                    <td class="check">✅</td>
+                    <td class="check">✅</td>
                 </tr>
                 <tr>
                     <td colspan="6" style="background: #f3f4f6; font-weight: bold;">Verification</td>
@@ -539,33 +539,39 @@
                 <tr>
                     <th>Role</th>
                     <th>Email</th>
+                    <th>Password</th>
                     <th>Purpose</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <td><span class="badge badge-admin">Admin</span></td>
-                    <td><code>admin@lppmrentals.test</code></td>
+                    <td><code>admin@lppm.com</code></td>
+                    <td><code>Adminny@2026</code></td>
                     <td>Full system testing</td>
                 </tr>
                 <tr>
                     <td><span class="badge badge-agent">Agent</span></td>
-                    <td><code>agent@lppmrentals.test</code></td>
+                    <td><code>agent@lppm.com</code></td>
+                    <td><code>Agent@2026</code></td>
                     <td>Referral and listing testing</td>
                 </tr>
                 <tr>
                     <td><span class="badge badge-applicant">Applicant</span></td>
-                    <td><code>applicant@lppmrentals.test</code></td>
+                    <td><code>applicant@lppm.com</code></td>
+                    <td><code>Applicant@2026</code></td>
                     <td>Application flow testing</td>
                 </tr>
                 <tr>
                     <td><strong>Co-Applicant</strong></td>
-                    <td><code>coapplicant@lppmrentals.test</code></td>
+                    <td><code>coapplicant@lppm.com</code></td>
+                    <td><code>Coapplicant@2026</code></td>
                     <td>Joint application testing</td>
                 </tr>
                 <tr>
                     <td><strong>Guarantor</strong></td>
-                    <td><code>guarantor@lppmrentals.test</code></td>
+                    <td><code>guarantor@lppm.com</code></td>
+                    <td><code>Guarantor@2026</code></td>
                     <td>Guarantor flow testing</td>
                 </tr>
             </tbody>
@@ -1063,13 +1069,45 @@
 npm run dev
 
 # Production Build
-npm run build
+npm run build</code></pre>
 
-# Start Production Server
-npm run start
-
-# Linting
-npm run lint</code></pre>
+        <h3>Build & Deployment Summary</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Configuration</th>
+                    <th>Value</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Node Version</strong></td>
+                    <td><code>v24.10.0</code></td>
+                    <td>Runtime environment version</td>
+                </tr>
+                <tr>
+                    <td><strong>Package Manager</strong></td>
+                    <td><code>npm</code></td>
+                    <td>Dependency management tool</td>
+                </tr>
+                <tr>
+                    <td><strong>Lockfile</strong></td>
+                    <td><code>package-lock.json</code></td>
+                    <td>Dependency version lock</td>
+                </tr>
+                <tr>
+                    <td><strong>Build Command</strong></td>
+                    <td><code>npm run build</code></td>
+                    <td>Production build command</td>
+                </tr>
+                <tr>
+                    <td><strong>Deployment Target</strong></td>
+                    <td><code>AWS Amplify Hosting</code></td>
+                    <td>Git-based CI/CD platform</td>
+                </tr>
+            </tbody>
+        </table>
 
         <h3>Deployment Target</h3>
         <div class="note-box">
@@ -1189,61 +1227,13 @@ ENCRYPTION_KEY</code></pre>
 
         <h3>Security Considerations</h3>
         <ul>
-            <li><strong>API Keys:</strong> All sensitive keys stored in AWS Secrets Manager or Amplify environment
-                variables</li>
+            <li><strong>API Keys:</strong> All sensitive keys stored in Amplify environment variables</li>
             <li><strong>Webhooks:</strong> Validated using signature verification (Stripe) or JWT tokens (Truv)</li>
             <li><strong>CORS:</strong> Configured for specific domains only</li>
-            <li><strong>Rate Limiting:</strong> Implemented at API Gateway level</li>
             <li><strong>Data Encryption:</strong> Sensitive data encrypted at rest and in transit</li>
         </ul>
 
-        <h2 id="assessments">6. Prior Assessment Reports</h2>
 
-        <div class="warning-box">
-            <strong>Status:</strong> No prior security or compliance assessments available.
-        </div>
-
-        <h3>Recommended Assessments</h3>
-        <table>
-            <thead>
-                <tr>
-                    <th>Assessment Type</th>
-                    <th>Components</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><strong>Security Audit</strong></td>
-                    <td>
-                        <ul>
-                            <li>Penetration testing</li>
-                            <li>Vulnerability scanning</li>
-                            <li>Code security review</li>
-                        </ul>
-                    </td>
-                </tr>
-                <tr>
-                    <td><strong>Compliance Review</strong></td>
-                    <td>
-                        <ul>
-                            <li>GDPR compliance (if applicable)</li>
-                            <li>PCI DSS compliance (payment handling)</li>
-                            <li>SOC 2 Type II (if required)</li>
-                        </ul>
-                    </td>
-                </tr>
-                <tr>
-                    <td><strong>Performance Testing</strong></td>
-                    <td>
-                        <ul>
-                            <li>Load testing</li>
-                            <li>Stress testing</li>
-                            <li>Scalability assessment</li>
-                        </ul>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
 
         <hr style="margin: 3rem 0; border: none; border-top: 2px solid #e5e7eb;">
 
