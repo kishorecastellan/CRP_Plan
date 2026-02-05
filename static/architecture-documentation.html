@@ -190,7 +190,7 @@
             subgraph External ["External Services"]
             Stripe["Stripe<br />(Payments)"]
             Truv["Truv<br />(Income/Asset Verification)"]
-            Monday["Monday.com<br />(CRM/Workflow)"]
+
             Make["Make.com<br />(Automation)"]
             end
 
@@ -370,7 +370,7 @@
     <p>This flowchart illustrates the complete application workflow for Primary Applicants, Co-Applicants, and
         Guarantors. Each user type follows a detailed process including signup, verification, form completion, payment
         processing,
-        and data synchronization to Monday.com and DynamoDB.</p>
+        and data synchronization to Make and DynamoDB.</p>
 
     <div class="diagram-container">
         <div class="mermaid">
@@ -542,7 +542,7 @@
                         <li>Process Stripe Payment</li>
                         <li>Submit Application</li>
                         <li>System makes webhook calls</li>
-                        <li>Data stored to Monday.com and AWS DynamoDB</li>
+                        <li>Data stored to Make and AWS DynamoDB</li>
                         <li>Email invites sent to Co-Applicants and Guarantors</li>
                     </ul>
                 </td>
@@ -565,7 +565,7 @@
                         <li>Process Stripe Payment</li>
                         <li>Submit Application</li>
                         <li>System makes webhook calls</li>
-                        <li>Data stored to Monday.com and AWS DynamoDB</li>
+                        <li>Data stored to Make and AWS DynamoDB</li>
                     </ul>
                 </td>
             </tr>
@@ -587,7 +587,7 @@
                         <li>Process Stripe Payment</li>
                         <li>Submit Application</li>
                         <li>System makes webhook calls</li>
-                        <li>Data stored to Monday.com and AWS DynamoDB</li>
+                        <li>Data stored to Make and AWS DynamoDB</li>
                     </ul>
                 </td>
             </tr>
@@ -620,7 +620,7 @@
             <li><strong>Truv:</strong> Provides instant income and employment verification by connecting directly to
                 payroll providers</li>
             <li><strong>Stripe:</strong> Handles all payment processing with PCI compliance built-in</li>
-            <li><strong>Monday.com:</strong> CRM integration for property managers to track applications</li>
+
             <li><strong>Make.com:</strong> Automation platform that syncs data between systems</li>
         </ul>
     </div>
@@ -631,15 +631,6 @@
             CloudFormation manages all AWS resources as Infrastructure as Code (IaC).</p>
     </div>
 
-    <div class="note-box">
-        <h4>Scalability Considerations</h4>
-        <ul>
-            <li>DynamoDB on-demand capacity automatically scales with traffic</li>
-            <li>S3 provides unlimited storage with automatic replication</li>
-            <li>CloudFront CDN ensures fast global content delivery</li>
-            <li>Lambda functions scale horizontally without manual intervention</li>
-        </ul>
-    </div>
 
 </body>
 
